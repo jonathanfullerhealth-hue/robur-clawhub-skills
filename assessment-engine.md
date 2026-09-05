@@ -110,7 +110,7 @@ For each solution in the "Major Deploy" quadrant, map it to one of the 5 Robur s
 | Annual value of reclaimed time | [hours × rate] | |
 | Total tool/subscription costs | [cost of tools recommended] | |
 | Net annual impact | [value - costs] | |
-| Setup investment | $997 (our bundle) | |
+| Setup investment | segment-priced implementation (see solution-templates) | |
 | Break-even period | [cost ÷ monthly savings] | |
 
 If the coach mentioned their pricing or hourly rate in the call, use that. If not, default to $100/hr for a running coach.
@@ -148,13 +148,12 @@ The quick win plan must be implementable with free tools and zero coding. The co
 Two options presented neutrally:
 
 **Option A: Do It Yourself**
-Install the free skills from ClawHub. The skills are free. Use the quick win plan above. If you hit friction, our maintenance retainer starts at $297/month.
+Install the free skills from ClawHub. The skills are free. Use the quick win plan above. If you hit friction, an optional maintenance retainer is available.
 
-**Option B: We Set It Up For You**
-$997 one-time. We deploy all 5 skills configured around your specific workflow. Cron schedules set. Telegram delivery. 48-hour turnaround. Done-with-you option available with Jonathan's personal content review.
+**Option B: We Set It Up For You** *(the core offer)*
+We deploy the matching `solution-templates` package configured around your workflow, with an optional monitor/optimize retainer. **Priced to your segment** (clinic/med-spa norms — roughly $2,500–7,500 setup + $1,000–2,500/mo), scoped on the call. Not a flat $997.
 
-**Option C: Assessment Only**
-$1,000. This report. Good for 30 days as credit toward setup if you decide later.
+*(Model change, 2026: the audit itself is now FREE — the reciprocity gift that earns the implementation conversation. The old paid "Assessment Only" tier is retired. The only next step this report offers is booking a working session. See `reclaim-your-time/nick-saraev-playbook.md`.)*
 
 ---
 

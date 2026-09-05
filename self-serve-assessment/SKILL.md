@@ -1,118 +1,109 @@
 ---
 name: self-serve-assessment
-description: Turns the RYT AI audit into a self-serve funnel. Takes a structured intake-form submission (no live call) and auto-generates the same ROI report the $1,000 assessment produces — quick wins, bottleneck map, hours reclaimed, and a tiered next-step CTA. The low-friction tripwire that qualifies buyers and sells the retainer without a human on the call.
-metadata: {"openclaw":{"emoji":"🧾","requires":{"bins":["date"],"env":[]}}}
+description: The free, automated ROI Snapshot lead magnet for RYT. Takes a short intake-form submission and instantly shows a prospect how many hours and dollars they're losing to manual work — then ends with a booking CTA. Reveals the value, NOT the how. Produces a separate internal sales sheet (the fix + price to quote). Replaces the old paid $1,000 assessment; built on Nick Saraev's free-audit → paid-implementation model.
+metadata: {"openclaw":{"emoji":"🎁","requires":{"bins":["date"],"env":[]}}}
 user-invocable: true
 ---
 
-# Self-Serve AI Assessment
+# Free ROI Snapshot (Lead Magnet)
 
 ## Who this helps
-RYT's top of funnel. Instead of every prospect needing a 20-minute discovery call
-before they see value, a clinic owner or coach fills a form and gets an instant,
-specific ROI report. It removes the founder from the front of the funnel and lets
-qualified buyers self-select.
+RYT's top of funnel. A clinic owner, med-spa operator, or coach fills a 60-second form
+and instantly sees what their manual workflows are costing them — no call, no fee, no
+gatekeeper.
 
 ## The problem it solves
-The current assessment (`coaching-ai-assessment`) requires a live call + transcript.
-That gates the funnel on the founder's calendar and can't scale. Self-serve turns the
-same analysis into a form → report, so leads qualify themselves 24/7 and the paid
-call is reserved for people already sold on the value.
+The old model charged $1,000 for a call-gated assessment. That bottlenecked qualified
+buyers and is off-model. This is the **free** version: it delivers real value up front
+(the rule of reciprocity), which earns the prospect's attention and their reply — then
+routes the ready ones to a booking link. **We charge for the implementation, not the
+audit.**
 
 ## What "solved" looks like
-A prospect submits the intake form and, within minutes, receives a report as specific
-as a consultant's — their bottlenecks, their hours reclaimed, their ROI — ending in a
-clear "do it yourself / we set it up / book a working session" choice. The founder
-only shows up for the ones ready to buy.
+The prospect gets a specific, credible number — *"you're losing ~7 hrs/week, about
+$X/year"* — feels the gap, and books a call to fix it. RYT never spends a human minute
+until someone is already sold on the value.
 
-## The intake form (deploy this as the lead magnet)
-Collect these fields. Mark the numeric ones as required — they drive the ROI math.
+## Two hard rules (do not break)
+1. **Reveal the value, not the how.** Show hours and dollars saved. Do **NOT** name the
+   tools, skills, or steps that would fix it — that is what the paid build sells. Vague-
+   by-design on mechanism; specific on ROI.
+2. **Always end with the booking CTA.** The only next step offered to the prospect is
+   "book your free 30-minute working session: `[BOOKING_LINK]`." No pricing, no scope.
 
-**About you**
+## The intake form (deploy as the lead magnet)
+Keep it short — friction kills lead magnets. Required fields drive the math.
 1. Business type: `Clinic (longevity / functional med / concierge) · Med spa · PT / chiro · Coaching · Other`
-2. Roughly how many active clients/members/patients? *(number, required)*
-3. Your (or your team's) approximate loaded hourly value? *(number; if unsure, we default by business type)*
-
-**Where the time goes** — *hours per week, best estimate:*
-4. Finding / following up with new leads: `___ hrs/wk`
-5. Creating content (social, email, blog): `___ hrs/wk`
-6. Producing client deliverables (plans, protocols, programs): `___ hrs/wk`
-7. Check-ins / responding to client messages & data: `___ hrs/wk`
-8. Turning research/notes into client-facing material: `___ hrs/wk`
-
-**The pain**
-9. Which ONE of the above do you most wish would run itself? *(pick one)*
-10. What have you tried that didn't stick? *(free text, optional)*
-11. Biggest worry about your business right now: `Not enough new clients · Losing clients I have · Drowning in admin · Can't create enough content · Other`
-
-**Retention signal** *(feeds the retention-engine upsell)*
-12. Roughly what % of clients are still with you after 6 months? *(number, optional)*
+2. Active clients / members / patients *(number, required)*
+3. Your (or your team's) loaded hourly value *(number; default by type if blank)*
+4. Hours/week on **finding & following up leads** *(number)*
+5. Hours/week on **content** (social, email, blog) *(number)*
+6. Hours/week on **client deliverables** (plans, protocols) *(number)*
+7. Hours/week on **check-ins & client messages** *(number)*
+8. The ONE task you most wish ran itself *(pick one of the above)*
+9. Name + email *(to send the Snapshot + booking link)*
 
 ## Workflow
 
-### 1. Validate the submission
-If required numeric fields (Q2, Q4–Q8) are missing, do NOT invent them. Use the
-business-type default and label every defaulted figure **"industry estimate — confirm
-your actuals."** Defaults (hrs/wk) by type when a field is blank:
-- Clinic: leads 4 · content 5 · deliverables 4 · check-ins 5 · research 2
-- Med spa: leads 6 · content 4 · deliverables 1 · check-ins 3 · research 1
-- PT / chiro: leads 3 · content 3 · deliverables 4 · check-ins 4 · research 2
-- Coaching: leads 3 · content 6 · deliverables 3 · check-ins 4 · research 3
+### 1. Validate & default (never fabricate)
+If a numeric field is blank, use the business-type default and label it *"industry
+estimate — we'll confirm your real numbers on the call."* Defaults (hrs/wk):
+- Clinic: leads 4 · content 5 · deliverables 4 · check-ins 5
+- Med spa: leads 6 · content 4 · deliverables 1 · check-ins 3
+- PT / chiro: leads 3 · content 3 · deliverables 4 · check-ins 4
+- Coaching: leads 3 · content 6 · deliverables 3 · check-ins 4
 
-Hourly-value defaults when Q3 blank: Clinic $250 · Med spa $200 · PT/chiro $120 ·
-Coaching $100.
+Hourly-value defaults when blank: Clinic $250 · Med spa $200 · PT/chiro $120 · Coaching $100.
 
-### 2. Run the analysis engine
-Apply the report structure in `../assessment-engine.md`, but source every input from
-the form answers instead of a call transcript. Every claim must trace to a form
-field; where a section has no data (e.g. Q10 blank), write "Not provided — book a
-working session to go deeper" rather than fabricating.
+### 2. Compute the ROI (honest, defensible)
+- Reclaimable hours/week = sum of Q4–Q7, **discounted 40%** (automation assists, rarely
+  replaces 100%).
+- Hours/year = ×48. Dollars/year = hours/year × hourly value.
+- Show the math in one line so it's credible, not magic.
 
-### 3. Compute the ROI honestly
-| Metric | Value | Source |
-|---|---|---|
-| Hours reclaimed / week | sum of automatable hours (Q4–Q8), discounted 40% (automation assists, rarely 100%) | form |
-| Hours reclaimed / year | above × 48 | |
-| Annual value of reclaimed time | hours/yr × Q3 (or default) | |
-| Setup + tools cost | tier price + ~$50–150/mo tools | |
-| Break-even | cost ÷ monthly value | |
-Apply the 40% discount so the number is defensible, not hype. Show the math.
+### 3. Produce OUTPUT A — the prospect-facing Snapshot
+Markdown/email, warm and specific, **no mechanism**:
+```
+[Name], here's what your week looks like on autopilot.
 
-### 4. Map the fix
-Point Q9 (their #1 wish) and Q11 (their biggest worry) at the right skill:
-- "Losing clients I have" / low Q12 % → **retention-engine** (lead with this).
-- Leads → lead-scanner · Content → content-pipeline-generator ·
-  Deliverables → training-plan-builder · Check-ins → client-checkin-analyzer ·
-  Research → research-breakdown-generator.
+Right now you're spending ~[X] hours/week on work that can run itself —
+mostly [their Q8 answer].
 
-### 5. Present tiered next steps (priced for the segment)
-- **A — Do it yourself:** install the free ClawHub skills + the 4-day quick-win plan.
-- **B — We set it up for you:** done-for-you deploy, configured to their workflow.
-  Price by segment, not the flat coach rate — clinics/med spas anchor to
-  $4,000–6,000 setup + $1,500–2,500/mo (vertical automation retainer norms), coaches
-  to the existing $997 tier.
-- **C — Working session:** a paid call that credits toward setup — for the ones who
-  want a human. This is the only step that touches the founder's calendar.
+Reclaimed, that's about [X×48×0.6 rounded] hours a year back in your calendar,
+worth roughly $[dollars/year] at your rate.
 
-## Output format
-Deliver the report as markdown (paste-ready into Gamma / Google Docs / email),
-following `assessment-engine.md` sections 1–8, with the ROI table and tiered CTA
-above. Open with a one-line hook: *"[Name], here's what your week looks like on
-autopilot — and what the manual version is costing you."*
+That time is the difference between [clinic-relevant outcome, e.g. "seeing more
+patients" / "keeping the members you have"] and staying stuck in admin.
+
+Want it back? Book a free 30-minute working session and we'll map exactly which
+of your workflows to automate first — no pitch, just the plan.
+→ [BOOKING_LINK]
+```
+Rounded numbers. One outcome line tied to their business type. End on the CTA.
+
+### 4. Produce OUTPUT B — the internal sales sheet (NOT sent to the prospect)
+For RYT's own use before the call:
+```
+LEAD: [name / email] · [business type] · [# clients]
+ROI shown: [hours/yr] hrs, $[/yr]
+Likely problem: [Q8] → maps to [solution-templates entry]
+Quote on the call: [segment-priced implementation range] + [retainer range]
+Retention flag: [if check-ins high or they picked check-ins → lead with retention-engine]
+```
+Pull the template match and price range from `../solution-templates/SKILL.md`.
 
 ## Guardrails
-- Every figure traces to a form field or a clearly-labeled industry default. No
-  fabrication of hours, ROI, or client counts.
-- Apply the 40% automation discount to reclaimed hours — under-promise.
-- If the form shows a genuinely poor fit (e.g. 2 clients, no content, no admin load),
-  say so and recommend Tier A only. The report's credibility is the product.
-- No hype language. "You could reclaim ~6 hrs/week" not "transform your business."
-- Price to the segment; never quote the $997 coach rate to a clinic buyer.
+- Every figure traces to a form field or a clearly-labeled default. No fabricated hours,
+  dollars, or client counts.
+- Apply the 40% discount — under-promise on the free asset; over-deliver on the build.
+- **Never reveal the how** in Output A. **Never** put pricing in Output A.
+- If the form shows a genuinely poor fit (e.g. 2 clients, no real admin load), be honest:
+  a soft "you may not need us yet" beats a bad-fit lead. Protects credibility.
+- No hype. "~6 hrs/week back" not "10x your business."
 
 ## Failure handling
-- Form mostly empty: return a short report on what was given + "complete these 3
-  fields for a full ROI estimate," listing the missing required fields.
-- Nonsensical numbers (e.g. 80 hrs/wk on one task): cap at 40, flag "figure looks
-  high — confirm on a working session."
-- Business type "Other": run generic defaults ($120/hr) and note the estimate is
-  rougher without a vertical match.
+- Form mostly empty: return a short Snapshot on what was given + "add these 2 numbers for
+  your full estimate," naming the missing required fields. Still show the booking CTA.
+- Nonsensical numbers (e.g. 80 hrs on one task): cap at 40, note "we'll confirm on the call."
+- `[BOOKING_LINK]` not configured: output the Snapshot and flag to the operator that the
+  booking link must be set before this goes live.
