@@ -15,6 +15,8 @@
 | **research-breakdown-generator** | Turn any research finding into a 7-part breakdown post. Citation-ready, limitations-honest, brand-specific. |
 | **coaching-ai-assessment** | Generate a structured ROI report from a discovery call transcript. Quick wins, bottleneck analysis, setup recommendations. Validated at $1,000/assessment. |
 | **reclaim-your-time** | Weekly demand & positioning audit for the RYT done-for-you automation service. Investigates where the money and pain are highest, who to advertise to, and how to reshape the offer for premium pricing. Ranks buyer segments by willingness-to-pay × pain × credibility fit. Built to run on a schedule. |
+| **retention-engine** | Weekly client-retention automation. Scores each active client's churn risk from engagement signals, explains why, and drafts a personalized retention action for approval. Sells RYT as "keep the clients you have" — the bigger wallet than lead-gen. Deterministic triage, no auto-send. |
+| **self-serve-assessment** | Turns the RYT audit into a self-serve funnel: an intake form → an instant, auto-generated ROI report with quick wins, hours reclaimed, and a tiered next-step CTA. The low-friction tripwire that qualifies buyers without a live call. |
 
 ```
 clawhub install lead-scanner
@@ -24,6 +26,8 @@ clawhub install client-checkin-analyzer
 clawhub install research-breakdown-generator
 clawhub install coaching-ai-assessment
 clawhub install reclaim-your-time
+clawhub install retention-engine
+clawhub install self-serve-assessment
 ```
 
 ## Requirements
