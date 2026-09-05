@@ -1,131 +1,117 @@
 ---
 name: reclaim-your-time
-description: Automated institutional-quality equity research on a watchlist of tickers. Runs a full evidence-based investigation across news, earnings language, customer and employee sentiment, supply chain, competitors, alternative data, fundamentals, red flags, catalysts, and produces a Bull/Base/Bear verdict with an information-edge score. Built to run on a schedule so you never do the manual dig yourself.
-metadata: {"openclaw":{"emoji":"📈","requires":{"bins":["curl","jq","date"],"env":["TAVILY_API_KEY"]}}}
+description: Weekly demand & positioning audit for the "Reclaim Your Time" (RYT) done-for-you AI automation service. Investigates where the money and the pain are highest, who to advertise to, and how to reshape the offer to charge premium prices. Evidence-based, cites sources, ranks target segments by willingness-to-pay × pain × founder-credibility fit. Built to run on a schedule so market-sensing happens without manual effort.
+metadata: {"openclaw":{"emoji":"🧭","requires":{"bins":["curl","jq","date"],"env":["TAVILY_API_KEY"]}}}
 user-invocable: true
 ---
 
-# Reclaim Your Time — Equity Research Automation
+# Reclaim Your Time — Demand & Positioning Audit
 
-## Who this is for
-An investor who wants an information edge but does not have hours to dig through
-earnings calls, Reddit threads, job boards, and supplier chatter every week. This
-skill does the grunt work: it investigates a company from primary and alternative
-sources and returns a structured, skeptical verdict.
+## Who this helps
+The owner of RYT — a done-for-you AI automation service (currently: assessment
+$1,000 / setup $997 / retainer $297/mo) that reclaims a business owner's time by
+deploying the Robur skill bundle (lead-scanner, content-pipeline-generator,
+training-plan-builder, client-checkin-analyzer, research-breakdown-generator).
 
 ## The problem it solves
-Institutional-quality research takes a full day per name and has to be repeated as
-new information lands. This automates the dig and reruns it on a schedule, so the
-work happens while you sleep and you only read the conclusion.
+Right now RYT is aimed at running & longevity **coaches** — a low-budget, hard-to-
+reach buyer. This audit answers the Hormozi question every week: *whose expensive
+problem does this exact automation stack solve, and where do we find them?*
+"Solve rich people's problems. They pay better." The service can be reshaped toward
+demand; this skill senses where that demand is.
+
+## What "solved" looks like
+A ranked shortlist of buyer segments — each with a real willingness-to-pay signal,
+the specific pain RYT removes, where to reach them, the offer/price to lead with,
+and the single riskiest assumption to test. Delivered weekly, cited, no fluff.
 
 ## Inputs
-- **Ticker(s):** one or more, e.g. `NKE`, `SBUX`, `LULU`. Maintained in the
-  `WATCHLIST` below.
-- **Web access:** requires live search (TAVILY_API_KEY) plus web fetch for primary
-  sources (SEC filings, transcripts, company IR).
+- **Founder credibility anchor** (fixed): health / longevity / physiotherapy /
+  endurance domain authority (BScKin, MScPT). Segments that sit inside this
+  authority convert cheaper and defend premium pricing — weight them up.
+- **Live web access:** TAVILY_API_KEY for search + web fetch for primary sources.
+- **Optional:** last week's audit file, to diff week-over-week.
 
-## Watchlist
-Edit this list to change what gets researched. One ticker per line.
+## The RYT capability map (what the stack actually automates)
+Translate every candidate segment through THIS lens — RYT only wins where these map
+to a painful, expensive job:
+| RYT skill | Generic job it removes |
+|-----------|------------------------|
+| lead-scanner | Manual prospecting / lead sourcing |
+| content-pipeline-generator | Ongoing marketing content production |
+| training-plan-builder | Producing structured, personalized client deliverables |
+| client-checkin-analyzer | Triage / follow-up on recurring client data |
+| research-breakdown-generator | Turning source material into authority content |
 
-```
-WATCHLIST:
-# <add tickers here, e.g.>
-# NKE
-# SBUX
-```
+## Workflow (run for the whole market, weekly)
 
-## Workflow
+Prioritize primary sources and dated evidence. Label **FACT / INFERENCE /
+SPECULATION**. Cite important claims. Do not fabricate numbers.
 
-For **each ticker** on the watchlist, run the full investigation below. Do NOT
-summarize the company's investor materials — look for signals that may not be
-priced in. Prioritize primary sources (SEC filings, earnings transcripts) and
-high-quality data. For every important claim, cite the source and give a date.
+### 1. Segment scan
+Generate/refresh a candidate list of buyer segments whose work matches the
+capability map AND has budget. Start from (and pressure-test) these: med spas,
+longevity/concierge/functional-medicine clinics, private physiotherapy/chiro
+practices, executive-health programs, high-ticket online fitness & gym owners,
+dietitian/nutrition practices, financial advisors, real-estate teams. Add any new
+segment the week's evidence surfaces.
 
-### 1. News & events
-Important news from the last 30 / 90 / 180 days. Separate material from noise.
-Tag each item positive / negative / ambiguous. Cover management changes, product,
-pricing, strategy, regulation, litigation, partnerships, M&A, layoffs, store
-openings/closures.
+### 2. Willingness-to-pay evidence
+For each segment, find a dated, sourced signal of what they already pay for
+marketing/ops/automation (retainers, agency prices, tool spend, revenue per
+location). No signal = mark UNVERIFIED, do not rank it high.
 
-### 2. Earnings & management language
-Most recent transcript vs. prior quarters. Changes in confidence, caution,
-optimism. Statements inconsistent with prior guidance. What management emphasized,
-avoided, or stopped discussing. Claims vs. measurable results.
+### 3. Pain evidence
+Find where the segment publicly complains about the exact jobs in the capability map
+(lead follow-up speed, content treadmill, admin/check-in load, no-shows, intake).
+Reddit, forums, industry blogs, review sites. Estimate reliability — anecdotes are
+not the whole segment.
 
-### 3. Customer sentiment
-Reddit, Google/app reviews, forums. Recurring complaints, quality changes, pricing
-dissatisfaction, retention concerns, new-product enthusiasm, switching to
-competitors, unusual swings in complaint volume. Estimate reliability of each
-signal — do NOT treat anecdotes as representative.
+### 4. Credibility fit
+Score how well the founder's health/longevity/PT authority carries into the segment
+(HIGH inside health-adjacent, LOW in unrelated verticals). This lowers CAC and
+defends price — it is a real ranking input, not a tiebreaker.
 
-### 4. Employee & frontline sentiment
-Employees, ex-employees, franchisees, suppliers. Staffing, morale, operational
-difficulty, supply shortages, rollouts, management problems, demand shifts.
-Distinguish verified evidence from anonymous speculation.
+### 5. Competition & pricing headroom
+Who already sells automation into this segment, at what price, and how specialized?
+Vertical specialists charge 2–3× horizontal generalists — note the headroom.
 
-### 5. Supply chain & operations
-Supplier problems, shipping delays, commodity costs, inventory, capacity,
-distribution, store count, hiring trends, job postings, manufacturing activity.
-Flag leading indicators before they hit the financials.
+### 6. Reachability
+Where does this segment actually congregate (associations, conferences, subreddits,
+Facebook groups, podcasts, directories)? A rich segment you can't reach is worthless.
 
-### 6. Competitive intelligence
-Compare against major competitors: share gain/loss, pricing, launches, sentiment,
-hiring, expansion/contraction, moat changes.
+### 7. Score & rank
+For each segment output a 0–5 score on: **Money · Pain · Credibility Fit ·
+Reachability · Pricing Headroom**. Rank. Show the math.
 
-### 7. Alternative data
-Web traffic, search trends, app rankings, foot traffic, job postings, product
-availability, pricing, import/export, satellite/parking data — ONLY where there is
-a defensible link to financial performance.
-
-### 8. Financial fundamentals
-Revenue and organic growth, gross/operating margin, FCF, debt, cash, capex,
-dilution/buybacks, ROIC, earnings quality, valuation. Compare to history and peers.
-
-### 9. Red flags
-Actively try to DISPROVE the thesis: accounting concerns, excess debt, weak cash
-generation, declining demand, management credibility, over-optimistic guidance,
-insider selling, competitive deterioration, regulatory and valuation risk.
-
-### 10. Catalysts
-Events in the next 30 days / 3 / 6 / 12 months that could re-rate the stock.
-
-### 11. Information discrepancies
-Where sources disagree (e.g. management says demand strong / customer sentiment
-deteriorating). State which evidence deserves more weight and why.
-
-### 12. Bull / Base / Bear
-Three scenarios with reasonable probability estimates and stated assumptions.
-
-### 13. Investment verdict
-- Rating: STRONG BUY / BUY / HOLD / AVOID / STRONG AVOID
-- Confidence: LOW / MEDIUM / HIGH
-- Key reasons; strongest bull evidence; strongest bear evidence; biggest unknown;
-  most important upcoming catalyst; what would change your mind; what to monitor.
-
-### 14. Information-edge score (1–10)
-1 = market likely understands the story. 10 = multiple credible, measurable signals
-suggest something the market may not yet appreciate. Explain the score.
+### 8. Offer reshape
+For the top 2–3 segments, rewrite the RYT offer to their language and their
+expensive problem, and propose the price to lead with (anchor to their existing
+retainer norms, not the current $997 coach price).
 
 ## Output format
-Lead with the verdict and edge score. Then the sections above. End with:
-
-**Signal table:** `SIGNAL | EVIDENCE | DIRECTION | CONFIDENCE | WHY IT MATTERS`
-
-**Then: the 5 most important things to monitor over the next 90 days.**
+Lead with the verdict. Then:
+- **Top 3 segments to pursue now** — with the one riskiest assumption to test each.
+- **Segment scorecard table:** `SEGMENT | MONEY | PAIN | FIT | REACH | HEADROOM | TOTAL | TOP SOURCE`
+- **Where to advertise** — concrete channels per top segment.
+- **Offer/price reshape** — for the top segment, headline + price + proof needed.
+- **Signal table:** `SIGNAL | EVIDENCE (dated, cited) | DIRECTION | CONFIDENCE | WHY IT MATTERS`
+- **The 5 things to monitor over the next 90 days.**
+- **Week-over-week diff** (if a prior audit exists): what moved and why.
 
 ## Guardrails
-- Clearly label **FACT vs. INFERENCE vs. SPECULATION**.
-- Give dates for important evidence. Cite important claims.
-- Do NOT claim something is "not priced in" without evidence for that conclusion.
-- Do NOT treat social-media sentiment as representative of the whole customer base.
-- Do NOT manufacture correlations. Do NOT fabricate any data that can't be verified.
-- Explicitly surface conflicting evidence. Be skeptical of your own conclusions.
-- The goal is not to justify buying — it's to determine whether a genuine,
-  evidence-based edge exists.
-- This is research, not personalized financial advice. It does not place trades.
+- Label **FACT vs. INFERENCE vs. SPECULATION**. Date and cite important evidence.
+- Do NOT treat one Reddit thread as the whole segment. Estimate reliability.
+- Do NOT rank a segment high on an UNVERIFIED willingness-to-pay guess.
+- Do NOT recommend a pivot away from the founder's credibility zone without saying
+  plainly that CAC and trust will be harder there.
+- Do NOT fabricate retainers, revenue, or headcounts. Missing data = say so.
+- This is market strategy, not a guarantee. The goal is to find where demand is —
+  not to justify the current target market.
 
 ## Failure handling
-- If a source is down or rate-limited (403 / 429): note it and continue.
-- If a ticker has no recent primary sources (e.g. pre-earnings, thin coverage): say
-  so plainly rather than padding with speculation.
-- If the watchlist is empty: report "No tickers configured" and stop.
+- Source down / rate-limited (403/429): note it, continue.
+- No willingness-to-pay evidence for a segment this week: keep it UNVERIFIED and
+  flag "needs primary source" rather than padding with speculation.
+- Thin week (little new evidence): say so and re-affirm last week's ranking rather
+  than inventing movement.

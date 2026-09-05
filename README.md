@@ -14,7 +14,7 @@
 | **client-checkin-analyzer** | Rule-based athlete triage. RED/YELLOW/GREEN from HRV, sleep, soreness, shift work. Deterministic — no LLM for triage. |
 | **research-breakdown-generator** | Turn any research finding into a 7-part breakdown post. Citation-ready, limitations-honest, brand-specific. |
 | **coaching-ai-assessment** | Generate a structured ROI report from a discovery call transcript. Quick wins, bottleneck analysis, setup recommendations. Validated at $1,000/assessment. |
-| **reclaim-your-time** | Automated institutional-quality equity research on a watchlist of tickers. Full evidence-based dig — news, earnings language, sentiment, supply chain, fundamentals, red flags, catalysts — ending in a Bull/Base/Bear verdict and information-edge score. Built to run on a schedule. |
+| **reclaim-your-time** | Weekly demand & positioning audit for the RYT done-for-you automation service. Investigates where the money and pain are highest, who to advertise to, and how to reshape the offer for premium pricing. Ranks buyer segments by willingness-to-pay × pain × credibility fit. Built to run on a schedule. |
 
 ```
 clawhub install lead-scanner
