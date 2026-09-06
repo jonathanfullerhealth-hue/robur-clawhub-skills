@@ -114,6 +114,48 @@ If the coach provides previous check-in data, identify trends:
 - **Sleep debt:** Consecutive nights below 7 hours
 - **Shift work compounding:** Multiple long shifts in a row
 
+### Step 6 — Sentiment Layer (Optional Input)
+
+Numeric wellness scores miss athletes who under-report. A stoic athlete answers "6" on a
+1–10 fatigue scale for anything short of a crisis, and their numbers will look fine right up
+until they don't.
+
+If `athlete-sentiment-tracker` has produced a deviation reading for the same window, add it
+as a **modifier**, never as an override:
+
+```
+SENTIMENT MODIFIER:
+- Sentiment HIGH deviation + triage GREEN  → report GREEN, append "SENTIMENT WATCH"
+- Sentiment HIGH deviation + triage YELLOW → escalate the coach message urgency, keep YELLOW
+- Sentiment deviation of any level + RED   → no change. RED is already RED.
+```
+
+The rule that does not bend: **positive sentiment never downgrades a triage level.** An
+upbeat athlete with an HRV crash and four hours of sleep is RED. Cheerful athletes get hurt.
+
+If no sentiment reading is available, state "No sentiment data — triage on metrics only" and
+proceed. This layer is optional by design.
+
+### Step 7 — Diagnose in Hierarchy Order
+
+When an athlete is YELLOW or RED, or when performance is off without an obvious cause, work
+down the hierarchy of training needs in order rather than reaching for the interesting
+explanation first:
+
+```
+1. VOLUME       — is total training load appropriate, or has it jumped?
+2. REST         — sleep, rest days, recovery between hard sessions. Sits above intensity.
+3. INTENSITY    — grey-zone drift, too many hard days, or hard days too hard
+4. SPECIFICITY  — terrain, vert, and eccentric load the athlete isn't adapted to yet
+5. NUTRITION    — under-fueling in training, not just racing. Assume it until ruled out.
+6. MENTAL       — life stress, motivation, external load
+7. TAPER        — last, and least. Rarely the answer.
+```
+
+Most underperformance resolves in the first three. Report the first level at which
+something is off, and say what would confirm it — the output of this analysis should be the
+right question, not a confident guess. See `docs/koop-methodology-notes.md` §1.
+
 ## Output Format
 
 ```
@@ -154,6 +196,8 @@ Recovery recommendation: [Proceed as planned / Modify / Rest]
 - Do NOT fabricate trend data. If no prior data available, state "No prior data — first check-in."
 - Do NOT suggest medical diagnoses. Flag concerns as training load management issues, not medical conditions. "Recommend consulting a physiotherapist" is OK. "This looks like patellar tendinopathy" is not.
 - Do NOT downplay RED status. If metrics are poor, say so directly. Softening the message defeats the purpose of triage.
+- Do NOT let positive sentiment downgrade a triage level. Sentiment modifies the message and can escalate attention; it never de-escalates the rules.
+- Do NOT treat self-reported subjective scores as calibrated across athletes. A 6/10 from a stoic athlete and a 6/10 from an expressive one are different numbers. Compare each athlete to their own history, not to the scale.
 - Do NOT generate workout prescriptions. The coach may modify sessions — flag recommendations, don't generate new plans.
 
 ## Failure Handling
