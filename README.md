@@ -9,6 +9,7 @@
 | Skill | What It Does |
 |-------|-------------|
 | **lead-scanner** | Scan Reddit, Strava, and forums for coaching leads. Extract posts, evaluate fit, draft outreach. |
+| **lead-research** | Source real target clinics/practices for outbound and generate a verifiable [Observation] for each. Outputs a send-ready prospect sheet with contact, the observed gap, and matching template. Never fabricates a business or claim. |
 | **content-pipeline-generator** | Generate 14 posts/week across two brands. Platform-native hooks, evidence-backed claims, daily CTA strategy. |
 | **training-plan-builder** | Structured weekly plans for trail/ultra runners. Shift-work aware, phase-appropriate, adjustment logic. |
 | **client-checkin-analyzer** | Rule-based athlete triage. RED/YELLOW/GREEN from HRV, sleep, soreness, shift work. Deterministic — no LLM for triage. |
@@ -21,6 +22,7 @@
 
 ```
 clawhub install lead-scanner
+clawhub install lead-research
 clawhub install content-pipeline-generator
 clawhub install training-plan-builder
 clawhub install client-checkin-analyzer
@@ -37,6 +39,7 @@ clawhub install solution-templates
 - OpenClaw v2026.3+
 - **lead-scanner:** TAVILY_API_KEY environment variable
 - **reclaim-your-time:** TAVILY_API_KEY environment variable (live web search) + web fetch for primary sources
+- **lead-research:** TAVILY_API_KEY environment variable (live web search) + web fetch to verify observations
 
 All other skills are pure prompt — no external dependencies.
 
