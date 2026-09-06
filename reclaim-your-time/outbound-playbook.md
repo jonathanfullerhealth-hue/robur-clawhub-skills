@@ -1,6 +1,6 @@
 # RYT Cold Outbound Playbook
 **Model:** Nick Saraev — value-first, no-pitch, free audit → book. **Drives to:** the ROI Snapshot lead magnet.
-**Placeholders:** `[First]` `[Clinic]` `[Observation]` `[SNAPSHOT_LINK]` `[BOOKING_LINK]` `[YourName]`
+**Placeholders:** `[First]` `[Clinic]` `[Observation]` `[SNAPSHOT_LINK]` `[YourName]` · **Booking link (set):** https://calendar.app.google/yyGpEpVHKNqTHG3S7
 
 > Rules: short, specific, one CTA, no mechanism. You're giving value (a number, an audit), not
 > pitching a service. Reply-or-click, never "hop on a call to learn about us."
@@ -48,14 +48,14 @@ Your 60-second snapshot: [SNAPSHOT_LINK]
 
 [LOOM_LINK]
 
-No pitch in it. If it's useful, the calendar's here: [BOOKING_LINK]
+No pitch in it. If it's useful, the calendar's here: https://calendar.app.google/yyGpEpVHKNqTHG3S7
 ```
 
 ### Email 4 — the breakup (Day 9)
 ```
 Last one, [First] — I'll get out of your inbox.
 
-If reclaiming ~10 hours a week is ever worth 30 minutes, the door's open: [BOOKING_LINK]
+If reclaiming ~10 hours a week is ever worth 30 minutes, the door's open: https://calendar.app.google/yyGpEpVHKNqTHG3S7
 Either way, the snapshot's yours free: [SNAPSHOT_LINK]
 ```
 
@@ -72,7 +72,7 @@ The Loom is the wedge — a specific, free teardown of *their* practice. Structu
    numbers. "For a practice your size that's ~X hours a year."
 4. **One first move (45s):** name *what* you'd fix first — never *how*. "I'd start with your
    follow-up. That alone usually recovers a third of lost leads."
-5. **CTA (15s):** "If you want the full map, book here — [BOOKING_LINK]. First 30 minutes are on me."
+5. **CTA (15s):** "If you want the full map, book here — https://calendar.app.google/yyGpEpVHKNqTHG3S7. First 30 minutes are on me."
 
 **Rules:** value not mechanism; one gap not ten; end on the calendar; keep it under 4 min.
 
