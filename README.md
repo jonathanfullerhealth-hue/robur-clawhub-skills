@@ -1,6 +1,6 @@
 # Robur ClawHub Skills
 
-6 free OpenClaw skills for running and longevity coaches. Built from workflows that run Fuller Health & Longevity and Cairn Endurance.
+8 free OpenClaw skills for running and longevity coaches. Built from workflows that run Fuller Health & Longevity and Cairn Endurance.
 
 ---
 
@@ -10,8 +10,10 @@
 |-------|-------------|
 | **lead-scanner** | Scan Reddit, Strava, and forums for coaching leads. Extract posts, evaluate fit, draft outreach. |
 | **content-pipeline-generator** | Generate 14 posts/week across two brands. Platform-native hooks, evidence-backed claims, daily CTA strategy. |
-| **training-plan-builder** | Structured weekly plans for trail/ultra runners. Shift-work aware, phase-appropriate, adjustment logic. |
+| **training-plan-builder** | Structured weekly plans for trail/ultra runners. Shift-work aware, ultra-specific periodization, vert and fueling prescribed as real numbers. |
 | **client-checkin-analyzer** | Rule-based athlete triage. RED/YELLOW/GREEN from HRV, sleep, soreness, shift work. Deterministic — no LLM for triage. |
+| **athlete-sentiment-tracker** | Baseline how an athlete normally communicates, then flag deviation. Detects sentiment change, not keywords. Merges TrainingPeaks comments, messages, and voice memos. |
+| **training-history-audit** | Audit a training history export for fundamental errors, bad GPS/HR data, and individual response patterns. For onboarding consults and quarterly review. |
 | **research-breakdown-generator** | Turn any research finding into a 7-part breakdown post. Citation-ready, limitations-honest, brand-specific. |
 | **coaching-ai-assessment** | Generate a structured ROI report from a discovery call transcript. Quick wins, bottleneck analysis, setup recommendations. Validated at $1,000/assessment. |
 
@@ -20,9 +22,16 @@ clawhub install lead-scanner
 clawhub install content-pipeline-generator
 clawhub install training-plan-builder
 clawhub install client-checkin-analyzer
+clawhub install athlete-sentiment-tracker
+clawhub install training-history-audit
 clawhub install research-breakdown-generator
 clawhub install coaching-ai-assessment
 ```
+
+## Docs
+
+- [`docs/koop-methodology-notes.md`](docs/koop-methodology-notes.md) — sourced trail/ultra training principles the running skills encode
+- [`docs/running-ops-notes.md`](docs/running-ops-notes.md) — internal notes on the running-side workflow
 
 ## Requirements
 
