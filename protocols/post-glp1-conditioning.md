@@ -52,6 +52,15 @@ The consequences are measurable:
 Lower protein intake, older age, and female sex are each associated with greater muscle loss
 in this population. Those three factors define the high-risk phenotype.
 
+**State the problem accurately, because prescribers know the counter-evidence.** The DEXA
+substudy of STEP 1 found that the *proportion* of lean body mass increased on semaglutide,
+because fat mass fell further than lean mass did. That is not in conflict with the figures
+above: absolute fat-free mass falls substantially while relative body composition improves.
+The clinical concern here is absolute functional capacity in patients with limited reserve —
+older adults, women, and those with low baseline muscle — not the body composition ratio.
+Framing GLP-1 therapy as uniformly damaging to body composition is unsupported and will cost
+credibility in the first conversation with a medical director.
+
 **The intervention is not novel or exotic.** Resistance training plus adequate protein
 preserves lean mass during energy restriction — this is among the better-established findings
 in exercise science. In one Danish trial, **exercise alone fully preserved hip and spine bone
@@ -154,7 +163,11 @@ what the scale says on a given morning.
 1. **Volume goes up as the dose goes up.** The instinct is to back off as the patient eats
    less and feels worse. Do the opposite. The therapeutic-dose window is the highest-risk
    period for lean mass, and it is precisely when training load must be protected. Evidence in
-   energy restriction favours maintaining or increasing resistance volume over reducing it.
+   energy restriction favours maintaining or increasing resistance volume over reducing it —
+   though note that the specific benefit of *high* volume is not settled (see references C2
+   vs C3). What is well supported is that some resistance training is essential and that
+   reducing it during the deficit is the error. Hence a firm 2×/week floor, escalating to
+   3×/week by risk tier, rather than maximal volume for everyone.
 2. **Two sessions a week is the floor, not the target.** Even low-volume resistance training
    prevents lean mass loss during energy restriction. Two well-executed full-body sessions
    beat an aspirational five-day split that gets abandoned in week three.
@@ -250,6 +263,7 @@ RED — escalate to prescriber within one week; do not progress load
   • Gait speed ≤ 0.8 m/s
   • Protein < 0.8 g/kg for 2 consecutive weeks
   • Sustained loss > ~1% body weight/week beyond initial weeks
+  • Training adherence < 60% (program disengagement — a clinical event, per §5)
   • Any fall
 
 YELLOW — hold load, address the driver, reassess in 2 weeks
@@ -310,28 +324,27 @@ other diabetes complications affecting exercise selection.
 
 ## 10. Evidence base
 
-Muscle and lean mass:
-- [Lean Mass and Musculoskeletal Preservation in GLP-1-Based Obesity Treatment](https://pmc.ncbi.nlm.nih.gov/articles/PMC13303403/)
-- [Lean mass sparing during caloric restriction: the role of resistance training volume](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9012799/)
-- [Energy deficiency impairs resistance training gains in lean mass but not strength](https://pubmed.ncbi.nlm.nih.gov/34623696/)
-- [Resistance training as a key strategy for high-quality weight loss](https://www.frontiersin.org/journals/endocrinology/articles/10.3389/fendo.2025.1725500/full)
+**Full annotated bibliography with evidence grading: [`references.md`](references.md).**
+Every threshold in this protocol traces to a numbered entry there.
 
-Protein:
-- [Suboptimal protein intake for hypocaloric diet needs while using GLP-1 receptor agonists](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12419545/)
-- [Macronutrient and micronutrient supplementation and monitoring on GLP-1 agonists: lessons from bariatric surgery](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12693348/)
+The load-bearing sources:
 
-Assessment:
-- [EWGSOP2 cut-points for grip strength and sarcopenia](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8037004/)
+| Claim | Source |
+|---|---|
+| All assessment cut-points | Cruz-Jentoft et al., *Age and Ageing* 2019;48(1):16–31 (EWGSOP2) — A1 |
+| 30–40% of loss is fat-free mass | *Metabolites* 2026;16(6):364 — B1 |
+| Proportional lean mass improves (the counterpoint) | Wilding et al., STEP 1 DEXA substudy, *J Endocr Soc* 2021 — B2 |
+| Strength preserved in deficit; lean mass gains blunted | Meta-analysis, PubMed 34623696 — C1 |
+| Maintain or increase resistance volume | PMC9012799 — C2, read against Roth et al. 2023 — C3 |
+| Protein 1.2–1.6 g/kg, 20–30 g per feeding | PMC12693348 — D2 |
+| ~20% dietitian referral rate | PMC12913018 — D3 |
+| Bone: monotherapy neutral, dual agonists higher risk | *Diagnostics* 2026;16(13):2128 — E1 |
+| 41% never strength trained | PwC 2026 — F2 |
+| 11% of US adults currently using | Gallup 2026 — F1 |
 
-Bone:
-- [GLP-1 drugs and bone density: fracture-risk evidence reviewed](https://theglp1daily.com/glp1-bone-density-fracture-risk-2026)
-- [Tracking bone loss in GLP-1RA therapy](https://pmc.ncbi.nlm.nih.gov/articles/PMC13360158/)
-
-Population:
-- [Gallup: GLP-1 usage reaches new high](https://news.gallup.com/poll/712157/glp-usage-reaches-new-high.aspx)
-- [PwC GLP-1 consumer trends](https://www.pwc.com/us/en/industries/consumer-markets/library/glp-1-consumer-trends.html)
-
----
+Grading runs Established → Supported → Emerging → Contextual. Nothing here rests on a single
+contextual source, and where a threshold derives from emerging evidence the protocol monitors
+more closely rather than intervening more aggressively.
 
 ## 11. Review
 
