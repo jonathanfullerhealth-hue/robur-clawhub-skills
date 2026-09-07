@@ -23,8 +23,15 @@ category writes its assessment protocol, its programming standard, and its refer
 pathway. That person becomes the citation, and everyone who arrives later cites them.
 
 This is available right now because the wave is two years ahead of the infrastructure and
-because naming things requires a credential you happen to hold. It will not be available in
-2029.
+because naming things requires a credential you happen to hold.
+
+**2029 is not a rhetorical date.** LEAN-PREP (NCT06885736) — Dasman Diabetes Institute with
+the University of Glasgow, 232 participants randomised across control / protein / resistance
+exercise / both — has been recruiting since August 2025 with primary completion **August
+2029**. It measures MRI quadriceps cross-sectional area, DXA body composition, grip strength,
+chair rise and gait speed: substantially the protocol in `protocols/` arrived at
+independently. When it reports, this stops being an open question and becomes a guideline.
+The window is the gap between now and then.
 
 The tell that this is real: bariatric surgery solved this problem decades ago with
 standardized multidisciplinary follow-up. GLP-1s produce comparable weight loss with none of

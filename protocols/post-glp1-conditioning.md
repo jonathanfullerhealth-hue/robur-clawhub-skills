@@ -42,10 +42,15 @@ The consequences are measurable:
 
 - An estimated **30–40% of total weight lost on GLP-1 therapy is fat-free mass**, with lean
   mass declines of 10–15% in patients losing more than 15% of body weight.
-- Hip bone mineral density falls roughly **2–3%** in the most direct trials, tracking the
-  magnitude of weight lost rather than any direct skeletal toxicity. Monotherapy appears
-  broadly bone-neutral; dual agonists may carry higher risk, plausibly through greater
-  weight loss and larger lean mass reduction.
+- Bone loss is real but **much smaller than popular coverage suggests, and fracture risk does
+  not appear elevated.** In a matched retrospective cohort (255 semaglutide/tirzepatide users
+  vs 255 controls, median 17 months, median 5% weight loss), both groups lost hip and femoral
+  neck BMD by a similar magnitude. The drug-attributable increment appeared only in patients
+  *without* diabetes, at **−1% vs −0.6%** total hip. Bone loss correlated with weight lost
+  (r = 0.32), not with the drug itself. A 2025 critical appraisal concludes GLP-1R agonists
+  have a neutral-to-negative but **not clinically significant** effect on BMD, and that
+  **fracture risk does not seem to increase** at clinically relevant doses — while dual and
+  triple agonists may, on mostly preclinical data, be *bone-positive*.
 - **41% of current GLP-1 users have never performed strength training**, and 17% have
   *decreased* it since starting. Only **20%** report referral to a dietitian.
 
@@ -74,7 +79,7 @@ Stratify at intake. This determines assessment frequency and minimum training do
 
 | Tier | Criteria (any one) | Assessment interval | Minimum resistance dose |
 |---|---|---|---|
-| **High** | Age ≥65; postmenopausal with known low BMD; baseline sarcopenia or probable sarcopenia; prior fragility fracture; on a dual agonist; targeting >15% total body weight loss; resistance-training naive with BMI ≥40 | 4 weeks | 3×/week, supervised where possible |
+| **High** | Age ≥65; postmenopausal with known low BMD; baseline sarcopenia or probable sarcopenia; prior fragility fracture; on a dual agonist *(included for the greater absolute weight loss it produces, and therefore greater absolute fat-free mass loss — not for a bone risk, which the primary evidence does not support)*; targeting >15% total body weight loss; resistance-training naive with BMI ≥40 | 4 weeks | 3×/week, supervised where possible |
 | **Moderate** | Age 50–64; female and premenopausal with rapid loss; resistance-training naive; protein intake historically <1.0 g/kg; concurrent insulin or sulfonylurea | 6 weeks | 2–3×/week |
 | **Standard** | Age <50, training-experienced, no risk features above | 12 weeks | 2×/week |
 
@@ -338,7 +343,7 @@ The load-bearing sources:
 | Maintain or increase resistance volume | PMC9012799 — C2, read against Roth et al. 2023 — C3 |
 | Protein 1.2–1.6 g/kg, 20–30 g per feeding | PMC12693348 — D2 |
 | ~20% dietitian referral rate | PMC12913018 — D3 |
-| Bone: monotherapy neutral, dual agonists higher risk | *Diagnostics* 2026;16(13):2128 — E1 |
+| Bone: small BMD loss tracking weight lost; fracture risk not elevated | Liu et al., *J Clin Endocrinol Metab* 2026;111(7):1959–66 — E1; Anastasilakis et al., *Diabetes Obes Metab* 2025;27(9):4674–88 — E2 |
 | 41% never strength trained | PwC 2026 — F2 |
 | 11% of US adults currently using | Gallup 2026 — F1 |
 
