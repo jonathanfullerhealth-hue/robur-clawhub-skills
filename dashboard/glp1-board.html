@@ -162,6 +162,7 @@ dl.kv dd{margin:0;color:var(--ink-2)}
       <div class="eyebrow">Clinical monitoring</div>
       <h1>GLP-1 Conditioning Board</h1>
       <p>Triage of conditioning check-ins against the post-GLP-1 protocol. Thresholds from EWGSOP2 and the protocol reference list.</p>
+      <p id="src" class="note" style="margin-top:6px;font-size:11.5px"></p>
     </div>
     <div class="hdr-actions">
       <button id="themeBtn" type="button">Dark</button>
@@ -306,7 +307,7 @@ const SCHEMA=`{
   }]
 }`;
 
-/* ---------- triage engine (protocol section 7) ---------- */
+/* TRIAGE-ENGINE:START — generated from scripts/triage.mjs. Do not edit here. */
 const wks=(a,b)=>(new Date(b)-new Date(a))/6048e5;
 const f1=n=>n==null?"—":n.toFixed(1);
 
@@ -323,7 +324,7 @@ function triage(p,i){
   let pStreak=0;
   for(let k=i;k>=0;k--){if(p.checkins[k].proteinGPerKg!=null&&p.checkins[k].proteinGPerKg<0.8)pStreak++;else break;}
 
-  // RED
+  // RED — escalate to prescriber within one week
   if(gripPct!=null&&gripPct<-10) red.push(["Grip strength decline >10% from baseline",`${f1(c.gripKg)} kg against a baseline of ${f1(b.gripKg)} kg — a ${f1(Math.abs(gripPct))}% fall.`]);
   if(b.canRiseWithoutArms===true&&c.canRiseWithoutArms===false) red.push(["New inability to rise from chair without arms","Could rise unaided at baseline; cannot at this assessment."]);
   if(c.sitToStandSec!=null&&c.sitToStandSec>15&&b.sitToStandSec!=null&&b.sitToStandSec<=15) red.push(["5× sit-to-stand crossed 15 s",`${f1(c.sitToStandSec)} s, from ${f1(b.sitToStandSec)} s at baseline.`]);
@@ -333,13 +334,14 @@ function triage(p,i){
   if(c.adherencePct!=null&&c.adherencePct<60) red.push(["Training adherence below 60%",`${c.adherencePct}% of prescribed sessions. Program disengagement — treat as a clinical event.`]);
   if(c.falls>0) red.push([`${c.falls} fall${c.falls>1?"s":""} since last check-in`,"Any fall is an escalation trigger regardless of injury."]);
 
-  // YELLOW
+  // YELLOW — hold load, address the driver, reassess in 2 weeks
   if(gripPct!=null&&gripPct<=-5&&gripPct>=-10) yel.push(["Grip strength decline 5–10% from baseline",`${f1(c.gripKg)} kg, down ${f1(Math.abs(gripPct))}% from ${f1(b.gripKg)} kg.`]);
   if(c.proteinGPerKg!=null&&c.proteinGPerKg>=0.8&&c.proteinGPerKg<1.2) yel.push(["Protein below target",`${f1(c.proteinGPerKg)} g/kg against 1.2–1.6. Usually a distribution problem — five feedings of 25 g rather than three of 40 g.`]);
   if(c.adherencePct!=null&&c.adherencePct>=60&&c.adherencePct<80) yel.push(["Training adherence 60–79%",`${c.adherencePct}% of prescribed sessions completed.`]);
   if(c.giLimiting) yel.push(["GI symptoms limiting intake or training","Reported at this check-in. Common in the 5–10 days after a dose escalation."]);
   if(stsD!=null&&stsD>2&&c.sitToStandSec<=15) yel.push(["5× sit-to-stand slowed >2 s from baseline",`${f1(c.sitToStandSec)} s, from ${f1(b.sitToStandSec)} s — still under the 15 s cut-point.`]);
 
+  // Absolute EWGSOP2 criteria — reported alongside triage, never folded into it
   const cut=p.sex==="M"?27:16;
   const ew={strength:(c.gripKg!=null&&c.gripKg<cut)||(c.sitToStandSec!=null&&c.sitToStandSec>15),cut,
             mass:p.almi!=null?(p.almi<(p.sex==="M"?7.0:5.5)):null,massCut:p.sex==="M"?7.0:5.5};
@@ -347,7 +349,9 @@ function triage(p,i){
   return{status:red.length?"crit":yel.length?"warn":"good",red,yel,inc,
          gripPct,stsD,loss,onTx,pStreak,ew,c,prior,first:i===0};
 }
+
 const latest=p=>triage(p,p.checkins.length-1);
+/* TRIAGE-ENGINE:END */
 
 /* ---------- chart ---------- */
 function chart(pts,opts={}){
@@ -380,7 +384,10 @@ function chart(pts,opts={}){
 }
 
 /* ---------- render ---------- */
+/* COHORT-DATA:START — replaced by scripts/sync-glp1-board.mjs */
 let DATA=JSON.parse(JSON.stringify(SAMPLE));
+const SYNCED_AT=null;
+/* COHORT-DATA:END */
 const $=id=>document.getElementById(id);
 const md=d=>{const x=new Date(d);return x.toLocaleDateString('en-CA',{month:'short',day:'numeric'});};
 const esc=s=>String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
@@ -650,5 +657,8 @@ $('loadBtn').onclick=()=>{
     $('detailView').hidden=true;$('cohortView').hidden=false;renderBoard();
   }catch(e){$('loadMsg').textContent=e.message;$('loadMsg').style.color='var(--crit)';}
 };
+$('src').innerHTML = SYNCED_AT
+  ? `<span class="mono">Live cohort · synced ${new Date(SYNCED_AT).toLocaleString('en-CA',{dateStyle:'medium',timeStyle:'short'})}</span>`
+  : '<span class="mono" style="color:var(--warn)">Sample cohort — example data, not real patients</span>';
 renderBoard();
 </script>
