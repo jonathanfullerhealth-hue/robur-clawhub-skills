@@ -1,0 +1,3 @@
+# Personal, machine-local Claude Code settings (permissions, overrides).
+# Team-wide settings belong in .claude/settings.json, which IS committed.
+.claude/settings.local.json

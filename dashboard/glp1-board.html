@@ -1,0 +1,705 @@
+<title>GLP-1 Conditioning Board</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F6F8F7;--surface:#FFFFFF;--surface-2:#F1F5F3;
+  --ink:#16201F;--ink-2:#4A5754;--ink-3:#76837F;
+  --line:#DCE4E1;--line-2:#C3CFCB;
+  --accent:#0E6E63;--accent-soft:#E2F0ED;
+  --crit:#A8352B;--crit-soft:#F8E7E5;
+  --warn:#8A6205;--warn-soft:#FAF0DC;
+  --good:#256B47;--good-soft:#E3F1E9;
+  --shadow:0 1px 2px rgba(22,32,31,.06),0 4px 12px rgba(22,32,31,.04);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E1312;--surface:#161D1C;--surface-2:#1D2624;
+    --ink:#E6EDEB;--ink-2:#AFBCB8;--ink-3:#7E8C88;
+    --line:#28322F;--line-2:#38443F;
+    --accent:#54B8A9;--accent-soft:#12302C;
+    --crit:#E8877D;--crit-soft:#3A1F1C;
+    --warn:#D9AC4E;--warn-soft:#332715;
+    --good:#66B98C;--good-soft:#16301F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 12px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1312;--surface:#161D1C;--surface-2:#1D2624;
+  --ink:#E6EDEB;--ink-2:#AFBCB8;--ink-3:#7E8C88;
+  --line:#28322F;--line-2:#38443F;
+  --accent:#54B8A9;--accent-soft:#12302C;
+  --crit:#E8877D;--crit-soft:#3A1F1C;
+  --warn:#D9AC4E;--warn-soft:#332715;
+  --good:#66B98C;--good-soft:#16301F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 12px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--ground);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:14px;line-height:1.5;margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 22px 64px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* header */
+header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;
+  border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+.brand h1{font-size:21px;font-weight:600;letter-spacing:-.015em}
+.brand p{margin:5px 0 0;color:var(--ink-3);font-size:12.5px;max-width:60ch}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:7px}
+.hdr-actions{display:flex;gap:8px;align-items:center}
+
+button{font:inherit;cursor:pointer;border-radius:5px;border:1px solid var(--line-2);
+  background:var(--surface);color:var(--ink-2);padding:6px 11px;font-size:12.5px}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.primary:hover{opacity:.9;color:#fff}
+
+/* tabs */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.tab{background:none;border:none;border-bottom:2px solid transparent;border-radius:0;
+  padding:9px 14px;color:var(--ink-3);font-size:13px;font-weight:500}
+.tab:hover{color:var(--ink);border-color:var(--line-2)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.panel[hidden]{display:none!important}
+
+/* summary strip */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:22px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:13px 15px;
+  display:flex;flex-direction:column;gap:3px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line-2)}
+.stat.crit::before{background:var(--crit)} .stat.warn::before{background:var(--warn)}
+.stat.good::before{background:var(--good)} .stat.neutral::before{background:var(--accent)}
+.stat.inc::before{background:var(--ink-3)}
+.stat .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3)}
+.stat .v{font-size:26px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat .s{font-size:11.5px;color:var(--ink-3)}
+
+/* table */
+.tablewrap{background:var(--surface);border:1px solid var(--line);border-radius:7px;
+  overflow-x:auto;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:820px}
+thead th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;
+  padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface-2)}
+tbody td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--surface-2)}
+tbody tr:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+td.stripe{width:3px;padding:0}
+.sc-crit{background:var(--crit)} .sc-warn{background:var(--warn)} .sc-good{background:var(--good)}
+.sc-inc{background:var(--ink-3)}
+.pid{font-weight:600;font-size:13.5px}
+.psub{font-size:11.5px;color:var(--ink-3);margin-top:1px}
+tbody td:nth-child(3){min-width:190px;max-width:230px}
+
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:100px;padding:2.5px 9px;
+  font-size:11px;font-weight:600;letter-spacing:.03em;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.crit{background:var(--crit-soft);color:var(--crit)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.inc{background:var(--line);color:var(--ink-2)}
+.tag{display:inline-block;border:1px solid var(--line-2);border-radius:4px;padding:1px 6px;
+  font-size:10.5px;font-family:"IBM Plex Mono",monospace;color:var(--ink-3);letter-spacing:.04em}
+.delta.dn{color:var(--crit)} .delta.up{color:var(--good)} .delta.flat{color:var(--ink-3)}
+
+/* detail */
+.detail{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px}
+@media(max-width:900px){.detail{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:17px 18px}
+.card h3{font-size:12px;font-family:"IBM Plex Mono",monospace;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:13px}
+.measures{display:grid;gap:0}
+.measure{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:baseline;
+  padding:8px 0;border-bottom:1px solid var(--line)}
+.measure:last-child{border-bottom:none}
+.measure .lbl{font-size:13px;color:var(--ink-2)}
+.measure .val{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+  font-size:14.5px;font-weight:500}
+.measure .ctx{font-family:"IBM Plex Mono",monospace;font-size:11.5px;text-align:right;min-width:88px}
+.flaglist{display:flex;flex-direction:column;gap:9px}
+.flag{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.45}
+.flag .dot{width:7px;height:7px;border-radius:50%;margin-top:6px;flex:none}
+.flag.crit .dot{background:var(--crit)} .flag.warn .dot{background:var(--warn)}
+.flag strong{font-weight:600}
+.charts{display:grid;gap:16px}
+.chart-t{font-size:12px;color:var(--ink-2);margin-bottom:4px;display:flex;justify-content:space-between}
+.chart-t .cur{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--ink)}
+svg{display:block;width:100%;height:auto}
+.note{font-size:12px;color:var(--ink-3);line-height:1.55}
+.draft{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;
+  padding:13px 14px;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.6;
+  white-space:pre-wrap;color:var(--ink-2);max-height:340px;overflow:auto}
+.review{margin-top:10px;font-size:11.5px;color:var(--warn);font-weight:600;letter-spacing:.02em}
+textarea{width:100%;min-height:230px;font-family:"IBM Plex Mono",monospace;font-size:12px;
+  border:1px solid var(--line-2);border-radius:6px;padding:11px;background:var(--surface);
+  color:var(--ink);resize:vertical}
+textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.privacy{display:flex;gap:9px;align-items:flex-start;background:var(--accent-soft);
+  border:1px solid var(--accent);border-radius:6px;padding:11px 13px;font-size:12.5px;
+  color:var(--ink-2);line-height:1.5;margin-bottom:20px}
+.privacy strong{color:var(--ink)}
+.back{margin-bottom:14px}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:12.5px}
+dl.kv dt{color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:11px;
+  letter-spacing:.06em;text-transform:uppercase;align-self:center}
+dl.kv dd{margin:0;color:var(--ink-2)}
+.refs{font-size:12.5px;line-height:1.6;color:var(--ink-2)}
+.refs li{margin-bottom:7px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="eyebrow">Clinical monitoring</div>
+      <h1>GLP-1 Conditioning Board</h1>
+      <p>Triage of conditioning check-ins against the post-GLP-1 protocol. Thresholds from EWGSOP2 and the protocol reference list.</p>
+      <p id="src" class="note" style="margin-top:6px;font-size:11.5px"></p>
+    </div>
+    <div class="hdr-actions">
+      <button id="themeBtn" type="button">Dark</button>
+      <button id="demoBtn" type="button">Reload sample cohort</button>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-panel="board">Board</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="report">Quarterly report</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="data">Data</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="about">Thresholds</button>
+  </div>
+
+  <section class="panel" id="p-board">
+    <div id="cohortView">
+      <div class="strip" id="strip"></div>
+      <div class="tablewrap"><table>
+        <thead><tr>
+          <th></th><th>Patient</th><th>Triage</th><th>Grip vs baseline</th>
+          <th>5×STS</th><th>Protein</th><th>Adherence</th><th>Phase / tier</th><th>Last seen</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table></div>
+      <p class="note" style="margin-top:11px">Sorted by urgency. Select a row for the full assessment, triggered flags, trends, and draft notes.</p>
+    </div>
+    <div id="detailView" hidden></div>
+  </section>
+
+  <section class="panel" id="p-report" hidden></section>
+
+  <section class="panel" id="p-data" hidden>
+    <div class="privacy">
+      <span>🔒</span>
+      <div><strong>Nothing leaves this browser.</strong> Check-in data is parsed and triaged locally in the page. It is never uploaded, stored, or transmitted. Closing the tab discards it. Use de-identified patient codes rather than names.</div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Import check-in data</h3>
+        <p class="note" style="margin:0 0 10px">Paste a cohort export from your tracking tool, matching the contract on the right.</p>
+        <textarea id="jsonIn" spellcheck="false" aria-label="Cohort JSON"></textarea>
+        <div style="display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap">
+          <button class="primary" id="loadBtn" type="button">Load cohort</button>
+          <button id="fillBtn" type="button">Paste sample</button>
+          <span id="loadMsg" class="note"></span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Data contract</h3>
+        <p class="note" style="margin:0 0 10px">Map your tool's export to these field names. Missing optional fields degrade gracefully — a missing <span class="mono">gripKg</span> marks the check-in incomplete rather than passing it.</p>
+        <div class="draft" id="schema"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-about" hidden></section>
+</div>
+
+<script>
+/* ---------- sample cohort ---------- */
+const SAMPLE={patients:[
+ {id:"PT-0416",sex:"F",age:64,heightM:1.60,tier:"high",agent:"tirzepatide",agentClass:"dual",
+  startDate:"2026-02-02",knownLowBMD:true,concurrentInsulinOrSU:false,almi:5.4,
+  baseline:{gripKg:19.2,sitToStandSec:13.8,gaitSpeedMs:0.95,weightKg:88.4,canRiseWithoutArms:true},
+  checkins:[
+   {date:"2026-03-02",phase:1,gripKg:19.0,sitToStandSec:13.9,gaitSpeedMs:0.94,weightKg:85.1,proteinGPerKg:1.15,adherencePct:90,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-03-30",phase:2,gripKg:18.1,sitToStandSec:14.6,gaitSpeedMs:0.91,weightKg:81.0,proteinGPerKg:0.95,adherencePct:82,falls:0,giLimiting:true,canRiseWithoutArms:true},
+   {date:"2026-04-27",phase:2,gripKg:17.4,sitToStandSec:15.4,gaitSpeedMs:0.88,weightKg:77.4,proteinGPerKg:0.74,adherencePct:71,falls:0,giLimiting:true,canRiseWithoutArms:true},
+   {date:"2026-05-25",phase:3,gripKg:16.6,sitToStandSec:16.2,gaitSpeedMs:0.84,weightKg:74.2,proteinGPerKg:0.71,adherencePct:64,falls:0,giLimiting:true,canRiseWithoutArms:false}]},
+
+ {id:"PT-0744",sex:"M",age:61,heightM:1.75,tier:"moderate",agent:"semaglutide",agentClass:"mono",
+  startDate:"2026-02-09",knownLowBMD:false,concurrentInsulinOrSU:false,almi:7.4,
+  baseline:{gripKg:34.0,sitToStandSec:11.8,gaitSpeedMs:1.10,weightKg:104.5,canRiseWithoutArms:true},
+  checkins:[
+   {date:"2026-03-09",phase:1,gripKg:33.6,sitToStandSec:11.9,gaitSpeedMs:1.09,weightKg:101.2,proteinGPerKg:1.30,adherencePct:88,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-04-20",phase:2,gripKg:33.1,sitToStandSec:12.1,gaitSpeedMs:1.08,weightKg:96.4,proteinGPerKg:1.24,adherencePct:85,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-05-25",phase:3,gripKg:null,sitToStandSec:12.4,gaitSpeedMs:null,weightKg:92.8,proteinGPerKg:null,adherencePct:83,falls:null,giLimiting:null,canRiseWithoutArms:true}]},
+
+ {id:"PT-0203",sex:"M",age:58,heightM:1.78,tier:"moderate",agent:"semaglutide",agentClass:"mono",
+  startDate:"2026-01-19",knownLowBMD:false,concurrentInsulinOrSU:false,almi:7.9,
+  baseline:{gripKg:38.5,sitToStandSec:10.2,gaitSpeedMs:1.22,weightKg:112.0,canRiseWithoutArms:true},
+  checkins:[
+   {date:"2026-03-02",phase:1,gripKg:39.1,sitToStandSec:10.0,gaitSpeedMs:1.24,weightKg:107.8,proteinGPerKg:1.42,adherencePct:95,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-04-13",phase:2,gripKg:40.2,sitToStandSec:9.4,gaitSpeedMs:1.28,weightKg:102.1,proteinGPerKg:1.51,adherencePct:100,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-05-25",phase:3,gripKg:41.4,sitToStandSec:9.1,gaitSpeedMs:1.30,weightKg:97.6,proteinGPerKg:1.48,adherencePct:92,falls:0,giLimiting:false,canRiseWithoutArms:true}]},
+
+ {id:"PT-0871",sex:"F",age:71,heightM:1.57,tier:"high",agent:"tirzepatide",agentClass:"dual",
+  startDate:"2026-03-09",knownLowBMD:true,concurrentInsulinOrSU:true,almi:5.2,
+  baseline:{gripKg:17.8,sitToStandSec:15.8,gaitSpeedMs:0.82,weightKg:79.3,canRiseWithoutArms:true},
+  checkins:[
+   {date:"2026-04-06",phase:1,gripKg:17.6,sitToStandSec:15.5,gaitSpeedMs:0.81,weightKg:76.9,proteinGPerKg:1.24,adherencePct:88,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-05-04",phase:2,gripKg:17.9,sitToStandSec:15.1,gaitSpeedMs:0.80,weightKg:74.8,proteinGPerKg:1.31,adherencePct:91,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-06-01",phase:2,gripKg:18.2,sitToStandSec:14.6,gaitSpeedMs:0.79,weightKg:73.1,proteinGPerKg:1.33,adherencePct:94,falls:0,giLimiting:false,canRiseWithoutArms:true}]},
+
+ {id:"PT-1122",sex:"M",age:45,heightM:1.81,tier:"standard",agent:"semaglutide",agentClass:"mono",
+  startDate:"2026-02-16",knownLowBMD:false,concurrentInsulinOrSU:false,almi:8.4,
+  baseline:{gripKg:46.0,sitToStandSec:8.1,gaitSpeedMs:1.41,weightKg:104.5,canRiseWithoutArms:true},
+  checkins:[
+   {date:"2026-03-30",phase:1,gripKg:46.8,sitToStandSec:7.9,gaitSpeedMs:1.43,weightKg:100.2,proteinGPerKg:1.61,adherencePct:100,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-05-25",phase:3,gripKg:48.5,sitToStandSec:7.5,gaitSpeedMs:1.46,weightKg:93.8,proteinGPerKg:1.57,adherencePct:96,falls:0,giLimiting:false,canRiseWithoutArms:true}]},
+
+ {id:"PT-0559",sex:"F",age:52,heightM:1.65,tier:"moderate",agent:"semaglutide",agentClass:"mono",
+  startDate:"2026-02-23",knownLowBMD:false,concurrentInsulinOrSU:false,almi:6.1,
+  baseline:{gripKg:26.4,sitToStandSec:11.0,gaitSpeedMs:1.14,weightKg:91.7,canRiseWithoutArms:true},
+  checkins:[
+   {date:"2026-04-06",phase:1,gripKg:26.1,sitToStandSec:11.2,gaitSpeedMs:1.13,weightKg:87.9,proteinGPerKg:1.08,adherencePct:84,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-05-18",phase:2,gripKg:25.2,sitToStandSec:11.9,gaitSpeedMs:1.11,weightKg:83.4,proteinGPerKg:0.98,adherencePct:76,falls:0,giLimiting:true,canRiseWithoutArms:true}]},
+
+ {id:"PT-0330",sex:"M",age:67,heightM:1.75,tier:"high",agent:"tirzepatide",agentClass:"dual",
+  startDate:"2026-01-12",knownLowBMD:false,concurrentInsulinOrSU:true,almi:7.1,
+  baseline:{gripKg:32.0,sitToStandSec:12.6,gaitSpeedMs:1.02,weightKg:118.2,canRiseWithoutArms:true},
+  checkins:[
+   {date:"2026-02-23",phase:1,gripKg:31.6,sitToStandSec:12.4,gaitSpeedMs:1.03,weightKg:112.6,proteinGPerKg:1.30,adherencePct:93,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-04-06",phase:2,gripKg:30.9,sitToStandSec:12.9,gaitSpeedMs:1.01,weightKg:106.4,proteinGPerKg:1.22,adherencePct:81,falls:0,giLimiting:false,canRiseWithoutArms:true},
+   {date:"2026-05-18",phase:3,gripKg:30.1,sitToStandSec:13.4,gaitSpeedMs:0.99,weightKg:101.2,proteinGPerKg:1.26,adherencePct:69,falls:0,giLimiting:true,canRiseWithoutArms:true}]}
+]};
+
+const SCHEMA=`{
+  "patients": [{
+    "id": "PT-0416",            // de-identified code
+    "sex": "F",                 // "M" | "F"  — sets EWGSOP2 cut-point
+    "age": 64,
+    "heightM": 1.60,
+    "tier": "high",             // high | moderate | standard
+    "agent": "tirzepatide",
+    "agentClass": "dual",       // mono | dual
+    "startDate": "2026-02-02",
+    "knownLowBMD": true,
+    "concurrentInsulinOrSU": false,
+    "almi": 5.4,                // optional, kg/m2, from DEXA
+    "baseline": {
+      "gripKg": 19.2, "sitToStandSec": 13.8,
+      "gaitSpeedMs": 0.95, "weightKg": 88.4,
+      "canRiseWithoutArms": true
+    },
+    "checkins": [{
+      "date": "2026-03-02",
+      "phase": 1,               // 0-5, protocol section 5
+      "gripKg": 19.0,           // required
+      "sitToStandSec": 13.9,
+      "gaitSpeedMs": 0.94,
+      "weightKg": 85.1,
+      "proteinGPerKg": 1.15,
+      "adherencePct": 90,
+      "falls": 0,
+      "giLimiting": false,
+      "canRiseWithoutArms": true,
+      "notes": ""
+    }]
+  }]
+}`;
+
+/* TRIAGE-ENGINE:START — generated from scripts/triage.mjs. Do not edit here. */
+const wks=(a,b)=>(new Date(b)-new Date(a))/6048e5;
+const f1=n=>n==null?"—":n.toFixed(1);
+
+const MIN_RATE_DAYS=7;
+
+function triage(p,i){
+  const c=p.checkins[i], prior=i>0?p.checkins[i-1]:null, b=p.baseline||{};
+  const red=[],yel=[],inc=[];
+
+  if(c.gripKg==null) inc.push("Grip strength missing — assessment incomplete. Grip is the primary measure and is not substitutable.");
+  if(c.falls==null) inc.push("Falls not recorded. Any fall is an escalation trigger, so a blank cannot be read as none.");
+  if(c.proteinGPerKg==null) inc.push("Protein intake not recorded — the consecutive-low-intake rule cannot be evaluated.");
+  if(c.adherencePct==null) inc.push("Training adherence not recorded.");
+  if(c.giLimiting==null) inc.push("GI symptom status not recorded.");
+  if(c.canRiseWithoutArms==null) inc.push("Chair-rise-without-arms not recorded.");
+  if(b.gripKg===0) inc.push("Baseline grip strength recorded as zero — a bad reading, not a real one. Change-from-baseline criteria are unavailable until it is corrected.");
+
+  const gripPct=(b.gripKg&&c.gripKg!=null)?((c.gripKg-b.gripKg)/b.gripKg*100):null;
+  const stsD=(c.sitToStandSec!=null&&b.sitToStandSec!=null)?c.sitToStandSec-b.sitToStandSec:null;
+
+  const onTx=wks(p.startDate,c.date);
+  const onTxKnown=Number.isFinite(onTx);
+  if(!onTxKnown) inc.push("Weeks on therapy could not be computed from the recorded dates — the rapid-loss rule is not being evaluated.");
+
+  let loss=null;
+  if(prior&&prior.weightKg&&c.weightKg!=null){
+    const w=wks(prior.date,c.date);
+    if(Number.isFinite(w)&&w*7>=MIN_RATE_DAYS) loss=((prior.weightKg-c.weightKg)/prior.weightKg)/w*100;
+    else if(Number.isFinite(w)&&w>0) inc.push(`Only ${Math.round(w*7)} days since the previous check-in — too short to estimate a weekly rate of weight loss, so that criterion is not being evaluated.`);
+  }
+
+  let pStreak=0;
+  for(let k=i;k>=0;k--){if(p.checkins[k].proteinGPerKg!=null&&p.checkins[k].proteinGPerKg<0.8)pStreak++;else break;}
+
+  const cut=p.sex==="M"?27:16;
+  const ew={strength:(c.gripKg!=null&&c.gripKg<cut)||(c.sitToStandSec!=null&&c.sitToStandSec>15),cut,
+            mass:p.almi!=null?(p.almi<(p.sex==="M"?7.0:5.5)):null,massCut:p.sex==="M"?7.0:5.5};
+
+  // RED — escalate to prescriber within one week
+  if(gripPct!=null&&gripPct<-10) red.push(["Grip strength decline >10% from baseline",`${f1(c.gripKg)} kg against a baseline of ${f1(b.gripKg)} kg — a ${f1(Math.abs(gripPct))}% fall.`]);
+  if(b.canRiseWithoutArms===true&&c.canRiseWithoutArms===false) red.push(["New inability to rise from chair without arms","Could rise unaided at baseline; cannot at this assessment."]);
+  if(c.sitToStandSec!=null&&c.sitToStandSec>15&&b.sitToStandSec!=null&&b.sitToStandSec<=15) red.push(["5× sit-to-stand crossed 15 s",`${f1(c.sitToStandSec)} s, from ${f1(b.sitToStandSec)} s at baseline.`]);
+  if(c.gaitSpeedMs!=null&&c.gaitSpeedMs<=0.8) red.push(["Gait speed at or below 0.8 m/s",`${c.gaitSpeedMs.toFixed(2)} m/s — meets the EWGSOP2 low physical performance criterion.`]);
+  if(pStreak>=2) red.push([`Protein below 0.8 g/kg for ${pStreak} consecutive check-ins`,`Currently ${f1(c.proteinGPerKg)} g/kg against a 1.2–1.6 target. This is a referral, not a coaching problem.`]);
+  if(loss!=null&&loss>1&&onTxKnown&&onTx>4) red.push(["Sustained loss above 1% body weight per week",`${f1(loss)}%/week since the previous check-in, at week ${Math.round(onTx)} of therapy.`]);
+  if(c.adherencePct!=null&&c.adherencePct<60) red.push(["Training adherence below 60%",`${c.adherencePct}% of prescribed sessions. Program disengagement — treat as a clinical event.`]);
+  if(c.falls!=null&&c.falls>0) red.push([`${c.falls} fall${c.falls>1?"s":""} since last check-in`,"Any fall is an escalation trigger regardless of injury."]);
+
+  // YELLOW — hold load, address the driver, reassess in 2 weeks
+  if(gripPct!=null&&gripPct<=-5&&gripPct>=-10) yel.push(["Grip strength decline 5–10% from baseline",`${f1(c.gripKg)} kg, down ${f1(Math.abs(gripPct))}% from ${f1(b.gripKg)} kg.`]);
+  if(c.proteinGPerKg!=null&&c.proteinGPerKg>=0.8&&c.proteinGPerKg<1.2) yel.push(["Protein below target",`${f1(c.proteinGPerKg)} g/kg against 1.2–1.6. Usually a distribution problem — five feedings of 25 g rather than three of 40 g.`]);
+  if(c.adherencePct!=null&&c.adherencePct>=60&&c.adherencePct<80) yel.push(["Training adherence 60–79%",`${c.adherencePct}% of prescribed sessions completed.`]);
+  if(c.giLimiting===true) yel.push(["GI symptoms limiting intake or training","Reported at this check-in. Common in the 5–10 days after a dose escalation."]);
+  if(stsD!=null&&stsD>2&&c.sitToStandSec<=15) yel.push(["5× sit-to-stand slowed >2 s from baseline",`${f1(c.sitToStandSec)} s, from ${f1(b.sitToStandSec)} s — still under the 15 s cut-point.`]);
+
+  // Standing findings — absolute impairment that the change-from-baseline rules
+  // above cannot see, because a patient impaired at baseline never crosses a
+  // threshold. These carry no de-load instruction: continue progressing load
+  // unless a RED or another YELLOW says otherwise.
+  const newInability=b.canRiseWithoutArms===true&&c.canRiseWithoutArms===false;
+  const stsAlreadyOver=c.sitToStandSec!=null&&c.sitToStandSec>15&&!(b.sitToStandSec!=null&&b.sitToStandSec<=15);
+  if(ew.strength&&!stsAlreadyOver&&c.gripKg!=null&&c.gripKg<cut) yel.push(["Meets EWGSOP2 low-strength criterion",`Grip ${f1(c.gripKg)} kg is below the ${cut} kg cut-point for this patient. A standing finding, not a new decline — keep progressing load unless another flag says otherwise.`]);
+  if(stsAlreadyOver) yel.push(["Sit-to-stand above 15 s and was at baseline",`${f1(c.sitToStandSec)} s. Already above the cut-point at intake, so the crossing rule cannot fire. Impairment is present and standing.`]);
+  if(c.canRiseWithoutArms===false&&!newInability) yel.push(["Cannot rise from chair without arms","Standing functional deficit, present at baseline. Not a new decline, but not a normal finding either."]);
+
+  const status=red.length?"crit":yel.length?"warn":inc.length?"inc":"good";
+  return{status,red,yel,inc,
+         gripPct,stsD,loss,onTx:onTxKnown?onTx:null,pStreak,ew,c,prior,first:i===0};
+}
+
+const latest=p=>triage(p,p.checkins.length-1);
+/* TRIAGE-ENGINE:END */
+
+/* ---------- chart ---------- */
+function chart(pts,opts={}){
+  const W=340,H=118,L=42,R=10,T=10,B=20;
+  const vals=pts.map(p=>p.y).filter(v=>v!=null);
+  if(!vals.length) return '<p class="note">No data.</p>';
+  let lo=Math.min(...vals,...(opts.include||[])),hi=Math.max(...vals,...(opts.include||[]));
+  const pad=(hi-lo)*0.18||Math.abs(hi*0.08)||1; lo-=pad; hi+=pad;
+  const X=i=>L+(pts.length<2?(W-L-R)/2:i*(W-L-R)/(pts.length-1));
+  const Y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  let s='';
+  (opts.bands||[]).forEach(bd=>{
+    const y1=Y(Math.min(bd.to,hi)),y2=Y(Math.max(bd.from,lo));
+    if(y2>y1)s+=`<rect x="${L}" y="${y1}" width="${W-L-R}" height="${y2-y1}" fill="var(--${bd.c}-soft)"></rect>`;
+  });
+  (opts.lines||[]).forEach(ln=>{
+    if(ln.y<lo||ln.y>hi)return;
+    s+=`<line x1="${L}" y1="${Y(ln.y)}" x2="${W-R}" y2="${Y(ln.y)}" stroke="var(--${ln.c||'line-2'})" stroke-width="1" stroke-dasharray="3 3"></line>`
+      +`<text x="${W-R}" y="${Y(ln.y)-4}" text-anchor="end" font-size="9" font-family="IBM Plex Mono, monospace" fill="var(--${ln.c||'ink-3'})">${ln.label}</text>`;
+  });
+  [hi,lo].forEach(v=>{s+=`<text x="${L-6}" y="${Y(v)+3}" text-anchor="end" font-size="9.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-3)">${v.toFixed(1)}</text>`;});
+  s+=`<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="var(--line)" stroke-width="1"></line>`;
+  const d=pts.map((p,i)=>p.y==null?null:`${X(i)},${Y(p.y)}`).filter(Boolean).join(" ");
+  s+=`<polyline points="${d}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>`;
+  pts.forEach((p,i)=>{if(p.y==null)return;const last=i===pts.length-1;
+    s+=`<circle cx="${X(i)}" cy="${Y(p.y)}" r="${last?4.5:3}" fill="${last?'var(--accent)':'var(--surface)'}" stroke="var(--accent)" stroke-width="2"></circle>`;});
+  pts.forEach((p,i)=>{if(i===0||i===pts.length-1)
+    s+=`<text x="${X(i)}" y="${H-6}" text-anchor="${i===0?'start':'end'}" font-size="9" font-family="IBM Plex Mono, monospace" fill="var(--ink-3)">${p.x}</text>`;});
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${opts.alt||'trend'}">${s}</svg>`;
+}
+
+/* ---------- render ---------- */
+/* COHORT-DATA:START — replaced by scripts/sync-glp1-board.mjs */
+let DATA=JSON.parse(JSON.stringify(SAMPLE));
+const SYNCED_AT=null;
+/* COHORT-DATA:END */
+const $=id=>document.getElementById(id);
+const md=d=>{const x=new Date(d);return x.toLocaleDateString('en-CA',{month:'short',day:'numeric'});};
+const esc=s=>String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+const RANK={crit:0,warn:1,inc:2,good:3};
+const LABEL={crit:"RED",warn:"YELLOW",inc:"INCOMPLETE",good:"GREEN"};
+
+function renderBoard(){
+  const rows=DATA.patients.map(p=>({p,t:latest(p)}))
+    .sort((a,b)=>RANK[a.t.status]-RANK[b.t.status]||(a.t.gripPct??0)-(b.t.gripPct??0));
+  const n=s=>rows.filter(r=>r.t.status===s).length;
+  const sarc=rows.filter(r=>r.t.ew.strength).length;
+  $('strip').innerHTML=[
+    ['crit','Escalate',n('crit'),'to prescriber this week'],
+    ['warn','Hold load',n('warn'),'address driver, reassess in 2 weeks'],
+    ['inc','Incomplete',n('inc'),'measures missing — cannot be cleared'],
+    ['good','Progressing',n('good'),'continue per phase'],
+    ['neutral','Sarcopenia criterion',sarc,`of ${rows.length} meet EWGSOP2 low strength`]
+  ].map(([c,k,v,s])=>`<div class="stat ${c}"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${s}</span></div>`).join('');
+
+  $('tbody').innerHTML=rows.map(({p,t})=>{
+    const g=t.gripPct;
+    const gc=g==null?'flat':g<=-5?'dn':g>=1?'up':'flat';
+    const sub=(t.red[0]&&t.red[0][0])||(t.yel[0]&&t.yel[0][0])||t.inc[0]||'';
+    return `<tr tabindex="0" data-id="${p.id}">
+      <td class="stripe sc-${t.status}"></td>
+      <td><div class="pid mono">${p.id}</div><div class="psub">${p.age} · ${p.sex} · ${esc(p.agent)}</div></td>
+      <td><span class="pill ${t.status}">${LABEL[t.status]}</span>${sub?`<div class="psub">${esc(sub)}</div>`:''}</td>
+      <td class="num delta ${gc}">${g==null?'—':(g>0?'+':'')+g.toFixed(1)+'%'}<div class="psub num">${f1(t.c.gripKg)} kg</div></td>
+      <td class="num">${f1(t.c.sitToStandSec)} s</td>
+      <td class="num">${f1(t.c.proteinGPerKg)}</td>
+      <td class="num">${t.c.adherencePct==null?'—':t.c.adherencePct+'%'}</td>
+      <td><span class="tag">P${t.c.phase} · ${p.tier}</span></td>
+      <td class="num">${md(t.c.date)}</td></tr>`;
+  }).join('');
+  $('tbody').querySelectorAll('tr').forEach(tr=>{
+    const go=()=>showDetail(tr.dataset.id);
+    tr.onclick=go; tr.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+  });
+}
+
+function showDetail(id){
+  const p=DATA.patients.find(x=>x.id===id), t=latest(p), b=p.baseline;
+  const gp=p.checkins.map(c=>({x:md(c.date),y:c.gripKg}));
+  const pr=p.checkins.map(c=>({x:md(c.date),y:c.proteinGPerKg}));
+  const wt=p.checkins.map(c=>({x:md(c.date),y:c.weightKg}));
+  const m=(l,v,ctx,cls)=>`<div class="measure"><span class="lbl">${l}</span><span class="val">${v}</span><span class="ctx delta ${cls||'flat'}">${ctx}</span></div>`;
+  const g=t.gripPct;
+
+  const flags=[...t.red.map(f=>['crit',f]),...t.yel.map(f=>['warn',f])];
+  const flagHtml=flags.length?flags.map(([c,[h,d]])=>
+    `<div class="flag ${c}"><span class="dot"></span><span><strong>${esc(h)}</strong><br>${esc(d)}</span></div>`).join('')
+    :'<p class="note">No thresholds triggered. Grip maintained or improving, protein on target, adherence at or above 80%, no functional decline.</p>';
+
+  const note=t.status==='crit'?prescriberNote(p,t):null;
+  const pt=patientDraft(p,t);
+
+  $('detailView').innerHTML=`
+   <div class="back"><button id="backBtn" type="button">← All patients</button></div>
+   <div class="detail">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px;flex-wrap:wrap">
+          <div><h2 class="mono" style="font-size:19px;font-weight:600">${p.id}</h2>
+            <p class="note" style="margin:3px 0 0">${p.age} · ${p.sex==='F'?'Female':'Male'} · ${esc(p.agent)} (${p.agentClass}-agonist) · week ${Math.round(t.onTx)} · phase ${t.c.phase} · ${p.tier} tier</p></div>
+          <span class="pill ${t.status}">${LABEL[t.status]}</span>
+        </div>
+        <h3>Measures — ${md(t.c.date)}</h3>
+        <div class="measures">
+          ${m('Grip strength',`${f1(t.c.gripKg)} kg`,g==null?'—':`${g>0?'+':''}${g.toFixed(1)}% vs ${f1(b.gripKg)}`,g==null?'flat':g<=-5?'dn':g>=1?'up':'flat')}
+          ${m('5× sit-to-stand',`${f1(t.c.sitToStandSec)} s`,t.stsD==null?'—':`${t.stsD>0?'+':''}${t.stsD.toFixed(1)} s vs base`,t.stsD>2?'dn':t.stsD<0?'up':'flat')}
+          ${m('Gait speed',`${t.c.gaitSpeedMs==null?'—':t.c.gaitSpeedMs.toFixed(2)} m/s`,t.c.gaitSpeedMs<=0.8?'≤ 0.8 cut-point':'above cut-point',t.c.gaitSpeedMs<=0.8?'dn':'flat')}
+          ${m('Body mass',`${f1(t.c.weightKg)} kg`,t.loss==null?'first check-in':`−${f1(t.loss)}%/week`,t.loss>1?'dn':'flat')}
+          ${m('Protein',`${f1(t.c.proteinGPerKg)} g/kg`,'target 1.2–1.6',t.c.proteinGPerKg<0.8?'dn':t.c.proteinGPerKg<1.2?'flat':'up')}
+          ${m('Adherence',`${t.c.adherencePct==null?'—':t.c.adherencePct+'%'}`,'target ≥ 80%',t.c.adherencePct<60?'dn':t.c.adherencePct<80?'flat':'up')}
+        </div>
+      </div>
+      <div class="card"><h3>Triggered thresholds</h3>${flagHtml}
+        ${t.inc.length?`<p class="note" style="margin-top:11px;color:var(--warn)">${t.inc.map(esc).join(' ')}</p>`:''}
+      </div>
+      <div class="card"><h3>EWGSOP2 status</h3>
+        <dl class="kv">
+          <dt>Strength</dt><dd>${t.ew.strength?'<strong>Criterion met</strong>':'Not met'} — grip ${f1(t.c.gripKg)} kg against a ${t.ew.cut} kg cut-point (${p.sex==='F'?'female':'male'}); 5×STS ${f1(t.c.sitToStandSec)} s against 15 s.</dd>
+          <dt>Muscle mass</dt><dd>${t.ew.mass==null?'No DEXA on file.':(t.ew.mass?'<strong>Criterion met</strong>':'Not met')+` — ALMI ${p.almi} against ${t.ew.massCut} kg/m².`}</dd>
+        </dl>
+        <p class="note" style="margin-top:11px">An absolute criterion may be met at baseline and is not itself evidence of decline. Reported alongside triage, never folded into it.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="card"><h3>Trends</h3><div class="charts">
+        <div><div class="chart-t"><span>Grip strength (kg) — primary measure</span><span class="cur">${f1(t.c.gripKg)}</span></div>
+          ${chart(gp,{include:[b.gripKg,t.ew.cut],alt:'Grip strength over time',
+            bands:[{from:-1e4,to:b.gripKg*0.9,c:'crit'},{from:b.gripKg*0.9,to:b.gripKg*0.95,c:'warn'}],
+            lines:[{y:b.gripKg,label:'baseline',c:'ink-3'},{y:t.ew.cut,label:'EWGSOP2',c:'crit'}]})}</div>
+        <div><div class="chart-t"><span>Protein (g/kg/day)</span><span class="cur">${f1(t.c.proteinGPerKg)}</span></div>
+          ${chart(pr,{include:[0.8,1.2],alt:'Protein intake over time',
+            bands:[{from:-1e4,to:0.8,c:'crit'},{from:0.8,to:1.2,c:'warn'}],
+            lines:[{y:1.2,label:'target floor',c:'good'}]})}</div>
+        <div><div class="chart-t"><span>Body mass (kg)</span><span class="cur">${f1(t.c.weightKg)}</span></div>
+          ${chart(wt,{alt:'Body mass over time'})}</div>
+      </div></div>
+
+      ${note?`<div class="card"><h3>Draft prescriber note</h3><div class="draft">${esc(note)}</div>
+        <div style="display:flex;gap:8px;margin-top:11px;align-items:center"><button data-copy="n" type="button">Copy</button><span class="review">🔍 Requires clinician review before sending</span></div></div>`:''}
+
+      <div class="card"><h3>Draft patient message</h3><div class="draft">${esc(pt)}</div>
+        <div style="display:flex;gap:8px;margin-top:11px;align-items:center"><button data-copy="p" type="button">Copy</button><span class="review">🔍 Requires clinician review before sending</span></div></div>
+    </div>
+   </div>`;
+
+  $('cohortView').hidden=true; $('detailView').hidden=false;
+  $('backBtn').onclick=()=>{$('detailView').hidden=true;$('cohortView').hidden=false;window.scrollTo(0,0);};
+  $('detailView').querySelectorAll('[data-copy]').forEach(btn=>{
+    btn.onclick=async()=>{try{await navigator.clipboard.writeText(btn.dataset.copy==='n'?note:pt);
+      const o=btn.textContent;btn.textContent='Copied';setTimeout(()=>btn.textContent=o,1400);}catch(e){btn.textContent='Copy blocked';}};
+  });
+  window.scrollTo(0,0);
+}
+
+function prescriberNote(p,t){
+  const L=[`Re: ${p.id} — conditioning program, week ${Math.round(t.onTx)}`,'','Flagging functional decline for your review.',''];
+  t.red.forEach(([h,d])=>L.push(`• ${h}. ${d}`));
+  L.push('',`Protein intake is currently ${f1(t.c.proteinGPerKg)} g/kg against a target of 1.2–1.6.`,
+    `Training adherence is ${t.c.adherencePct}%.`,'',
+    'I have held load progression pending your input. No changes made to anything','outside exercise programming.','','Happy to discuss.','','Jonathan Fuller, BScKin, MScPT');
+  return L.join('\n');
+}
+
+function patientDraft(p,t){
+  if(t.status==='crit'){
+    const [h]=t.red[0];
+    return `Hi,\n\nYour check-in on ${md(t.c.date)} showed something I want to stay ahead of: ${h.toLowerCase()}.\n\nI've flagged it with your prescriber and we're holding your weights where they are until I hear back. Nothing to worry about today — catching this early is exactly what these check-ins are for.\n\nOne thing that will help in the meantime: protein at ${f1(t.c.proteinGPerKg)} g/kg is below where we want it. Easier in five smaller servings of about 25 g than three big ones, especially while your appetite is down.\n\nI'll be in touch as soon as I've heard back.`;
+  }
+  if(t.status==='warn'){
+    const [h,d]=t.yel[0];
+    return `Hi,\n\nGood check-in overall on ${md(t.c.date)}. One thing to tighten up: ${h.toLowerCase()}. ${d}\n\nWe'll hold your loads where they are for the next two weeks rather than adding, then reassess. Your strength is holding, which is the number that matters most here — not the scale.\n\nSame time in two weeks.`;
+  }
+  const g=t.gripPct;
+  return `Hi,\n\nStrong check-in on ${md(t.c.date)}. Grip strength is ${g>=0?`up ${g.toFixed(1)}%`:`holding within ${Math.abs(g).toFixed(1)}%`} of where you started, and you're down ${f1(p.baseline.weightKg-t.c.weightKg)} kg.\n\nThat combination is the whole goal: you're losing weight and keeping the muscle. Most people on these medications don't manage that, and it's because they're not doing what you're doing.\n\nProgressing you to the next block. Keep going.`;
+}
+
+function renderReport(){
+  const rows=DATA.patients.map(p=>({p,t:latest(p)}));
+  const withBase=rows.filter(r=>r.t.gripPct!=null);
+  const meanGrip=withBase.reduce((s,r)=>s+r.t.gripPct,0)/(withBase.length||1);
+  const holding=withBase.filter(r=>r.t.gripPct>=-2).length;
+  const onProt=rows.filter(r=>r.t.c.proteinGPerKg>=1.2).length;
+  const adh=rows.filter(r=>r.t.c.adherencePct>=80).length;
+  const decl=rows.filter(r=>r.t.red.length).length;
+  const stsAll=rows.filter(r=>r.t.stsD!=null);
+  const meanSts=stsAll.reduce((s,r)=>s+r.t.stsD,0)/(stsAll.length||1);
+  const pct=(a,b)=>Math.round(a/b*100);
+  const row=(l,v,s)=>`<div class="measure"><span class="lbl">${l}</span><span class="val">${v}</span><span class="ctx">${s}</span></div>`;
+  $('p-report').innerHTML=`
+    <div class="grid2" style="align-items:start">
+      <div class="card">
+        <h3>Cohort outcomes — current quarter</h3>
+        <div class="measures">
+          ${row('Patients active',rows.length,'')}
+          ${row('Mean grip change',`${meanGrip>0?'+':''}${meanGrip.toFixed(1)}%`,'from baseline')}
+          ${row('Maintaining or improving strength',`${pct(holding,withBase.length)}%`,`${holding} of ${withBase.length}`)}
+          ${row('Mean 5×STS change',`${meanSts>0?'+':''}${meanSts.toFixed(1)} s`,'from baseline')}
+          ${row('Meeting protein target',`${pct(onProt,rows.length)}%`,`${onProt} of ${rows.length} at ≥1.2 g/kg`)}
+          ${row('Adherence ≥ 80%',`${pct(adh,rows.length)}%`,`${adh} of ${rows.length}`)}
+          ${row('Functional decline events',decl,'escalated to prescriber')}
+        </div>
+      </div>
+      <div class="card">
+        <h3>What this report is for</h3>
+        <p class="note">This is the artifact that earns the renewal. It shows a practice, in its own patients' numbers, whether the conditioning program is doing what it was bought to do.</p>
+        <p class="note" style="margin-top:11px"><strong style="color:var(--ink)">The headline number is strength retention</strong>, not weight lost. Energy deficiency blunts lean mass gains but not strength gains, so a cohort that gets stronger while losing weight is the outcome — and it is a result the medication alone does not produce.</p>
+        <p class="note" style="margin-top:11px">De-identify before sharing. With consent and ethics approval, this same dataset supports prospective research in a population where very little exists.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>Per-patient summary</h3>
+      <div class="tablewrap" style="border:none;box-shadow:none"><table><thead><tr>
+        <th>Patient</th><th>Triage</th><th>Grip Δ</th><th>5×STS Δ</th><th>Protein</th><th>Adherence</th><th>Weeks</th>
+      </tr></thead><tbody>
+      ${rows.sort((a,b)=>RANK[a.t.status]-RANK[b.t.status]).map(({p,t})=>`<tr style="cursor:default"><td class="mono">${p.id}</td>
+        <td><span class="pill ${t.status}">${LABEL[t.status]}</span></td>
+        <td class="num delta ${t.gripPct<=-5?'dn':t.gripPct>=1?'up':'flat'}">${t.gripPct==null?'—':(t.gripPct>0?'+':'')+t.gripPct.toFixed(1)+'%'}</td>
+        <td class="num">${t.stsD==null?'—':(t.stsD>0?'+':'')+t.stsD.toFixed(1)+' s'}</td>
+        <td class="num">${f1(t.c.proteinGPerKg)}</td>
+        <td class="num">${t.c.adherencePct}%</td>
+        <td class="num">${Math.round(t.onTx)}</td></tr>`).join('')}
+      </tbody></table></div>
+    </div>`;
+}
+
+function renderAbout(){
+  $('p-about').innerHTML=`
+   <div class="grid2" style="align-items:start">
+    <div class="card">
+      <h3>Triage rules — protocol §7</h3>
+      <p class="note" style="margin:0 0 12px">Deterministic. Every rule fires on a threshold, never on judgement. A RED is a communication trigger, not authority to change medication, diet, or medical management.</p>
+      <div class="draft">RED — escalate to prescriber within one week
+  • Grip decline > 10% from baseline
+  • New inability to rise from chair without arms
+  • 5×STS > 15 s where previously ≤ 15 s
+  • Gait speed ≤ 0.8 m/s
+  • Protein < 0.8 g/kg for 2 consecutive check-ins
+  • Loss > 1% body weight/week beyond week 4
+  • Training adherence < 60%
+  • Any fall
+
+YELLOW — hold load, address driver, reassess in 2 weeks
+  • Grip decline 5–10% from baseline
+  • Protein 0.8–1.2 g/kg
+  • Adherence 60–79%
+  • GI symptoms limiting intake or training
+  • 5×STS slowed > 2 s but still ≤ 15 s
+
+GREEN — progress per phase
+  • Grip maintained or improving
+  • Protein ≥ 1.2 g/kg
+  • Adherence ≥ 80%
+  • No functional decline, no falls</div>
+    </div>
+    <div class="card">
+      <h3>Where each threshold comes from</h3>
+      <ul class="refs" style="padding-left:17px;margin:0">
+        <li><strong>Grip &lt;27 kg (M) / &lt;16 kg (F); 5×STS &gt;15 s; gait ≤0.8 m/s; ALMI &lt;7.0 / &lt;5.5 kg/m²</strong> — Cruz-Jentoft AJ et al. Sarcopenia: revised European consensus on definition and diagnosis. <em>Age and Ageing</em>. 2019;48(1):16–31. doi:10.1093/ageing/afy169</li>
+        <li><strong>Grip as the primary, non-substitutable measure</strong> — RESORT, <em>Age and Ageing</em>. 2022;51(11):afac242.</li>
+        <li><strong>30–40% of weight lost is fat-free mass</strong> — Lean Mass and Musculoskeletal Preservation in GLP-1-Based Obesity Treatment. <em>Metabolites</em>. 2026;16(6):364.</li>
+        <li><strong>Proportional lean mass improves — the counterpoint to cite alongside</strong> — Wilding JPH et al. STEP 1 DEXA substudy. <em>J Endocr Soc</em>. 2021;5(Suppl 1):A16.</li>
+        <li><strong>Strength as the primary KPI in energy deficit</strong> — Energy deficiency impairs resistance training gains in lean mass but not strength: meta-analysis. PubMed 34623696.</li>
+        <li><strong>Maintain resistance volume through the deficit</strong> — PMC9012799, read against Roth C et al. <em>Scand J Med Sci Sports</em>. 2023. doi:10.1111/sms.14237.</li>
+        <li><strong>Protein 1.2–1.6 g/kg, 20–30 g per feeding</strong> — Macronutrient and micronutrient monitoring on GLP-1 agonists: lessons from bariatric surgery. PMC12693348.</li>
+        <li><strong>Protein shortfall is common and predicts muscle loss</strong> — PMC12419545; Endocrine Society, ENDO 2026.</li>
+        <li><strong>~20% dietitian referral rate</strong> — PMC12913018.</li>
+        <li><strong>Bone: monotherapy neutral, dual agonists higher risk</strong> — <em>Diagnostics</em>. 2026;16(13):2128.</li>
+        <li><strong>41% never strength trained; 11% of US adults using</strong> — PwC 2026; Gallup 2026.</li>
+      </ul>
+      <p class="note" style="margin-top:13px">Full annotated bibliography with evidence grading: <span class="mono">protocols/references.md</span>. Reassess against the literature every six months.</p>
+    </div>
+   </div>
+   <div class="card" style="margin-top:16px">
+    <h3>Scope</h3>
+    <p class="note">For a qualified exercise professional working alongside a prescribing clinician. The exercise professional programs exercise and reports measures. The prescriber owns the medication; the prescriber or a registered dietitian owns nutrition. Protein figures here are reported against a target set elsewhere, never prescribed by this tool.</p>
+    <p class="note" style="margin-top:10px">BIA-derived lean mass is deliberately absent from triage: bioimpedance over-reads fat-free mass loss in dehydrated patients, and this population is frequently dehydrated. Trend only, never a decision.</p>
+   </div>`;
+}
+
+/* ---------- shell ---------- */
+document.querySelectorAll('.tab').forEach(tb=>{
+  tb.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',String(x===tb)));
+    document.querySelectorAll('.panel').forEach(x=>x.hidden=true);
+    $('p-'+tb.dataset.panel).hidden=false;
+    if(tb.dataset.panel==='report')renderReport();
+    if(tb.dataset.panel==='about')renderAbout();
+  };
+});
+$('themeBtn').onclick=()=>{
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+  $('themeBtn').textContent=dark?'Dark':'Light';
+};
+$('demoBtn').onclick=()=>{DATA=JSON.parse(JSON.stringify(SAMPLE));$('detailView').hidden=true;$('cohortView').hidden=false;renderBoard();};
+$('schema').textContent=SCHEMA;
+$('fillBtn').onclick=()=>{$('jsonIn').value=JSON.stringify(SAMPLE,null,2);};
+$('loadBtn').onclick=()=>{
+  try{
+    const d=JSON.parse($('jsonIn').value);
+    if(!d||!Array.isArray(d.patients)||!d.patients.length)throw new Error('Expected a "patients" array with at least one entry.');
+    d.patients.forEach(p=>{if(!Array.isArray(p.checkins)||!p.checkins.length)throw new Error(`Patient ${p.id||'(no id)'} has no check-ins.`);});
+    DATA=d;$('loadMsg').textContent=`Loaded ${d.patients.length} patients.`;$('loadMsg').style.color='var(--good)';
+    $('detailView').hidden=true;$('cohortView').hidden=false;renderBoard();
+  }catch(e){$('loadMsg').textContent=e.message;$('loadMsg').style.color='var(--crit)';}
+};
+$('src').innerHTML = SYNCED_AT
+  ? `<span class="mono">Live cohort · synced ${new Date(SYNCED_AT).toLocaleString('en-CA',{dateStyle:'medium',timeStyle:'short'})}</span>`
+  : '<span class="mono" style="color:var(--warn)">Sample cohort — example data, not real patients</span>';
+renderBoard();
+</script>
