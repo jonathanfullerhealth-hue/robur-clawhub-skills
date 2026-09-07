@@ -1,303 +1,226 @@
-# School Group Strategy — Assessment & Recommendation
+# Adult Group Strategy — Recommendations
 
 Prepared for Jonathan Fuller (BScKin, MScPT) — September 2026
 
----
-
-## Part 1 — Readiness Assessment
-
-### What I looked at
-
-The `robur-clawhub-skills` repo (6 shipped skills + the assessment engine), the Cairn brand
-skill suite loaded in this environment, and the connected tool surface (Notion, Google
-Calendar/Drive/Gmail, Supabase, Cloudflare, Gamma, Blotato, GitHub).
-
-### What is strong
-
-**Domain credibility is the real asset, and it is rare.** BScKin + MScPT + a finisher's
-résumé at Canadian Death Race, The Divide 200, Iron Legs 100 km, and Lone Wolf Backyard.
-Almost no school has access to someone who is simultaneously a clinical exercise
-professional and a credible endurance athlete. This is the scarce input. Everything else
-in this document is downstream of it.
-
-**The skills are properly engineered, not prompt soup.** `client-checkin-analyzer` runs
-deterministic rules *before* any LLM call — that is the correct architecture for anything
-touching health signals, and it is the single most transferable design decision in the
-repo. `training-plan-builder` already models constraint-aware planning (shift schedules,
-injury limitations, phase logic). Swapping "rotating 12s" for "exam week and basketball
-season" is a small edit, not a rewrite.
-
-**`research-breakdown-generator` is, unintentionally, a teaching artifact.** Its 7-part
-structure — hook, the study, before/after, limitations, application — is a science
-communication rubric. It is the closest thing in the repo to curriculum.
-
-**Operational surface is more than sufficient.** Calendar for sessions, Notion for a
-roster and session log, Gamma for a one-page parent/recruiting sheet, Drive for forms.
-No new tooling is required to run a club.
-
-### What is missing
-
-**There is no pedagogy in this repo.** Every asset is built for an adult client or for
-your own business. Nothing is scaffolded for a learner, age-graded, or designed to
-assess *learning* rather than business ROI. This is the largest genuine gap, and it is
-a content gap, not a capability gap — it is a few weekends of work, not a skills problem.
-
-**Everything is monetization-shaped, and that is a liability in a school.** The
-`assessment-engine.md` is explicitly a funnel ending in a $997/$1,000 upsell.
-`lead-scanner` scans Reddit, Strava, and Instagram for individuals and drafts outreach.
-Both are legitimate for your business. Both are disqualifying if a school administrator
-ever associates them with a youth program. **These must be firewalled from anything you
-do at a school — not softened, firewalled.** No shared branding, no shared mailing list,
-no lead capture from students or parents.
-
-**No safeguarding, consent, or data-privacy layer exists.** `client-checkin-analyzer`
-ingests HRV, resting HR, sleep, mood, and motivation. Collected from a minor, that is
-health information about a child, and in Alberta it engages FOIP/PIPA and district
-policy. Right now you have a tool that would collect it and nothing that governs it.
-
-**The role boundary is undefined and it matters legally.** You are an MScPT. In a school
-volunteer capacity you are *not* the students' physiotherapist, and you must not be. The
-moment you assess or treat an injury on school property you have converted a volunteer
-role into an unsupervised clinical one, outside your professional liability coverage.
-Alberta's Freedom to Care Act protections depend on acting within a **documented scope of
-duties** — so that document has to exist before day one.
-([Alberta.ca](https://www.alberta.ca/freedom-to-care-managing-your-volunteers))
-
-**The actual bottleneck is not content — it is a school relationship.** No school,
-no teacher sponsor, and no age group is named anywhere in your setup. Content you can
-generate in an afternoon. A sponsor teacher takes weeks.
-
-### Readiness verdict
-
-**Ready to lead a movement-based group at a school within ~2 weeks. Not ready to run a
-data-collection program on minors, and roughly a term away from being ready.**
-
-Your technical setup is over-built for what a school club actually needs in month one.
-The gap is entirely institutional: sponsor, charter, scope-of-duties, consent. Do not
-solve a content problem you do not have.
+**Scope: adults only.** Every recommendation below is for participants 18+, and most
+target 35+. No minors, no safeguarding regime, no teacher sponsor.
 
 ---
 
-## Part 2 — Demand Evidence
+## What the adult constraint changes
 
-Four signals, ranked by how directly they bear on the decision.
+Everything that made this hard disappears. No parental consent, no vulnerable-sector
+gate, no district privacy review for collecting HRV or sleep data, no teacher sponsor as
+a blocking dependency, and no conflict-of-interest problem with your business.
 
-**1. Group running is the fastest-growing social behaviour among the exact age cohort.**
-Strava's 2026 community report puts running-club growth at **3.5× in 2025**, club-organized
-events **+50%**, and club participation **+59% over two years**. Gen Z runners grew from
-186M (2022) to 259M (2025). **72% say they join run clubs primarily to meet people** — the
-draw is social, not athletic.
-([Running Lookout](https://runninglookout.com/news/strava-2026-community-report-running-clubs-3-5x-growth-gen-z/),
-[CEP Running](https://ceprunning.com/blogs/news/run-club-culture-why-group-running-is-booming))
+Two consequences worth naming:
 
-**2. Teens are the one group moving the wrong way.** SFIA's 2026 Topline report has overall
-US inactivity falling below 20% for the first time in seven years — while **inactivity among
-13–17-year-olds rose 4.4% year over year** and core teen participation fell 3%. Roughly 80%
-of youth athletes quit organized sport after age 15.
-([SFIA](https://sfia.org/resources/participation-hits-new-high-but-majority-of-americans-not-yet-meeting-recommended-guidelines-of-150-minutes-of-weekly-activity-sfias-2026-topline-report-finds/),
-[Join Strive On](https://joinstriveon.com/blog/youth-sports-participation-statistics))
+**Your skills work as built.** `training-plan-builder`, `client-checkin-analyzer`, and
+`research-breakdown-generator` were designed for exactly this population. No forking, no
+stripping fields, no minor-safe variants. You are not building — you are pointing existing
+tools at a room.
 
-That divergence is the opportunity. Running is the activity teens say they most intend to
-take up, and it is the one they are least served in — because school running means
-*competitive cross-country*, which selects for the kids who were already fast.
-
-**3. AI literacy demand is enormous but the supply gap is closing fast.** ~86% of students
-and 85% of teachers use AI; fewer than half have had any formal guidance; **more than 80% of
-students say no teacher has ever shown them how to use AI for schoolwork**; 76% of education
-leaders call AI literacy essential while 45% of educators have had zero training.
-([eCampus News](https://www.ecampusnews.com/ai-in-education/2026/05/27/the-ai-literacy-paradox-why-students-feel-unprepared-for-the-ai-driven-workforce/),
-[AI Literacy Day](https://ailiteracyday.org/blog/5-ai-literacy-trends-shaping-education))
-
-Note the counter-signal though: there is now a well-developed how-to-start-an-AI-club
-cottage industry and every school is being pitched one. Demand is high; **differentiation
-is low, and yours would be lowest here.**
-
-**4. There is a documented teacher-coach shortage.** Administrators broadly report
-difficulty retaining teacher-coaches post-pandemic. Schools have unmet supervision
-capacity, which is exactly what an outside qualified volunteer supplies.
-([Global News](https://globalnews.ca/news/8627956/school-coaches-volunteers-dedication-shortage-saskatoon))
+**Your business stops being a liability and becomes the point.** With minors, any
+connection to Cairn or Fuller Health had to be firewalled. With adults, a group you lead
+is legitimate top-of-funnel. It needs disclosure, not concealment — say plainly that you
+coach professionally, don't pitch from the front of the room, and let the work recruit.
 
 ---
 
-## Part 3 — Recommendations
+## 1. First responder fitness cohort — highest value, and the timing is unusually good
 
-### #1 — PRIMARY: A no-drop student run club, with a data-literacy module added in term two
+**Who you help:** firefighters, paramedics, and police whose shift schedules are
+dismantling the fitness their job depends on.
 
-**Who you help:** the students who will never make the cross-country team — beginners,
-returners, kids who quit sport at 14, kids who want the social thing.
-**The problem you solve:** school running is organized around competition, so the students
-who most need movement are the ones it excludes.
-**What it looks like when solved:** thirty students who did not consider themselves runners
-finish a 5K together, and a meaningful share keep running after the term ends.
+**The problem you solve:** departments are being told to run health-related fitness
+programs, and almost nobody on staff can write training that survives a rotating 24-hour
+schedule.
 
-**Why now.** This is the only recommendation where two independent signals point at the same
-target: run-club participation is up 3.5× among this cohort while teen inactivity is the one
-category getting worse. Students already want this format; no school is offering the
-non-competitive version of it.
+**What it looks like solved:** a hall of 20 runs a 12-week block, passes their annual
+assessment without the usual scramble, and the department renews.
 
-**Why you.** Your entire professional stack is aimed at the exact failure mode that kills
-beginner run programs — doing too much too soon and getting hurt. A BScKin/MScPT running a
-progression is not a nice-to-have here; it is the difference between an 8-week club and an
-8-week club with three shin splints and a quiet collapse in week five. Your ultra résumé
-buys you credibility with teenagers that no teacher-coach gets for free.
+### Why now
 
-**Structure — an 8-week term.**
+**NFPA 1580 (2025 edition)** consolidated four standards — 1581, 1582, 1583, 1584 —
+into one *Standard for Emergency Responder Occupational Health and Wellness*, folding in
+what used to be 1583 (health-related fitness programs) with revised cardiorespiratory and
+aerobic-capacity criteria. Departments are in the transition window now, updating policies
+and legal references.
+([Professional Health Services](https://phsmobile.com/2026/02/10/nfpa-1582-to-nfpa-1580-explained/),
+[NFPA 1580:2025](https://www.intertekinform.com/en-us/standards/nfpa-1580-2025-1385900_saig_nfpa_nfpa_3513850/))
 
-- Two sessions a week, 45 minutes, right after last bell.
-- **One rule, stated every session: no-drop, conversation pace.** If you can't talk, slow
-  down. This single rule is the retention mechanism — the 72% who join for the social
-  reason leave the moment the club becomes a race.
-- Three lanes running the same session: walk/run intervals, continuous easy, developing.
-  Nobody is "the slow group"; everyone starts and finishes together.
-- **10 minutes of "60-second science" per session** — one study, plainly explained
-  (this is `research-breakdown-generator` output, near-zero marginal cost to you).
-- Week 8: a club 5K where the whole group crosses together, then everyone gets a
-  one-page personal progress sheet.
+A new standard with a fitness-program requirement and a transition deadline is a
+budget-releasing event. Departments need a program and most do not have one.
 
-**Measurable outcomes:** week-1→week-8 attendance retention (target >60%); share
-completing the 5K; total club kilometres; a 3-question pre/post confidence survey.
-These are the numbers that get you invited back for term two.
+**The calendar hands you two dated entry points.** Safety Stand Down runs **June 14–20,
+2026**, themed *"Firefighter FITNESS: Fit to Serve, Fit for Life."* First Responder Wellness
+Week runs **March 23–27, 2026**. Both are pre-existing slots where departments are
+actively looking for someone to deliver fitness content.
+([Fire Engineering](https://www.fireengineering.com/firefighting/firefighter-health/physical-fitness-is-the-focus-of-safety-stand-down-2026/),
+[Lexipol](https://www.firstresponderwellnessweek.com/))
 
-**Challenges and mitigations.**
+### Why you
+
+This is Cairn's stated audience, and shift-aware programming is a genuinely rare
+capability. `training-plan-builder` already takes "rotating 12s — 2 days, 2 nights, 4 off"
+as a first-class input. Most fitness professionals pitching a fire hall hand them a generic
+block and hope. You hand them a plan built around the schedule that is actually breaking
+them, from a clinical exercise background, as someone who has finished a 200-miler.
+
+Sleep deprivation and circadian disruption are named repeatedly in the first-responder
+wellness literature as the core problem. That is the thing your tooling models and almost
+nobody else's does.
+
+### Structure — a 12-week block
+
+- **Week 0:** baseline session at the hall. Movement screen, aerobic baseline, and a
+  conversation about shift patterns. This is also your credibility moment.
+- **Weeks 1–12:** individualized plans generated from `training-plan-builder`, keyed to
+  each member's rotation. One in-person session per week at the hall, on-shift where the
+  department allows it.
+- **Weekly:** check-ins through `client-checkin-analyzer` — RED/YELLOW/GREEN triage, run
+  as designed, no modifications needed.
+- **Week 12:** re-test, and a one-page department report with aggregate outcomes.
+
+**Measurable outcomes:** aerobic capacity change, assessment pass rate, self-reported
+sleep and readiness, participation rate. That aggregate report is what gets the second
+contract — and it writes itself from data the check-in analyzer already collects.
+
+### Challenges and mitigations
 
 | Risk | Mitigation |
 |---|---|
-| Alberta winter kills outdoor attendance | Run 8-week terms in Sept–Oct and Apr–May; hold a gym/hallway contingency session format in reserve |
-| Injury, and your PT role blurring | Written scope of duties naming what you do *not* do: no assessment, no treatment, no advice on existing injuries — refer to the school's process and the student's own provider. Have the sponsor teacher countersign it |
-| Attrition after week 3 | The no-drop rule, running pairs assigned in week 1, and the week-8 finish event as a commitment device |
-| Looking like business development | Zero Cairn/Fuller branding. No sign-up capture, no offers to students or parents, ever. Put this in the charter in writing — it is also your best argument to a skeptical principal |
-| No sponsor teacher | See the next-action plan; this is the real gate |
+| Getting in the door | Go through the union or the department's peer fitness lead, not the chief's office. Offer the Wellness Week or Stand Down slot free as the entry |
+| Skepticism of outside fitness people | Lead with the shift schedule, not with credentials. Being the first person who plans around nights rather than ignoring them is the whole differentiation |
+| Attendance across rotations | Never require a fixed weekly time — plans are asynchronous, the in-person session is a floating anchor |
+| Scope: you are not their occupational physician | NFPA 1580 medical evaluation is a physician's job. You deliver the fitness program. Say this explicitly and in writing up front |
 
-**How Claude Code multiplies you.**
+### Claude Code leverage
 
-- Fork `training-plan-builder` → `cohort-plan-builder`: one 8-week progression, three lanes,
-  school-calendar-aware (exam weeks, competing sports seasons) instead of shift-aware.
-  This is a constraint swap on logic you already wrote.
-- Fork `client-checkin-analyzer` → a **minor-safe** 3-question version. Strip HRV, resting
-  HR, mood, motivation. Keep: soreness 1–10, sleep hours band, "is anything hurting?".
-  Deterministic GREEN/YELLOW/RED, for your eyes only, not stored. Your existing
-  rules-before-LLM design is already the right shape — you are removing fields, not adding
-  machinery.
-- `research-breakdown-generator` → the weekly 60-second science handout. Already built.
-- Google Calendar MCP for the session series; Notion for roster, attendance, and session
-  log; Gamma for the one-page parent info sheet and recruiting poster.
+`training-plan-builder` and `client-checkin-analyzer` run unmodified. Build one new
+thing: a **cohort roll-up** that aggregates weekly check-ins into the department report.
+That report is your renewal instrument, and it is a small skill. Gamma for the pitch
+one-pager; Calendar for the block; Notion for the roster.
 
 ---
 
-### #2 — SECOND: An applied performance science group (best if there is credit or a science teacher attached)
+## 2. A lifelong-learning course — the truest "school group" for adults, and it pays
 
-**Who you help:** students who want a real research project for university applications and
-have no one qualified to supervise one.
-**The problem you solve:** schools cannot staff genuine physiology or sports-science
-mentorship, so ambitious students end up with book reports.
-**What it looks like when solved:** six students each finish a defensible research poster on
-a question they chose, and can talk about methods and limitations.
+**Who you help:** adults 50+ who want to stay strong and active for another thirty years
+and are drowning in contradictory longevity content.
 
-**Why now.** Wearable data collection in adolescent athletes is an active, publishable area,
-and sports analytics clubs are an established and growing format. Demand from students is
-driven by admissions portfolios, which is durable.
-([JMIR Formative Research](https://formative.jmir.org/2025/1/e54630),
-[Sports Analytics Club Program](https://sacpinc.org/),
-[Polygence](https://www.polygence.org/blog/sports-science-project-ideas-for-high-school-students))
+**The problem you solve:** they want evidence, not supplements and influencers, and
+nobody qualified is teaching them in a room.
 
-**Why you.** This is where you are close to unique — a clinical exercise background *plus*
-the ability to ship working AI tooling. The supervision, not the software, is the scarce part.
+**What it looks like solved:** twenty-five people finish an 8-week course able to read a
+study, and each leaves with a training plan they wrote themselves.
 
-**Structure — a 10-week sprint.** Weeks 1–2: how to read a study (run
-`research-breakdown-generator`'s rubric backwards as a critique tool). Weeks 3–4: pick a
-question, **using public datasets only**. Weeks 5–8: analysis. Weeks 9–10: poster and
-presentation night.
+### Why now
 
-**Challenges and mitigations.** Consent and privacy are the entire game — start on public
-data and do not touch student-collected data until a district-approved consent process
-exists, if ever. Scope creep is the second killer; cap every project at one question and one
-dataset. Needs a science teacher sponsor more than the run club does.
+Osher Lifelong Learning Institutes and university continuing-education programs run large
+catalogs — Duke offers 200+ courses across three terms, Colorado State 200+ multi-week
+courses — and they **actively recruit instructors from outside the faculty**: independent
+scholars, working professionals, local business owners. No academic appointment required,
+no grades, no tests, no credit.
+([Duke Continuing Studies](https://learnmore.duke.edu/olli),
+[Colorado State OLLI](https://www.osher.colostate.edu/),
+[Tufts OLLI](https://universitycollege.tufts.edu/osher-lifelong-learning-institute))
 
-**How Claude Code multiplies you.** `research-breakdown-generator` becomes both the teaching
-rubric and the output template. Build one new skill — a study-critique walkthrough (sample
-size, controls, effect size vs p-value, funding source) — which is a genuinely reusable asset
-for your business too. Supabase only if a properly consented dataset ever materializes.
+This is a school group, on a campus, for adults, where the institution wants you and the
+recruiting is done for you. It is the lowest-friction teaching venue that exists.
 
----
+### Why you
 
-### #3 — THIRD, and I rank it third deliberately: a general AI build club
+The demographic *is* Fuller Health & Longevity — active adults 50–90. You already have the
+audience definition, the content pillars, and the evidence-translation pipeline. And this
+cohort specifically values credentials in a way younger groups don't: BScKin, MScPT reads
+as authority in that room.
 
-The raw demand is the highest of the three (>80% of students have never been shown how to
-use AI for schoolwork). I still rank it last **for you**, because your differentiation is
-lowest here: every school is being pitched an AI club, the how-to material is commoditized,
-and you would be competing with CS teachers on their turf rather than standing on the
-credential nobody else in the building has.
+### Structure — an 8-week course, 90 minutes weekly
 
-If a school specifically asks for this, take it — but take it with your wedge, not the
-generic version: **"AI for your body and your sport."** Students build small tools that
-analyze training data, nutrition, or sleep. That is an AI club only you can run.
+1. What actually predicts healthspan — and what doesn't
+2. How to read a study without a science degree
+3. Strength: the non-negotiable after 50
+4. Aerobic base and why zone 2 got oversold
+5. Recovery, sleep, and the things that quietly matter more
+6. Reading your own data (wearables, without the anxiety)
+7. Injury, pain, and when to see someone
+8. Build your own plan — workshop, everyone leaves with one
 
----
+Each session opens with a `research-breakdown-generator` study of the week. Session 2 runs
+that rubric backwards as a critique tool. Session 8 is `training-plan-builder` with the
+class driving.
 
-## Part 4 — The structural insight
+### Challenges and mitigations
 
-Do not treat these as three options. **Run #1, then recruit #2 out of it.**
+| Risk | Mitigation |
+|---|---|
+| Proposal cycles run a term or two ahead | Submit now for the next intake; treat the first term as scheduling, not rejection |
+| Very mixed fitness levels in one room | Teach principles and self-assessment, not a single prescription. This is a class, not a training group |
+| Individual medical questions in class | State the boundary in week 1: general education, not individual advice — and offer to talk after |
+| Pay is modest | Correct. The return is repeatable content, a warm audience, and institutional credibility, not the honorarium |
 
-The run club is a wide, low-barrier, high-social-signal entry point that costs a student
-nothing to try. A term of it produces the handful of students genuinely curious about *why*
-the training worked. Those students are the science group. The funnel is natural, and it
-means you never have to cold-recruit for the harder, smaller program.
+### Claude Code leverage
 
----
-
-## Part 5 — Next actions (14 days)
-
-**Days 1–3 — Secure the gate.**
-1. Pick one school and identify a specific teacher sponsor — PE, biology, or an existing
-   staff coach. This is the only true blocker.
-2. Write the **one-page club charter**: purpose, format, safety rules, the explicit
-   no-commercial-activity clause, and your documented scope of duties (including what you
-   will *not* do as a PT). Countersigned by the sponsor.
-3. Confirm the district's volunteer requirements — police/vulnerable-sector check,
-   orientation, supervision ratios. Start the check immediately; it has the longest lead time.
-
-**Days 4–7 — Build the term.**
-4. Fork `training-plan-builder` → `cohort-plan-builder` (three lanes, 8 weeks, school
-   calendar).
-5. Fork `client-checkin-analyzer` → the 3-question minor-safe version. Delete every field
-   you do not need.
-6. Generate eight `research-breakdown-generator` handouts — the whole term of 60-second
-   science, done in one sitting.
-
-**Days 8–11 — Make it real.**
-7. One recruiting poster and one parent info sheet via Gamma. Club branding only — nothing
-   from Cairn or Fuller Health.
-8. Set the session series in Google Calendar; stand up the Notion roster and session log.
-9. Write the 3-question pre/post confidence survey. Baseline it in week 1 or the outcome
-   numbers are worthless.
-
-**Days 12–14 — Launch.**
-10. An interest meeting, not a first run. Target 20+ sign-ups on the promise of the no-drop
-    rule.
-11. First session. Assign running pairs. State the one rule out loud.
-
-**Kill criteria, set now:** if fewer than 8 students are still attending at week 4, the
-format is wrong — do not push through on effort. Debrief with the sponsor and reshape it.
+`research-breakdown-generator` produces eight study-of-the-week handouts in one sitting.
+`content-pipeline-generator` turns each session into a week of Fuller Health content — you
+are producing the course and the marketing in the same pass. Gamma for slides. Build one
+new skill: a course-session generator that outputs slides, handout, and discussion
+questions from a topic.
 
 ---
 
-## Part 6 — What would change this recommendation
+## 3. An adult run club — the easiest to start, and worth doing anyway
 
-Five things I assumed, in the order they would move the answer:
+**Who you help:** adults who want to run and don't want a race team.
 
-1. **Age group.** I assumed high school (roughly 14–18). Middle school pushes harder toward
-   the run club and rules out most of #2. University flips the ranking — #2 becomes primary,
-   and consent/liability constraints mostly dissolve.
-2. **Your role.** I assumed outside volunteer. If you are staff or a parent, the sponsor
-   problem shrinks dramatically and the timeline compresses.
-3. **Time budget.** I assumed ~3 hours/week. Under 2, drop to one session weekly and
-   lengthen the term.
-4. **Whether this is philanthropic or a business play.** I have deliberately assumed
-   philanthropic. If you intend it as brand-building for Cairn, say so, because the entire
-   firewall recommendation changes shape — and would need to be disclosed to the school
-   rather than hidden.
-5. **Geography.** I assumed Alberta, from your race history. This drives the seasonal term
-   timing and the specific Freedom to Care Act framing.
+Run-club participation is up **59% globally over two years**, and the growth is driven by
+demand for a "third space" — people show up for the social side more than the fitness.
+Structurally: past 40 regulars, name 3–5 members with actual roles; members with a role
+attend at roughly 3× the rate of those without.
+([Running Lookout](https://runninglookout.com/news/strava-2026-community-report-running-clubs-3-5x-growth-gen-z/),
+[EventCortex](https://eventcortex.com/blog/morning-run-club-guide))
+
+Honest assessment: anyone can start a run club, so this is your lowest-differentiation
+option. But it costs almost nothing, it compounds, and it is the natural feeder into both
+recommendations above — the first responders in your club become the door into their hall.
+Run it as a standing weekly thing, not a project.
+
+---
+
+## Which to pick
+
+**Pick #1 if you want revenue and leverage.** Departments have budgets, NFPA 1580 has
+created a reason to spend them, and there is a dated slot in March and another in June.
+This is the one with a closing window.
+
+**Pick #2 if "school" is the part that matters to you.** It is a real course at a real
+institution, they want outside instructors, and it maps onto your longevity brand exactly.
+
+They are not exclusive. Different audiences, different calendars, shared content engine.
+
+---
+
+## Next actions
+
+**This week**
+1. List every fire hall, EMS station, and police service within an hour. Find the peer
+   fitness coordinator or union health rep for each — that is the contact, not the chief.
+2. Read NFPA 1580 (2025) — the former 1583 fitness-program sections specifically. You need
+   to speak to it precisely in the first conversation.
+3. Find the lifelong-learning or continuing-education programs at the nearest universities.
+   Locate the instructor proposal form and the deadline.
+
+**Next two weeks**
+4. Write a one-page first responder offer: 12-week shift-aware block, what you deliver,
+   what the department gets back, priced. Free Wellness Week or Stand Down session as entry.
+5. Submit the 8-week longevity course proposal. The syllabus above is the proposal.
+6. Build the cohort roll-up skill — it is the renewal instrument for #1 and the smallest
+   piece of net-new work in this document.
+
+**Timing note:** First Responder Wellness Week is March 23–27, 2026, and Safety Stand Down
+is June 14–20, 2026. Departments plan those months ahead. Reaching out for the June slot is
+reasonable now; for March you are already late.
 
 ---
 
