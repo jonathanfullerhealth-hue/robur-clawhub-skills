@@ -1,6 +1,6 @@
 ---
 name: glp1-triage
-description: Triage a GLP-1 patient's conditioning check-in against the post-GLP-1 protocol. Produces RED/YELLOW/GREEN status, flagged measures with EWGSOP2 context, a prescriber escalation note, and a patient-facing draft. Rule-based triage before LLM — deterministic, no false negatives on functional decline.
+description: Triage a GLP-1 patient's conditioning check-in against the post-GLP-1 protocol. Produces RED/YELLOW/INCOMPLETE/GREEN status, flagged measures with EWGSOP2 context, a prescriber escalation note, and a patient-facing draft. Rule-based triage before LLM — deterministic, no false negatives on functional decline.
 metadata: {"openclaw":{"emoji":"💉","requires":{"bins":["date"],"env":[]}}}
 user-invocable: true
 ---
@@ -11,7 +11,7 @@ user-invocable: true
 Takes a check-in from a patient on GLP-1 receptor agonist therapy who is enrolled in a
 conditioning program, and produces:
 
-1. **Triage status** — RED (escalate to prescriber this week), YELLOW (hold load, address driver), GREEN (progress per phase)
+1. **Triage status** — RED (escalate to prescriber this week), YELLOW (hold load, address driver), INCOMPLETE (measures missing — cannot be cleared), GREEN (progress per phase)
 2. **Flagged measures** — which thresholds fired, with EWGSOP2 context and change from baseline
 3. **Prescriber escalation note** — ready for clinician review, for RED status
 4. **Patient-facing draft** — plain-language, for professional review before sending
@@ -78,7 +78,26 @@ YELLOW CONDITIONS (any one triggers YELLOW, absent any RED):
 GREEN:
 - Grip maintained or improving, protein ≥ 1.2 g/kg,
   adherence ≥ 80%, no functional decline, no falls
+- AND every criterion above was actually measured
+
+INCOMPLETE (outranks GREEN; never reported as GREEN):
+- Any criterion could not be evaluated because the measure is absent
+- An absent measure is not a negative finding. A check-in nobody asked
+  about falls is not a check-in with no falls.
+- Fewer than 7 days since the previous check-in: a weekly rate of weight
+  loss cannot be estimated from it, so that criterion is not evaluated
+
+STANDING FINDINGS (YELLOW; carry no de-load instruction):
+- Grip below the EWGSOP2 cut-point, stable
+- 5× sit-to-stand > 15 s and already above it at baseline
+- Cannot rise from chair without arms, and could not at baseline
 ```
+
+The standing findings exist because every RED above is a *change* criterion, and a patient
+already impaired at intake never crosses a threshold. Without them, the most impaired
+patient on the list is the one who reads GREEN every week. They are YELLOW so the patient
+stays visible — not so load comes off. Keep progressing load unless a RED or another
+YELLOW says otherwise.
 
 **Report separately, do not fold into triage** — these are absolute EWGSOP2 criteria that
 may be met at baseline and are not themselves evidence of decline:
@@ -115,7 +134,7 @@ Date: [date] | Week [N] on therapy | Phase [N] | Tier: [HIGH/MODERATE/STANDARD]
 Agent: [agent] ([mono/dual]-agonist)
 ────────────────────────
 
-TRIAGE: 🔴 RED / 🟡 YELLOW / 🟢 GREEN
+TRIAGE: 🔴 RED / 🟡 YELLOW / ⚪ INCOMPLETE / 🟢 GREEN
 
 MEASURES:
   Grip strength      [X] kg    ([+/-X.X]% from baseline [Y] kg)   [flag]
@@ -191,7 +210,9 @@ Always close: `🔍 REQUIRES CLINICIAN REVIEW BEFORE SENDING.`
 - **Missing baseline:** cannot compute change from baseline. Triage on absolute criteria only (EWGSOP2 cut-points, gait speed, protein, adherence, falls) and state: "No baseline on file — trend-based criteria not evaluated."
 - **First check-in:** absolute criteria only. State "First check-in — no trend available."
 - **Missing grip:** flag as an incomplete assessment. Grip is the primary measure; a check-in without it is not a check-in. Do not substitute another measure for it.
-- **Missing protein or adherence:** evaluate remaining criteria, note the gap explicitly.
+- **Missing protein, adherence, falls, GI status, or chair-rise:** evaluate the remaining criteria and return INCOMPLETE, naming each absent measure. Never record a blank as zero, none, or no.
+- **Check-ins less than 7 days apart:** do not compute a weekly rate of weight loss from them. Say the criterion was not evaluated.
+- **Baseline grip recorded as zero:** treat as a bad reading. Change-from-baseline criteria are unavailable until it is corrected.
 - **Empty check-in:** report "No data provided — cannot triage." Generate nothing further.
 
 ## Evidence Base for These Thresholds

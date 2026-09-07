@@ -283,7 +283,31 @@ GREEN — progress per phase
   • Protein ≥ 1.2 g/kg
   • Adherence ≥ 80%
   • No new functional decline
+  • and every criterion above was actually measured
+
+INCOMPLETE — outranks GREEN; the assessment cannot be cleared
+  • Any criterion above could not be evaluated because the measure is absent
+  • Fewer than 7 days since the previous assessment (no weekly rate available)
+  • Baseline grip recorded as zero
+
+STANDING FINDINGS — YELLOW, and carry no instruction to reduce load
+  • Grip below the EWGSOP2 cut-point, stable
+  • 5× sit-to-stand > 15 s and already above it at baseline
+  • Cannot rise from chair without arms, and could not at baseline
 ```
+
+**An absent measure is not a negative finding.** Every RED above except gait speed depends on
+a number somebody has to write down. A check-in where nobody asked about falls is not a
+check-in with no falls, and software that treats the two the same will produce a clean board
+for a patient nobody assessed. Blanks are reported as INCOMPLETE and are never cleared as
+GREEN.
+
+**Every RED is a change criterion, which leaves the already-impaired patient uncovered.** A
+patient whose 5× sit-to-stand was 18 s at intake can never cross 15 s; one who could not rise
+from a chair unaided at baseline can never newly fail to. Read literally, the most impaired
+patient in the cohort is the one who screens clean every week. The standing findings close
+that gap. They sit at YELLOW to keep the patient visible, not to take load off — a sarcopenic
+patient's problem is undertraining, and de-loading them is the wrong response to the finding.
 
 A RED flag is a communication trigger. It does not authorize the exercise professional to
 alter medication, diet prescription, or medical management.

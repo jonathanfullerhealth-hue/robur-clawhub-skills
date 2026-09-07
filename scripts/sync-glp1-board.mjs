@@ -21,6 +21,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { injectEngine } from "./inject-engine.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HTML = join(ROOT, "dashboard", "glp1-board.html");
@@ -81,25 +82,14 @@ export function buildCohort(rows) {
         weightKg: num(r.weight_kg),
         proteinGPerKg: num(r.protein_g_per_kg),
         adherencePct: num(r.adherence_pct),
-        falls: num(r.falls) ?? 0,
-        giLimiting: Boolean(r.gi_limiting),
+        falls: num(r.falls),
+        giLimiting: r.gi_limiting == null ? null : Boolean(r.gi_limiting),
         canRiseWithoutArms: bool(r.can_rise_without_arms),
         notes: r.notes || "",
       })),
     });
   }
   return { cohort: { patients }, warnings };
-}
-
-function injectEngine(html) {
-  const src = readFileSync(ENGINE, "utf8")
-    .replace(/^export /gm, "")
-    .replace(/^\/\/.*$/gm, "")     // strip the module-only header comments
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
-  const re = /(\/\* TRIAGE-ENGINE:START[^\n]*\*\/\n)[\s\S]*?(\/\* TRIAGE-ENGINE:END \*\/)/;
-  if (!re.test(html)) throw new Error("TRIAGE-ENGINE markers not found in the dashboard HTML.");
-  return html.replace(re, (_, a, b) => `${a}${src}\n${b}`);
 }
 
 function injectCohort(html, cohort, syncedAt) {
