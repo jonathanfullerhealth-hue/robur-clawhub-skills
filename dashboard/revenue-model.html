@@ -1,0 +1,343 @@
+<title>84 Clinics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<style>
+:root{
+  --ground:#F6F7F5; --surface:#FFFFFF; --sunk:#EFF2EF;
+  --ink:#131A19; --ink-2:#48534F; --ink-3:#7A8480;
+  --line:#E2E6E2; --line-2:#C7CFCA;
+  --accent:#0E5B51; --accent-soft:#E2EFEC;
+  --warn:#8A5B08; --warn-soft:#F8F0DE; --crit:#9E332A; --gain:#1F6B4A;
+  --shadow:0 1px 2px rgba(19,26,25,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1413; --surface:#161D1C; --sunk:#131A19;
+    --ink:#E8EDEB; --ink-2:#A9B5B1; --ink-3:#7A8682;
+    --line:#252F2D; --line-2:#36413F;
+    --accent:#5FC3B2; --accent-soft:#122925;
+    --warn:#D6A54D; --warn-soft:#2A2211; --crit:#E08579; --gain:#63BE95;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1413; --surface:#161D1C; --sunk:#131A19;
+  --ink:#E8EDEB; --ink-2:#A9B5B1; --ink-3:#7A8682;
+  --line:#252F2D; --line-2:#36413F;
+  --accent:#5FC3B2; --accent-soft:#122925;
+  --warn:#D6A54D; --warn-soft:#2A2211; --crit:#E08579; --gain:#63BE95;
+  --shadow:none;
+}
+
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.page{max-width:1000px;margin:0 auto;padding:56px 28px 88px}
+.col{max-width:660px}
+h1,h2,h3{text-wrap:balance;margin:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+
+/* masthead */
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);font-weight:500}
+h1{font-family:Newsreader,Georgia,serif;font-size:clamp(38px,6vw,58px);line-height:1.04;
+  font-weight:500;letter-spacing:-.018em;margin:14px 0 0}
+.standfirst{font-family:Newsreader,Georgia,serif;font-size:20.5px;line-height:1.5;
+  color:var(--ink-2);margin:18px 0 0;max-width:610px}
+.standfirst em{color:var(--ink);font-style:italic}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;padding-top:16px;
+  border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;
+  font-size:11.5px;color:var(--ink-3);letter-spacing:.03em}
+.meta b{color:var(--ink-2);font-weight:500}
+
+/* the thesis */
+.thesis{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;
+  gap:0;margin:44px 0 0;border:1px solid var(--line);border-radius:3px;
+  background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
+.path{padding:26px 28px;display:flex;flex-direction:column;gap:5px}
+.path .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-3)}
+.path .v{font-family:Newsreader,Georgia,serif;font-size:46px;line-height:1;font-weight:500;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.path .who{font-size:14.5px;color:var(--ink-2)}
+.path .note{font-size:13px;color:var(--ink-3);margin-top:7px;line-height:1.45}
+.path.cold{background:var(--sunk)} .path.cold .v{color:var(--ink-3)}
+.path.warm .v{color:var(--accent)}
+.vs{display:flex;align-items:center;justify-content:center;padding:0 6px;
+  background:var(--surface);border-left:1px solid var(--line);border-right:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  color:var(--ink-3);text-transform:uppercase}
+.thesis-foot{grid-column:1/-1;border-top:1px solid var(--line);padding:13px 28px;
+  font-size:13.5px;color:var(--ink-2);background:var(--surface)}
+
+/* sections */
+section{margin-top:64px}
+.shead{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+.snum{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);
+  letter-spacing:.06em;padding-top:4px;flex:none}
+h2{font-family:Newsreader,Georgia,serif;font-size:31px;line-height:1.16;font-weight:500;
+  letter-spacing:-.012em}
+p{margin:0 0 16px}
+.col p:last-child{margin-bottom:0}
+h3{font-family:"IBM Plex Sans",sans-serif;font-size:15px;font-weight:600;
+  margin:28px 0 8px;letter-spacing:-.005em}
+strong{font-weight:600}
+
+/* tables */
+.tw{overflow-x:auto;margin:26px 0;border:1px solid var(--line);border-radius:3px;
+  background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  padding:12px 16px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+  white-space:nowrap;color:var(--ink)}
+th.n{text-align:right}
+td:first-child{color:var(--ink);font-weight:500}
+tr.hi td{background:var(--accent-soft)}
+tr.hi td.n{color:var(--accent);font-weight:600}
+.dim{color:var(--ink-3)}
+
+/* pull figure */
+.figure{margin:28px 0;padding:24px 26px;border-left:2px solid var(--accent);
+  background:var(--surface);border-radius:0 3px 3px 0}
+.figure .big{font-family:Newsreader,Georgia,serif;font-size:34px;line-height:1.14;
+  font-weight:500;letter-spacing:-.015em;margin-bottom:11px;max-width:19ch;max-width:26ch}
+.figure .big b{color:var(--accent);font-weight:500}
+.figure p{font-size:14.5px;color:var(--ink-2);margin:0;max-width:64ch}
+
+/* quote / stat callout */
+.stat{margin:26px 0;padding:20px 24px;background:var(--warn-soft);border-radius:3px;
+  border:1px solid color-mix(in srgb,var(--warn) 22%,transparent)}
+.stat .t{font-family:Newsreader,Georgia,serif;font-size:21px;line-height:1.38;
+  font-weight:500;color:var(--ink);max-width:56ch}
+.stat .s{font-size:13.5px;color:var(--ink-2);margin-top:8px;max-width:70ch}
+
+/* phases */
+.phases{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:3px;overflow:hidden;margin:26px 0}
+.phase{background:var(--surface);padding:20px 24px;display:grid;
+  grid-template-columns:88px 1fr;gap:20px;align-items:start}
+.phase .d{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--accent);
+  letter-spacing:.05em;padding-top:3px;font-weight:500}
+.phase h4{margin:0 0 5px;font-size:15px;font-weight:600}
+.phase p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.55}
+
+/* risks */
+.risks{display:grid;gap:14px;margin:26px 0}
+.risk{padding:18px 22px;background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;border-top:2px solid var(--crit)}
+.risk h4{margin:0 0 6px;font-size:15px;font-weight:600}
+.risk p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.55}
+
+/* sources */
+.sources{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;
+  color:var(--ink-3);line-height:1.6}
+.sources h2{font-size:15px;font-family:"IBM Plex Sans",sans-serif;font-weight:600;
+  color:var(--ink);margin-bottom:12px;letter-spacing:0}
+.sources dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:14px}
+.sources dd{margin:4px 0 0}
+.sources a{color:var(--ink-2)}
+.sources a:hover{color:var(--accent)}
+
+@media (max-width:640px){
+  .page{padding:36px 20px 64px}
+  .thesis{grid-template-columns:1fr}
+  .vs{border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:7px}
+  .phase{grid-template-columns:1fr;gap:7px}
+  .shead{gap:10px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="page">
+
+<header>
+  <div class="eyebrow">Revenue model · supersedes community-strategy.md</div>
+  <h1>The customer count is the strategy</h1>
+  <p class="standfirst">Our strategy documents recommend a $47/month community for solo coaches. That was right for a content business. We then built clinical infrastructure, and it points at a <em>different buyer with a bigger problem</em>.</p>
+  <div class="meta">
+    <span><b>Same revenue target</b> $1M ARR</span>
+    <span><b>Status</b> Unvalidated — no pilot yet</span>
+    <span><b>Window</b> Closes August 2029</span>
+  </div>
+</header>
+
+<div class="thesis">
+  <div class="path cold">
+    <span class="k">Current plan</span>
+    <span class="v">1,838</span>
+    <span class="who">online coaches at $47/month</span>
+    <span class="note">Net of platform fees. At 5.8% monthly churn, recruiting 107 every month forever just to hold the line.</span>
+  </div>
+  <div class="vs">or</div>
+  <div class="path warm">
+    <span class="k">What the assets support</span>
+    <span class="v">84</span>
+    <span class="who">clinics at $1,000/month</span>
+    <span class="note">0.9% of the ~9,500 US med spas. No audience required, no content machine, no perpetual top of funnel.</span>
+  </div>
+  <div class="thesis-foot">One of these is a distribution problem. The other is a sales problem. Only one is executable from a standing start.</div>
+</div>
+
+<section>
+  <div class="shead"><span class="snum">01</span><h2>What a million dollars actually requires</h2></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Sell</th><th>Price</th><th class="n">Customers for $1M ARR</th><th>Reachable universe</th><th class="n">Penetration</th></tr></thead>
+      <tbody>
+        <tr><td>Community membership</td><td class="dim">$47/mo</td><td class="n">1,838</td><td class="dim">every online coach</td><td class="n dim">—</td></tr>
+        <tr><td>Practitioner certification</td><td class="dim">$997 once</td><td class="n">1,003 <span class="dim">/yr, forever</span></td><td class="dim">every online coach</td><td class="n dim">—</td></tr>
+        <tr><td>Clinic licence</td><td class="dim">$500/mo</td><td class="n">167</td><td class="dim">~9,500 US med spas</td><td class="n">1.8%</td></tr>
+        <tr class="hi"><td>Clinic licence</td><td class="dim">$1,000/mo</td><td class="n">84</td><td class="dim">~9,500 US med spas</td><td class="n">0.9%</td></tr>
+        <tr class="hi"><td>Per active patient</td><td class="dim">$25/patient/mo</td><td class="n">84 <span class="dim">clinics</span></td><td class="dim">40 patients each</td><td class="n">0.9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>The membership route is a media business. It needs an audience, a content machine, and a permanent top of funnel. People run it well and it is a real business — it is not the business the assets we have describe.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">02</span><h2>Who has the money and the problem</h2></div>
+  <div class="col">
+    <p><strong>The buyer is a medical weight-loss clinic or med spa that prescribes GLP-1s.</strong> Patients pay them $300–600 a month. After drug cost, supplies and NP/PA oversight, the clinic keeps roughly <strong>$244 per patient per month</strong>. Forty active patients is $14,000–24,000 in monthly recurring revenue.</p>
+  </div>
+  <div class="stat">
+    <div class="t">Up to 65% of patients without type 2 diabetes stop GLP-1 therapy within a year. Two-thirds of the lost weight comes back within a year of stopping.</div>
+    <div class="s">Compounded, that is 8.4% monthly churn and an average patient lifetime of twelve months — about $2,900 in gross margin.</div>
+  </div>
+  <div class="col">
+    <p>A 40-patient clinic loses 26 patients a year, about 2.2 every month. By year end that is <strong>$76,000 of annualised gross margin</strong> gone, to be replaced with paid acquisition.</p>
+    <p>That is the problem we solve. Not muscle loss in the abstract — <strong>churn</strong>. And the clinic owner is exactly the customer the founding filter describes: capital, a P&amp;L, and a problem whose solution makes them money.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">03</span><h2>What we sell</h2></div>
+  <div class="col">
+    <p>A conditioning and monitoring programme the clinic runs under its own name, that keeps patients on programme longer and gives the prescriber something defensible to point at. All of it already exists.</p>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Asset</th><th>What the clinic gets</th></tr></thead>
+      <tbody>
+        <tr><td>Conditioning protocol</td><td>The clinical programme, cited to primary sources</td></tr>
+        <tr><td>Triage skill</td><td>Deterministic scoring of every check-in, no clinician time</td></tr>
+        <tr><td>Monitoring board</td><td>One screen: who to escalate this week, who to leave alone</td></tr>
+        <tr><td>Annotated references</td><td>The answer when a physician asks where a threshold came from</td></tr>
+        <tr><td>Quarterly report</td><td>Outcomes evidence the clinic markets with</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>The clinic is not buying information. It is buying a retention mechanism with a clinical justification attached — and a report that proves the programme works, which it then uses to sell the programme.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">04</span><h2>Pricing</h2></div>
+  <div class="col">
+    <p>Take the per-patient model. It is the only one whose incentives point the same way as the clinic's. <strong>$25 per active patient per month, $500/month minimum</strong> — 10% of their margin on each patient. Which sets the bar the programme has to clear, and the bar is a duration, not a headcount.</p>
+  </div>
+  <div class="figure">
+    <div class="big">The fee pays for itself the moment we extend average time on programme by <b>11.4%. About six weeks.</b></div>
+    <p>Without us the clinic keeps $244/month for twelve months: $2,913. With us they keep $219/month, so they need 13.3 months to be level. Everything past six extra weeks is theirs.</p>
+  </div>
+  <div class="col">
+    <p>If the programme moves annual discontinuation from 65% to 55% — the number the pilot has to establish — average lifetime goes to 15.5 months and the clinic nets about <strong>$490 more gross margin per patient</strong> against $388 of fees. A 1.3× return on the fee, plus a quarterly outcomes report they can market with.</p>
+    <p>That is not a spectacular multiple and should not be sold as one. It is a defensible one, and it survives a clinic owner with a spreadsheet, which the alternative framings do not. Price on their margin, not our effort — and be honest that the whole case rests on a retention number nobody has measured yet.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">05</span><h2>Why we win against what exists</h2></div>
+  <div class="col">
+    <p>The space is not empty. It is occupied by three shapes of competitor, none of which is the shape we are.</p>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Who</th><th>What they sell</th><th>Their programme is</th></tr></thead>
+      <tbody>
+        <tr><td>InBody</td><td class="dim">Muscle-preservation content that sells body-composition scanners</td><td>the scan</td></tr>
+        <tr><td>Karpa Health</td><td class="dim">White-label GLP-1 programme at $500/mo, body composition as a feature</td><td>the drug</td></tr>
+        <tr><td>Thrive · KORB</td><td class="dim">GLP-1 access beside gym access — Crunch, 550+ locations</td><td>the room</td></tr>
+        <tr class="hi"><td>Us</td><td class="dim">The rules that read a check-in and say <em>phone the prescriber this week</em></td><td>the governance</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>Two differentiators are technical rather than positioning.</p>
+    <h3>We refuse to triage on bioimpedance</h3>
+    <p>Every scanner-led programme in this market triages on BIA lean mass, which over-reads fat-free mass loss in dehydrated patients — and this population is chronically dehydrated. Our skill bars it explicitly and triages on grip strength and function instead. That is defensible in front of a physician in a way an InBody trend line is not.</p>
+    <h3>The triage is deterministic and tested</h3>
+    <p>Thirty-three tests over the escalation rules, and a status that reports <em>incomplete</em> rather than quietly clearing a patient nobody measured. That is the difference between a decision aid a medical director signs off on and one they do not.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">06</span><h2>The first 90 days</h2></div>
+  <div class="col">
+    <p>The bottleneck is not product. It is that we have zero patients, zero outcome data and no reference customer. Nothing else matters until that changes.</p>
+  </div>
+  <div class="phases">
+    <div class="phase"><div class="d">Days 1–30</div><div>
+      <h4>Build the intake, get one clinic</h4>
+      <p>Close the write path from the client app into the check-ins table; the pipeline is otherwise finished and idle. Then land a single pilot. Free for 90 days in exchange for the data and a named reference. One clinic, not five.</p></div></div>
+    <div class="phase"><div class="d">Days 31–60</div><div>
+      <h4>Run the protocol on real patients</h4>
+      <p>Every check-in through the triage engine, every escalation logged. This is the first time any of it touches a real person, and it will surface things the sample cohort cannot.</p></div></div>
+    <div class="phase"><div class="d">Days 61–90</div><div>
+      <h4>Produce the report and convert</h4>
+      <p>The quarterly report is the sales asset. Retention against the clinic's own prior cohort is the number that sells the second clinic, and the second sells the tenth.</p></div></div>
+  </div>
+  <div class="col">
+    <p>Ten clinics at $500–1,000/month is $60,000–120,000 ARR and a repeatable pitch. That is the point at which this is a business rather than a bet.</p>
+    <h3>Where the community comes back</h3>
+    <p>Clinics that buy the programme need somebody to deliver it. That is the second side of the market, and it is what the community strategy is actually for: certify coaches into the protocol at $997, place them into clinics that have licensed it. The group stops being the revenue engine and becomes the supply of practitioners — far easier to sell to a coach than another membership, because it ends in paid work.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">07</span><h2>What kills this</h2></div>
+  <div class="risks">
+    <div class="risk">
+      <h4>The window closes in 2029</h4>
+      <p>LEAN-PREP (NCT06885736) reports in August 2029. When it does, this stops being a proprietary protocol and becomes a guideline anyone can implement. Three years to build the customer base, the outcome data and the brand. After that we compete on execution, not on knowing something.</p>
+    </div>
+    <div class="risk">
+      <h4>Clinical liability is a different business to selling courses</h4>
+      <p>Decision support sold into medical practices carries obligations a community does not. The scope boundary in the protocol is the mitigation and must never soften: we programme exercise, the prescriber owns medication, the prescriber or dietitian owns nutrition. Get this reviewed before the first paid clinic, not after.</p>
+    </div>
+    <div class="risk">
+      <h4>No proof yet</h4>
+      <p>Every figure in section 4 is a projection built on the clinic's published economics, not on our results. The pilot exists to replace the projection with evidence. If the protocol does not improve retention the business does not work — and we should find that out in 90 days on one clinic rather than in two years on forty.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sources">
+  <h2>Sources</h2>
+  <p>Clinic economics and competitor positioning from published industry reporting; discontinuation and regain figures from the clinical literature. Market-size estimates vary widely by source and are used only to size the buyer universe, never to forecast revenue.</p>
+  <dl>
+    <dt>Discontinuation and regain</dt>
+    <dd><a href="https://www.thelancet.com/journals/eclinm/article/PIIS2589-5370(26)00043-X/fulltext">Trajectory of weight regain after cessation of GLP-1 receptor agonists</a> · <a href="https://www.thelancet.com/journals/eclinm/article/PIIS2589-5370(26)00240-3/fulltext">Weight maintenance after discontinuation</a> · <a href="https://www.amgen.com/obesity/prescription-gap">The Gap Between GLP-1 Prescriptions and Persistence</a> · <a href="https://newsroom.clevelandclinic.org/2026/03/12/what-happens-when-patients-stop-taking-glp-1-drugs-new-cleveland-clinic-study-reveals-real-world-insights">Cleveland Clinic real-world analysis</a></dd>
+    <dt>Clinic pricing and margin</dt>
+    <dd><a href="https://pabau.com/blog/how-weight-loss-clinics-make-money/">How Weight Loss Clinics Make Money</a> · <a href="https://www.spakinect.com/blog/med-spa-profit-margins-for-2026">Med Spa Profit Margins 2026</a> · <a href="https://karpahealth.com/resources/med-spa-weight-loss-program/">Adding GLP-1 Weight Loss to Your Med Spa</a></dd>
+    <dt>Buyer universe</dt>
+    <dd><a href="https://www.medicalspalocator.com/resources/med-spa-statistics-2026">Med Spa Industry Statistics 2026</a> · <a href="https://scalehaven.io/blog/med-spa-industry-statistics/">47 Med Spa Industry Statistics</a> · <a href="https://www.grandviewresearch.com/industry-analysis/us-medical-weight-loss-clinics-market-report">U.S. Medical Weight Loss Clinics Market</a></dd>
+    <dt>Competitors</dt>
+    <dd><a href="https://inbodyusa.com/blogs/inbodyblog/the-missing-piece-in-glp-1-weight-loss-how-thrive-inbody-protect-muscle/">InBody: The Missing Piece in GLP-1 Weight Loss</a> · <a href="https://www.inspire360.com/glp-1-report-2026">GLP-1 Health Club Intelligence Report</a> · <a href="https://medspastandards.com/blog/glp1-muscle-loss-body-composition-med-spa-2026">Body Composition Protocols for Med Spas</a></dd>
+    <dt>Trial window</dt>
+    <dd><a href="https://clinicaltrials.gov/study/NCT06885736">NCT06885736 — LEAN-PREP</a>, primary completion August 2029</dd>
+  </dl>
+</div>
+
+</div>
