@@ -13,7 +13,7 @@ Takes an athlete's check-in data (subjective wellness scores, HRV, sleep, shift 
 2. **Flagged concerns** — specific metrics that triggered each level
 3. **Draft coaching message** — ready for coach review and approval before sending
 
-Built on the triage engine from Cairn Coach — a production check-in system used by Jonathan Fuller (BScKin, MScPT) for endurance and longevity athletes.
+Built on the triage engine from Cairn Coach — a production check-in system used by Jonathan Fuller (BScKin, MSc Physical Therapy) for endurance and longevity athletes.
 
 ## Workflow
 
@@ -152,7 +152,7 @@ Recovery recommendation: [Proceed as planned / Modify / Rest]
 - Do NOT send any message to the athlete. Output is draft-only for coach review and approval.
 - Do NOT override the rule-based triage with narrative reasoning. Triage is deterministic. If the rules say RED, output RED — then explain why.
 - Do NOT fabricate trend data. If no prior data available, state "No prior data — first check-in."
-- Do NOT suggest medical diagnoses. Flag concerns as training load management issues, not medical conditions. "Recommend consulting a physiotherapist" is OK. "This looks like patellar tendinopathy" is not.
+- Do NOT suggest medical diagnoses. Flag concerns as training load management issues, not medical conditions. "Recommend consulting a qualified health professional" is OK. "This looks like patellar tendinopathy" is not.
 - Do NOT downplay RED status. If metrics are poor, say so directly. Softening the message defeats the purpose of triage.
 - Do NOT generate workout prescriptions. The coach may modify sessions — flag recommendations, don't generate new plans.
 

@@ -26,8 +26,8 @@ the specific pain RYT removes, where to reach them, the offer/price to lead with
 and the single riskiest assumption to test. Delivered weekly, cited, no fluff.
 
 ## Inputs
-- **Founder credibility anchor** (fixed): health / longevity / physiotherapy /
-  endurance domain authority (BScKin, MScPT). Segments that sit inside this
+- **Founder credibility anchor** (fixed): health / longevity / exercise therapy /
+  endurance domain authority (BScKin, MSc Physical Therapy). Segments that sit inside this
   authority convert cheaper and defend premium pricing — weight them up.
 - **Live web access:** TAVILY_API_KEY for search + web fetch for primary sources.
 - **Optional:** last week's audit file, to diff week-over-week.

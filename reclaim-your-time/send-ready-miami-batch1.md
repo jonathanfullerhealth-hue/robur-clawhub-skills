@@ -20,8 +20,8 @@ is costing a clinic your size: [SNAPSHOT_LINK]
 
 If the number's real, I'll show you which piece to fix first.
 
-Jonathan Fuller, MScPT
-(clinician, not an agency — I built this for my own practice first)
+Jonathan Fuller, Clinical Exercise Therapist
+(clinical exercise therapist, not an agency — I built this for my own practice first)
 ```
 
 ## 2 — Timeless Health (Miami) · functional-med + concierge · T2/T1
@@ -38,7 +38,7 @@ Here's a 60-second snapshot of what producing that content manually is costing y
 
 If it lands, I'll show you how the content engine works — for a clinic, not an agency.
 
-Jonathan Fuller, MScPT
+Jonathan Fuller, Clinical Exercise Therapist
 ```
 
 ## 6 — The Mirror Miami (Brickell) · med spa · T1 speed-to-lead
@@ -54,7 +54,7 @@ of 30 lifts booked consults 3–5x. That gap is booked revenue walking out the d
 
 If it's worth 30 minutes, I'll map exactly how to close it: [booking link]
 
-Jonathan Fuller, MScPT
+Jonathan Fuller, Clinical Exercise Therapist
 ```
 
 ## 7 — No Filter Medical Spa (Brickell) · med spa · T1/T3
@@ -70,7 +70,7 @@ Here's what the manual version is costing you, in a 60-second snapshot: [SNAPSHO
 
 Want it back? [booking link]
 
-Jonathan Fuller, MScPT
+Jonathan Fuller, Clinical Exercise Therapist
 ```
 
 ---

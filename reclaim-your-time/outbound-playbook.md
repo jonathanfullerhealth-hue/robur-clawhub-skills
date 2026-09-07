@@ -29,7 +29,7 @@ you. No signup, no call: [SNAPSHOT_LINK]
 If the number stings, I'll show you which piece to fix first.
 
 [YourName]
-(clinician, not an agency — I built this for my own practice first)
+(clinical exercise therapist, not an agency — I built this for my own practice first)
 ```
 
 ### Email 2 — the proof nudge (Day 3)
@@ -64,7 +64,7 @@ Either way, the snapshot's yours free: [SNAPSHOT_LINK]
 ## B. Loom audit script (3–4 min, personalized)
 The Loom is the wedge — a specific, free teardown of *their* practice. Structure:
 
-1. **Open (10s):** "Hey [First], [YourName] — clinician who builds automation. Recorded a quick,
+1. **Open (10s):** "Hey [First], [YourName] — clinical exercise therapist who builds automation. Recorded a quick,
    honest look at [Clinic], no pitch."
 2. **Show you did the work (45s):** screen-share their site / booking flow / one real gap.
    Name the specific thing: "I filled out your consult form and here's what happened next…"

@@ -37,7 +37,7 @@ platform's documented A&R model and the coach-funnel genre conventions, not a co
 
 ## Copy bank (headlines / CTAs — AR energy, honest)
 - **Hero H1:** "You didn't open a practice to answer emails."
-- **Hero sub:** "See exactly how many hours — and dollars — manual admin is costing you. 60 seconds, no pitch. Built by a clinician."
+- **Hero sub:** "See exactly how many hours — and dollars — manual admin is costing you. 60 seconds, no pitch. Built by a clinical exercise therapist."
 - **Primary CTA:** "Show me what it's costing" → scrolls to Snapshot.
 - **Post-Snapshot CTA:** "Get my snapshot + book my working session."
 - **Scarcity line:** "We take on a handful of builds a month so each one ships fast."
@@ -50,7 +50,7 @@ platform's documented A&R model and the coach-funnel genre conventions, not a co
 - **E4 (Day 7):** soft breakup — "want me to just send the plan?" + booking link.
 
 ## A&R nurture — SMS (only if they gave a mobile + consented)
-- **S1 (1 hr after capture):** "Hi [First] — Jonathan here (the clinician). Sent your time-cost snapshot to your email. Want the 15-min version live? [link]"
+- **S1 (1 hr after capture):** "Hi [First] — Jonathan here (a clinical exercise therapist). Sent your time-cost snapshot to your email. Want the 15-min version live? [link]"
 - **S2 (Day 3):** "[First] — the piece I'd automate first for [segment] is usually [lead follow-up]. Worth a quick look? [booking link]"
 - SMS needs express consent (a checkbox at capture) + STOP-to-opt-out. Keep it to 2 touches.
 

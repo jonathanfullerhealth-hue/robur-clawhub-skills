@@ -1,6 +1,6 @@
 # Robur ClawHub Skills
 
-6 free OpenClaw skills for running and longevity coaches. Built from workflows that run Fuller Health & Longevity and Cairn Endurance.
+6 free OpenClaw skills for running and longevity coaches. Built from workflows that run Fuller Health & Performance and Cairn Endurance.
 
 ---
 
@@ -45,4 +45,4 @@ All other skills are pure prompt — no external dependencies.
 
 ---
 
-Built and maintained by [Jonathan Fuller](https://fullerhealthandlongevity.com) — BScKin, MScPT, ultra runner.
+Built and maintained by [Jonathan Fuller](https://fullerhealthandlongevity.com) — BScKin, MSc Physical Therapy, ultra runner.

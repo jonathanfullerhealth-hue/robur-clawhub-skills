@@ -19,7 +19,7 @@ Works for any coach who serves:
 ### 1. Define Your Brands
 The agent will ask you for:
 - **Endurance brand name** (e.g., "Cairn Endurance")
-- **Longevity brand name** (e.g., "Fuller Health & Longevity")
+- **Longevity brand name** (e.g., "Fuller Health & Performance")
 - Your posting platforms (default: Instagram, X/Twitter, Facebook, LinkedIn)
 - Any content pillars or themes you want to rotate through
 

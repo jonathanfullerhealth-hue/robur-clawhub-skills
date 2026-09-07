@@ -1,5 +1,5 @@
 # Reclaim Your Time — Demand & Positioning Audit
-**Date:** 2026-09-05 · **Run:** #1 (baseline) · **Founder anchor:** health / longevity / physiotherapy / endurance (BScKin, MScPT)
+**Date:** 2026-09-05 · **Run:** #1 (baseline) · **Founder anchor:** health / longevity / exercise therapy / endurance (BScKin, MSc Physical Therapy)
 
 ---
 
@@ -16,7 +16,7 @@ already pay for growth**. Lead with two, keep a third as your warm wedge:
 
 1. **Longevity / functional-medicine / concierge clinics** — your exact authority zone, highest ceiling.
 2. **Med spas** — the most documented operational pain and the most defined, reachable market.
-3. **Private physiotherapy / chiropractic practices** — your insider wedge (you're an MScPT).
+3. **Private physiotherapy / chiropractic practices** — your insider wedge (you know the field firsthand).
 
 And **reprice**: $997 setup is a coach price. Clinics pay $1.5K–6K/mo for this class of work.
 
@@ -32,7 +32,7 @@ these segments is unproven and is the #1 thing to test.
   >$150K/yr, mostly cash-pay ([World Longevity Clinics, 2026](https://worldlongevityclinics.com/news/executive-health-program-cost-2026-longevity-clinic-buyers-guide/); [Yahoo, 2026](https://www.yahoo.com/lifestyle/articles/longevity-clinics-worth-2026-5-002654092.html)). The market's own experts say *prevention is hard to sell directly and must be packaged into content + lifecycle nurture*, and that **retention beats acquisition** on economics ([Macbach concierge benchmark, 2026](https://macbach.com/insights/concierge-medicine-benchmarks-2026)) — precisely what content-pipeline + check-in-analyzer + research-breakdown do.
 - **Pain RYT removes:** the content/authority treadmill, slow lead nurture, and
   low-touch member check-ins that quietly kill retention.
-- **Riskiest assumption to test:** that a clinician-founder can land these as an
+- **Riskiest assumption to test:** that a practitioner-founder can land these as an
   *automation* vendor rather than being seen as "just marketing." Test with one
   lighthouse clinic.
 
@@ -40,11 +40,11 @@ these segments is unproven and is the #1 thing to test.
 - **Why:** ~8,000 US locations, ~14%/yr growth, $1–3M revenue each ([search-sourced industry data, 2026](https://ciela.ai/blogs/ai-automation-agency-niches-most-profitable)); standard automation retainers **$3K–6K/mo**. Their pain is *documented and quantified*: 5-minute lead response lifts conversion **3–5×** vs. 30 minutes, and automated follow-up lifts booking rate 25–40% ([ScaleHaven, 2026](https://scalehaven.io/blog/med-spa-lead-follow-up-system/); [amplivista, 2026](https://amplivista.com/med-spa-lead-generation/)).
 - **Pain RYT removes:** lead leakage + no-show recovery + the content calendar.
 - **Riskiest assumption:** aesthetics sits outside your longevity authority — your
-  credibility discount here is real. Test whether a health-clinician angle
+  credibility discount here is real. Test whether a health-practitioner angle
   ("clinical trust") actually converts vs. generic automation agencies.
 
 ### 3. Private physiotherapy / chiropractic practices (warm wedge)
-- **Why:** You're an MScPT — you speak the language and have network access. Cash-pay
+- **Why:** You know the field firsthand — you speak the language and have network access. Cash-pay
   clinics have real budgets; the pain (intake, no-shows, content, plan delivery)
   maps 1:1 to the stack, and `training-plan-builder` literally already produces
   structured client deliverables.
@@ -61,7 +61,7 @@ Scores 0–5. Total /25.
 |---|---|---|---|---|---|---|---|
 | Longevity / concierge clinics | 5 | 4 | 5 | 3 | 4 | **21** | Macbach 2026 / World Longevity 2026 |
 | Med spas | 5 | 5 | 3 | 4 | 4 | **21** | ScaleHaven 2026 / Ciela 2026 |
-| Private PT / chiro | 3 | 4 | 5 | 4 | 3 | **19** | Founder domain (MScPT) |
+| Private PT / chiro | 3 | 4 | 5 | 4 | 3 | **19** | Founder domain (field insider) |
 | High-ticket fitness coaches / gyms | 3 | 5 | 4 | 5 | 2 | **19** | current-market inference |
 | Executive-health programs | 5 | 3 | 4 | 2 | 4 | **18** | World Longevity 2026 |
 | Financial advisors | 5 | 4 | 1 | 3 | 4 | **17** | Ciela 2026 ($3–7K/mo) |
@@ -86,7 +86,7 @@ are the ceiling you keep hitting.
 
 ## Offer / price reshape (top segment: longevity/functional-medicine clinic)
 - **Headline:** *"Reclaim 10+ clinician hours a week — automated patient content,
-  lead nurture, and check-in triage, built and run by a clinician."*
+  lead nurture, and check-in triage, built and run by a practitioner."*
 - **Price anchor:** setup **$4,000–6,000** + **$1,500–2,500/mo** managed — anchored to
   their existing marketing/ops retainer norms, **not** the $997 coach price. Vertical
   specialists command 2–3× generalists ([Ciela, 2026](https://ciela.ai/blogs/ai-automation-agency-niches-most-profitable)).
