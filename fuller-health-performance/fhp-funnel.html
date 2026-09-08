@@ -1,0 +1,353 @@
+<title>Fuller Performance Scorecard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Archivo+Narrow:wght@500;600&family=Space+Mono:wght@700&display=swap">
+
+<!--
+  OPERATOR NOTES (not shown to visitors):
+  • BOOKING_LINK defaults to Jonathan's Google Calendar. Swap if FHP books elsewhere.
+  • CREDENTIALS are stated conservatively: "Clinical Exercise Therapist · BScKin · MSc Physical Therapy".
+    Per Jonathan's own bio the PT master's is not licensed, so this page does NOT say "physiotherapist".
+  • PROOF: real ultra races (his own record) + empty client-result slots. Fill slots with REAL results only.
+  • Health marketing — no medical guarantees, no cure claims, no promised weight-loss numbers.
+-->
+
+<style>
+  :root{
+    --ground:#F7F5F1; --surface:#FFFFFF; --surface-2:#F0EDE7;
+    --ink:#16191C; --muted:#5C6169; --faint:#8A9098;
+    --line:#E4E0D8; --amber:#D9662B; --amber-ink:#B24E1C; --amber-soft:#F6E2D3;
+    --slate:#151A21; --slate-2:#0F141A; --paper:#F4EFE7; --signal:#E9873D;
+    --good:#3E8E5A; --shadow:0 1px 2px rgba(22,25,28,.05),0 16px 36px -16px rgba(22,25,28,.20);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ground:#0F1318; --surface:#171C22; --surface-2:#1E242B; --ink:#ECEFF2; --muted:#A0A7B0; --faint:#6E757E;
+    --line:#262D35; --amber:#F0883E; --amber-ink:#F4A160; --amber-soft:#2A2016; --good:#54B27A;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 20px 46px -18px rgba(0,0,0,.6);}}
+  :root[data-theme="dark"]{
+    --ground:#0F1318; --surface:#171C22; --surface-2:#1E242B; --ink:#ECEFF2; --muted:#A0A7B0; --faint:#6E757E;
+    --line:#262D35; --amber:#F0883E; --amber-ink:#F4A160; --amber-soft:#2A2016; --good:#54B27A;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 20px 46px -18px rgba(0,0,0,.6);}
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);margin:0;font-family:"Archivo",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 clamp(16px,4vw,36px);}
+  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.015em;text-wrap:balance;}
+  .mono{font-family:"Space Mono",monospace;}
+  a{color:inherit;}
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;border-radius:12px;padding:13px 22px;font-size:15px;cursor:pointer;border:0;transition:transform .12s,background .12s;}
+  .btn-p{background:var(--amber);color:#fff;box-shadow:var(--shadow);}
+  .btn-p:hover{background:var(--amber-ink);transform:translateY(-1px);}
+  .btn-sm{padding:9px 16px;font-size:14px;}
+  .btn-ghost{background:transparent;border:1px solid rgba(244,239,231,.28);color:var(--paper);}
+  .btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+
+  header.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px;}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.01em;font-size:15.5px;}
+  .brand .mark{width:30px;height:30px;border-radius:8px;background:var(--amber);display:grid;place-items:center;color:#fff;font-family:"Space Mono",monospace;font-size:15px;flex:none;}
+  .brand small{display:block;font-family:"Archivo Narrow";font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+
+  .hero{background:radial-gradient(130% 120% at 85% -10%,var(--slate) 0%,var(--slate-2) 70%);color:var(--paper);position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(217,102,43,.14));pointer-events:none;}
+  .hero .wrap{position:relative;padding:clamp(50px,7vw,92px) clamp(16px,4vw,36px) clamp(46px,6vw,74px);max-width:780px;}
+  .kicker{font-family:"Archivo Narrow";font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--signal);margin-bottom:20px;}
+  .hero h1{font-size:clamp(34px,6.4vw,62px);line-height:1;color:var(--paper);}
+  .hero h1 em{font-style:normal;color:var(--signal);}
+  .hero p.sub{margin:22px 0 30px;font-size:clamp(16px,2vw,20px);color:#CDD3DA;max-width:48ch;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+  .trust{margin-top:24px;font-family:"Archivo Narrow";font-size:14px;color:#AEB6BF;}
+  .trust b{color:var(--paper);font-weight:600;}
+
+  section{padding:clamp(46px,6vw,82px) 0;}
+  .eyebrow{font-family:"Archivo Narrow";font-weight:600;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink);margin:0 0 12px;}
+  .sec-h{font-size:clamp(25px,3.6vw,36px);line-height:1.05;}
+  .sec-intro{color:var(--muted);max-width:56ch;margin:12px 0 0;font-size:16px;}
+
+  /* Programs */
+  .progs{display:grid;grid-template-columns:1fr;gap:18px;margin-top:34px;}
+  @media(min-width:760px){.progs{grid-template-columns:repeat(3,1fr);}}
+  .prog{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column;gap:10px;}
+  .prog .tag{font-family:"Space Mono",monospace;font-size:12px;color:var(--amber-ink);}
+  .prog h3{font-size:19px;}
+  .prog p{margin:0;color:var(--muted);font-size:14.5px;}
+  .prog .who{margin-top:auto;font-family:"Archivo Narrow";font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);padding-top:8px;}
+
+  /* Scorecard */
+  #score{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .sc-grid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:30px;align-items:start;}
+  @media(min-width:900px){.sc-grid{grid-template-columns:1fr 1fr;}}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);}
+  .panel-h{padding:20px 24px 4px;}
+  .panel-h h3{font-size:19px;}
+  .panel-h p{margin:4px 0 0;color:var(--muted);font-size:13px;}
+  .quiz{padding:14px 24px 24px;display:flex;flex-direction:column;gap:18px;}
+  .goalpick{display:flex;flex-direction:column;gap:6px;padding-bottom:4px;}
+  .goalpick label{font-weight:600;font-size:14px;}
+  select{font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;width:100%;}
+  select:focus{outline:2px solid var(--amber);outline-offset:1px;border-color:transparent;}
+  .q .qt{font-weight:600;font-size:14.5px;margin-bottom:9px;display:flex;justify-content:space-between;gap:10px;}
+  .q .qt b{font-family:"Space Mono",monospace;color:var(--amber-ink);font-weight:700;}
+  .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+  .scale button{font:inherit;font-weight:700;font-size:14px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:10px 0;cursor:pointer;transition:.12s;}
+  .scale button:hover{border-color:var(--amber);color:var(--ink);}
+  .scale button[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:#fff;}
+  .scale .ends{grid-column:1/-1;display:flex;justify-content:space-between;font-family:"Archivo Narrow";font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;}
+
+  .res{position:sticky;top:78px;overflow:hidden;}
+  .res-top{padding:26px 26px 22px;background:linear-gradient(180deg,var(--amber-soft),transparent);border-bottom:1px solid var(--line);text-align:center;}
+  .res-top .lbl{font-family:"Archivo Narrow";font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .dial{font-family:"Space Mono",monospace;font-size:clamp(52px,11vw,76px);line-height:1;font-weight:700;color:var(--amber-ink);margin:6px 0 2px;}
+  .dial small{font-size:22px;color:var(--faint);}
+  .res-top .band{font-weight:700;font-size:15px;}
+  .bars{padding:20px 26px;display:flex;flex-direction:column;gap:13px;}
+  .bar .bl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;}
+  .bar .bl .bn{color:var(--muted);} .bar .bl .bv{font-family:"Space Mono",monospace;font-size:12px;color:var(--ink);}
+  .track{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;}
+  .fill{height:100%;background:var(--amber);border-radius:99px;transition:width .3s ease;}
+  .bar.weak .fill{background:#C6482B;} .bar.weak .bn{color:#C6482B;font-weight:700;}
+  .weaklink{margin:2px 26px 0;padding:14px 16px;background:var(--surface-2);border-radius:12px;font-size:14px;}
+  .weaklink b{color:var(--amber-ink);}
+  .capture{padding:16px 26px 24px;display:flex;flex-direction:column;gap:11px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  label{font-size:12.5px;font-weight:600;color:var(--ink);}
+  input{font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;width:100%;}
+  input:focus{outline:2px solid var(--amber);outline-offset:1px;border-color:transparent;}
+  .cta-full{width:100%;justify-content:center;font-size:15.5px;padding:15px;}
+  .microcopy{font-size:11.5px;color:var(--faint);text-align:center;margin:0;}
+
+  .steps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:34px;}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);}}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+  .step .n{font-family:"Space Mono",monospace;font-size:13px;color:var(--amber-ink);font-weight:700;border:1.5px solid var(--amber-soft);border-radius:8px;width:34px;height:34px;display:grid;place-items:center;margin-bottom:14px;}
+  .step h3{font-size:18px;margin-bottom:6px;}
+  .step p{margin:0;color:var(--muted);font-size:14.5px;}
+
+  .proof-lead{display:flex;flex-wrap:wrap;gap:20px 28px;align-items:center;margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 26px;}
+  .proof-lead .cred{flex:1 1 260px;}
+  .proof-lead h3{font-size:20px;margin-bottom:6px;}
+  .proof-lead p{margin:0;color:var(--muted);font-size:14.5px;}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .badge{font-family:"Archivo Narrow";font-size:12px;font-weight:600;color:var(--amber-ink);background:var(--amber-soft);border-radius:999px;padding:5px 12px;letter-spacing:.03em;}
+  .results{display:grid;grid-template-columns:1fr;gap:16px;margin-top:20px;}
+  @media(min-width:760px){.results{grid-template-columns:repeat(3,1fr);}}
+  .result{border:1px dashed var(--line);border-radius:14px;padding:20px;background:var(--surface);}
+  .result .q{font-size:15px;color:var(--faint);font-style:italic;}
+  .result .slot{font-family:"Archivo Narrow";font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;font-weight:600;}
+
+  .faq{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 18px;}
+  summary{cursor:pointer;font-weight:700;font-size:16px;padding:15px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";color:var(--amber-ink);font-family:"Space Mono",monospace;font-size:19px;}
+  details[open] summary::after{content:"–";}
+  details p{margin:0 0 16px;color:var(--muted);font-size:14.5px;}
+
+  .final{background:radial-gradient(130% 120% at 15% -10%,var(--slate) 0%,var(--slate-2) 75%);color:var(--paper);text-align:center;}
+  .final h2{color:var(--paper);font-size:clamp(27px,4.2vw,42px);}
+  .final p{color:#CDD3DA;max-width:48ch;margin:16px auto 26px;font-size:16.5px;}
+  .final .scarce{margin-top:18px;font-family:"Archivo Narrow";font-size:13.5px;color:var(--signal);letter-spacing:.03em;}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;font-family:"Archivo Narrow";font-size:13px;color:var(--faint);}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:center;}
+  .toggle{font:inherit;font-size:12.5px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<header class="bar"><div class="wrap">
+  <span class="brand"><span class="mark">F</span><span>Fuller Health &amp; Performance<small>Lose weight · live longer · run stronger</small></span></span>
+  <a class="btn btn-p btn-sm" id="navBook" href="#" target="_blank" rel="noopener">Book my consult</a>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <p class="kicker">The 60-second scorecard</p>
+  <h1>Whatever your goal — the body you want is <em>built, not wished.</em></h1>
+  <p class="sub">Lose the weight, add capable years, or run your next big distance. Score your body across the five things every one of those goals depends on. Free, instant, no email wall to see it.</p>
+  <div class="cta-row">
+    <a class="btn btn-p" href="#score">Score my body →</a>
+    <a class="btn btn-ghost" id="heroBook" href="#" target="_blank" rel="noopener">Book a consult</a>
+  </div>
+  <p class="trust">With <b>Jonathan Fuller</b> — Clinical Exercise Therapist · BScKin, MSc Physical Therapy · ultra runner · 100% remote</p>
+</div></div>
+
+<!-- PROGRAMS -->
+<section><div class="wrap">
+  <p class="eyebrow">Three ways to work together</p>
+  <h2 class="sec-h">One coach. Whichever finish line is yours.</h2>
+  <div class="progs">
+    <div class="prog"><span class="tag">01</span><h3>Weight loss &amp; healthy living</h3><p>Lose the weight and build habits that actually hold — training and nutrition that fit a real life, not a punishing reset.</p><p class="who">For anyone ready to feel better</p></div>
+    <div class="prog"><span class="tag">02</span><h3>Longevity</h3><p>Get stronger, move better, and add capable years. Training built to keep you doing what you love for decades.</p><p class="who">For active adults 50–90</p></div>
+    <div class="prog"><span class="tag">03</span><h3>Running coaching</h3><p>From a confident first 5K to your first ultra — programmed by someone who's run 200-mile races.</p><p class="who">For road &amp; trail runners</p></div>
+  </div>
+</div></section>
+
+<!-- SCORECARD -->
+<section id="score"><div class="wrap">
+  <p class="eyebrow">Performance &amp; Longevity Scorecard</p>
+  <h2 class="sec-h">Where are you strong — and where's the weak link?</h2>
+  <p class="sec-intro">Pick your goal, rate yourself honestly on five domains, and your score plus your weakest link update live. The weak link is usually where the biggest gains hide.</p>
+  <div class="sc-grid">
+    <div class="panel">
+      <div class="panel-h"><h3>Rate yourself</h3><p>1 = not at all · 5 = dialed in</p></div>
+      <div class="quiz" id="quiz">
+        <div class="goalpick">
+          <label for="goal">My main goal right now</label>
+          <select id="goal">
+            <option value="weightloss">Lose weight &amp; feel healthier</option>
+            <option value="longevity">Stay strong &amp; age well</option>
+            <option value="running">Run stronger / a big distance</option>
+            <option value="general" selected>General — all of the above</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="panel res">
+      <div class="res-top">
+        <div class="lbl">Your score</div>
+        <div class="dial"><span id="dial">—</span><small>/100</small></div>
+        <div class="band" id="band">Answer the five to see your score</div>
+      </div>
+      <div class="bars" id="bars"></div>
+      <p class="weaklink" id="weak" hidden></p>
+      <div class="capture">
+        <div class="row2">
+          <div class="field"><label for="name">First name</label><input id="name" type="text" autocomplete="given-name"></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email"></div>
+        </div>
+        <a class="btn btn-p cta-full" id="scoreBook" href="#" target="_blank" rel="noopener">Book my free consult →</a>
+        <p class="microcopy">On the call we build the plan for your weak link and your goal. No obligation.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow">How it works</p><h2 class="sec-h">From score to a plan that fits your life</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Score yourself</h3><p>Five domains, 60 seconds. See where you're strong and where the weak link is holding your goal back.</p></div>
+    <div class="step"><div class="n">2</div><h3>Book a consult</h3><p>Sit down with your coach. We turn the weak link and your goal into a specific, doable plan.</p></div>
+    <div class="step"><div class="n">3</div><h3>Train with a pro</h3><p>A remote program built for your goal, your schedule, and the long game — reviewed and adjusted as you go.</p></div>
+  </div>
+</div></section>
+
+<section style="background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <p class="eyebrow">Who you'd work with</p><h2 class="sec-h">A coach who's put in the miles — and the science.</h2>
+  <div class="proof-lead"><div class="cred">
+    <h3>Jonathan Fuller</h3>
+    <p>Clinical Exercise Therapist with a BScKin and a Master's in Physical Therapy, and an ultra runner — Canadian Death Race, Iron Legs 100&nbsp;km, The Divide 200. About a decade helping people lose weight, prevent injury, get stronger, and build health that lasts. Coaching is 100% remote from Stettler, Alberta.</p>
+    <div class="badges"><span class="badge">BScKin</span><span class="badge">MSc Physical Therapy</span><span class="badge">Clinical Exercise Therapist</span><span class="badge">Ultra runner</span></div>
+  </div></div>
+  <div class="results">
+    <div class="result"><p class="q">"[Add a real client result — weight lost, a PR, a pain-free milestone.]"</p><p class="slot">Your client result here</p></div>
+    <div class="result"><p class="q">"[Add a real client quote once you have one.]"</p><p class="slot">Your client result here</p></div>
+    <div class="result"><p class="q">"[Add a real before / after here.]"</p><p class="slot">Your client result here</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow">Straight answers</p><h2 class="sec-h">Common questions</h2>
+  <div class="faq">
+    <details open><summary>I just want to lose weight — is this for me?</summary><p>Yes. Weight loss and healthy living is one of the three programs. We build training and nutrition habits that hold in a real life — no crash resets, no punishing yourself.</p></details>
+    <details><summary>I'm over 50 / getting back into it — too late?</summary><p>Not remotely. The longevity program is built for active adults 50–90. Strength and your aerobic engine are trainable at any age, and they're what keep you capable.</p></details>
+    <details><summary>Can you coach me for a race?</summary><p>Yes — from a first 5K to an ultra. Your coach has run 200-mile races and programs road and trail runners for real goals.</p></details>
+    <details><summary>Do I have to be in person?</summary><p>No — assessment and coaching are 100% remote. The plan comes to you.</p></details>
+    <details><summary>I've got a nagging injury — can you help?</summary><p>We build training around it with an injury-prevention and exercise-therapy lens. This isn't a substitute for medical diagnosis of an acute problem — if you need one, we'll tell you.</p></details>
+  </div>
+</div></section>
+
+<section class="final"><div class="wrap">
+  <h2>Build a body that lasts.</h2>
+  <p>Score yourself, then book a free consult. You'll leave knowing your weak link and the first move toward your goal.</p>
+  <a class="btn btn-p" id="finalBook" href="#" target="_blank" rel="noopener">Book my free consult →</a>
+  <p class="scarce">Coaching spots are limited so each person gets real attention.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© Fuller Health &amp; Performance · Jonathan Fuller · Stettler, AB · remote coaching</span>
+  <button class="toggle" id="themeBtn" type="button">Toggle theme</button>
+</div></footer>
+
+<script>
+  const BOOKING_LINK = "https://calendar.app.google/yyGpEpVHKNqTHG3S7"; // swap if FHP uses a different calendar
+  const DOMAINS = [
+    {id:"strength", q:"Strength — can you do the lifting/carrying your goal needs?"},
+    {id:"engine",   q:"Engine — is your cardio/endurance where you want it?"},
+    {id:"recovery", q:"Recovery — sleep, stress, and bouncing back between sessions?"},
+    {id:"nutrition",q:"Fuel — nutrition and body composition working for you?"},
+    {id:"movement", q:"Movement — mobile, pain-free, moving the way you want?"}
+  ];
+  const TIP = {
+    strength:"Strength is the clearest predictor of staying capable as you age — and it protects fat-loss and running alike. Small, consistent gains compound for decades.",
+    engine:"Your aerobic engine drives endurance, weight loss, and healthspan. It's very trainable at any age.",
+    recovery:"You adapt while you recover, not while you train. Fixing sleep and load usually unlocks everything else.",
+    nutrition:"Fuel and body composition quietly gate energy, strength, and fat loss. Often the fastest lever.",
+    movement:"Pain-free, mobile movement is what lets you keep training at all. Protect it and everything else lasts longer."
+  };
+  const GOALLINE = {
+    weightloss:"For fat loss, the fastest wins usually come from this — let's build the plan around it.",
+    longevity:"For aging well, this is the lever that keeps you capable — let's start here.",
+    running:"For your running, this is what's capping your progress — let's train it directly.",
+    general:"Fix this first and your strength, energy, and endurance all move together."
+  };
+  const $=id=>document.getElementById(id);
+  const answers={};
+
+  function build(){
+    const q=$("quiz");
+    DOMAINS.forEach(d=>{
+      const el=document.createElement("div"); el.className="q";
+      el.innerHTML=`<div class="qt"><span>${d.q}</span><b id="qv_${d.id}">–</b></div>
+        <div class="scale" role="group" aria-label="${d.id}">
+          ${[1,2,3,4,5].map(n=>`<button type="button" data-d="${d.id}" data-n="${n}" aria-pressed="false">${n}</button>`).join("")}
+          <div class="ends"><span>Not at all</span><span>Dialed in</span></div>
+        </div>`;
+      q.appendChild(el);
+    });
+    q.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+      const d=b.dataset.d, n=+b.dataset.n; answers[d]=n;
+      q.querySelectorAll(`button[data-d="${d}"]`).forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+      $("qv_"+d).textContent=n; render(); store();
+    }));
+    const bars=$("bars");
+    DOMAINS.forEach(d=>{
+      const b=document.createElement("div"); b.className="bar"; b.id="bar_"+d.id;
+      b.innerHTML=`<div class="bl"><span class="bn">${label(d.id)}</span><span class="bv" id="bv_${d.id}">–</span></div>
+        <div class="track"><div class="fill" id="fill_${d.id}" style="width:0%"></div></div>`;
+      bars.appendChild(b);
+    });
+  }
+  const label=id=>({strength:"Strength",engine:"Engine",recovery:"Recovery",nutrition:"Fuel",movement:"Movement"}[id]);
+
+  function render(){
+    const ans=DOMAINS.map(d=>answers[d.id]).filter(Boolean);
+    DOMAINS.forEach(d=>{const v=answers[d.id];const pct=v?v*20:0;$("fill_"+d.id).style.width=pct+"%";$("bv_"+d.id).textContent=v?`${pct}`:"–";$("bar_"+d.id).classList.remove("weak");});
+    if(ans.length<DOMAINS.length){ $("dial").textContent="—"; $("band").textContent=`Answer ${DOMAINS.length-ans.length} more to see your score`; $("weak").hidden=true; return; }
+    const score=Math.round(DOMAINS.reduce((s,d)=>s+answers[d.id]*20,0)/DOMAINS.length);
+    $("dial").textContent=score;
+    $("band").textContent = score>=80?"Strong — let's protect and sharpen it" : score>=60?"Solid base — clear room to build" : score>=40?"Real gains available" : "Big upside — let's start with the basics";
+    let weak=DOMAINS[0].id, low=99; DOMAINS.forEach(d=>{ if(answers[d.id]<low){low=answers[d.id];weak=d.id;} });
+    $("bar_"+weak).classList.add("weak");
+    const goal=$("goal").value;
+    const w=$("weak"); w.hidden=false; w.innerHTML=`<b>Weak link: ${label(weak)}.</b> ${TIP[weak]} <br><span style="color:var(--muted)">${GOALLINE[goal]}</span>`;
+  }
+  function store(){try{localStorage.setItem("fhp",JSON.stringify({answers,goal:$("goal").value,name:$("name").value,email:$("email").value}));}catch(e){}}
+  function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("fhp-theme",t);}catch(e){}}
+
+  build();
+  $("goal").addEventListener("change",()=>{render();store();});
+  ["name","email"].forEach(i=>$(i).addEventListener("input",store));
+  ["navBook","heroBook","scoreBook","finalBook"].forEach(id=>{const a=$(id);a.href=BOOKING_LINK;});
+  $("themeBtn").addEventListener("click",()=>{const c=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");setTheme(c==="dark"?"light":"dark");});
+
+  (function(){
+    let s=null,th=null;try{s=JSON.parse(localStorage.getItem("fhp")||"null");}catch(e){}
+    try{th=localStorage.getItem("fhp-theme");}catch(e){}
+    if(th)setTheme(th);
+    const seed=s&&s.answers&&Object.keys(s.answers).length? s.answers : {strength:4,engine:3,recovery:2,nutrition:3,movement:4};
+    Object.assign(answers,seed);
+    if(s&&s.goal)$("goal").value=s.goal;
+    DOMAINS.forEach(d=>{const b=document.querySelector(`button[data-d="${d.id}"][data-n="${answers[d.id]}"]`); if(b){b.setAttribute("aria-pressed","true");$("qv_"+d.id).textContent=answers[d.id];}});
+    if(s){ if(s.name)$("name").value=s.name; if(s.email)$("email").value=s.email; }
+    render();
+  })();
+</script>

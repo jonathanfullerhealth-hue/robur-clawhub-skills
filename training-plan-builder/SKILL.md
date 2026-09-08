@@ -10,7 +10,7 @@ user-invocable: true
 ## What It Does
 Takes an athlete's profile (goal race, available training hours, shift schedule, fitness level, injuries) and generates a structured weekly training plan. Works for any endurance coach who wants to move from "here's a general plan" to "here's a plan built around your actual schedule and capacity."
 
-Built on periodization principles used by Jonathan Fuller (BScKin, MScPT) — a clinical exercise therapist and ultra runner with finishes at Canadian Death Race, The Divide 200, Iron Legs 100km, and Lone Wolf Backyard Ultra.
+Built on periodization principles used by Jonathan Fuller (BScKin, MSc Physical Therapy) — a clinical exercise therapist and ultra runner with finishes at Canadian Death Race, The Divide 200, Iron Legs 100km, and Lone Wolf Backyard Ultra.
 
 ## Workflow
 
@@ -178,7 +178,7 @@ WEEKLY VOLUME: [total minutes/km] | HARD SESSIONS: [count] | [ADJUSTMENT NOTES I
 ```
 
 ## Guardrails
-- Do NOT generate plans for athletes with unmanaged injuries. If injuries are listed without a management plan, flag: "This athlete has reported [injury]. Recommend medical/physio clearance or injury management protocol before training prescription."
+- Do NOT generate plans for athletes with unmanaged injuries. If injuries are listed without a management plan, flag: "This athlete has reported [injury]. Recommend medical clearance or injury management protocol before training prescription."
 - Do NOT increase volume by more than 15% week over week. Use a step-back week every 4th week.
 - Do NOT schedule hard sessions on consecutive days without rest. Hard-Easy is the minimum cadence.
 - Do NOT schedule strength training the day before or after a long run or race.

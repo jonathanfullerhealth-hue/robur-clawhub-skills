@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reclaim Your Time — Get your week back</title>
+<meta name="description" content="See exactly how many hours and dollars manual admin is costing your practice. Free 60-second snapshot, built by a clinical exercise therapist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --ground:#F5F7F4; --surface:#FFFFFF; --surface-2:#EEF3EF;
+    --ink:#15201C; --muted:#556B62; --faint:#7E9088;
+    --line:#E1E8E2; --accent:#0E7C66; --accent-ink:#0A5F4E; --accent-soft:#D7EAE2;
+    --pine:#0C332A; --pine-2:#0A2A23; --cream:#F3EFE4; --gold:#E4B678;
+    --shadow:0 1px 2px rgba(20,32,28,.05),0 14px 34px -14px rgba(20,32,28,.16);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ground:#0D1512; --surface:#151F1B; --surface-2:#1C2925; --ink:#EAF1EC; --muted:#9DB0A7; --faint:#6C817A;
+    --line:#233330; --accent:#35B79A; --accent-ink:#5FCBB2; --accent-soft:#1E332D;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 44px -16px rgba(0,0,0,.55);}}
+  :root[data-theme="dark"]{
+    --ground:#0D1512; --surface:#151F1B; --surface-2:#1C2925; --ink:#EAF1EC; --muted:#9DB0A7; --faint:#6C817A;
+    --line:#233330; --accent:#35B79A; --accent-ink:#5FCBB2; --accent-soft:#1E332D;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 44px -16px rgba(0,0,0,.55);}
+  *{box-sizing:border-box} img{max-width:100%}
+  body{background:var(--ground);color:var(--ink);margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,36px);}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;text-wrap:balance;margin:0;}
+  a{color:inherit;}
+  header.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:14px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;}
+  .brand .mark{width:26px;height:26px;border-radius:7px;background:var(--accent);position:relative;flex:none;}
+  .brand .mark::before,.brand .mark::after{content:"";position:absolute;background:var(--surface);border-radius:2px;}
+  .brand .mark::before{width:2.3px;height:11px;left:11.6px;top:5px;transform-origin:bottom;transform:rotate(32deg);}
+  .brand .mark::after{width:2.3px;height:7px;left:11.6px;top:9px;transform-origin:bottom;transform:rotate(-58deg);}
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;border-radius:11px;padding:12px 20px;font-size:15px;cursor:pointer;border:0;transition:transform .12s,background .12s;}
+  .btn-p{background:var(--accent);color:#fff;box-shadow:var(--shadow);}
+  .btn-p:hover{background:var(--accent-ink);transform:translateY(-1px);}
+  .btn-sm{padding:9px 16px;font-size:14px;}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
+  .btn-gold{background:var(--gold);color:#2A1C08;}
+  .btn-gold:hover{background:#EFC488;transform:translateY(-1px);}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .hero{background:radial-gradient(120% 120% at 80% 0%,var(--pine) 0%,var(--pine-2) 70%);color:var(--cream);}
+  .hero .wrap{display:grid;grid-template-columns:1fr;gap:34px;padding:clamp(48px,7vw,88px) clamp(16px,4vw,36px) clamp(44px,6vw,72px);}
+  @media(min-width:860px){.hero .wrap{grid-template-columns:1.15fr .85fr;align-items:center;}}
+  .kicker{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
+  .hero h1{font-weight:600;font-size:clamp(34px,6vw,60px);line-height:1.02;letter-spacing:-.015em;color:var(--cream);}
+  .hero p.sub{margin:20px 0 28px;font-size:clamp(16px,1.9vw,19px);color:#D9E2D8;max-width:46ch;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+  .trust{margin-top:22px;font-size:13.5px;color:#B9C7BD;}
+  .trust b{color:var(--cream);font-weight:600;}
+  .vsl{background:rgba(255,255,255,.06);border:1px solid rgba(243,239,228,.16);border-radius:18px;aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--cream);text-align:center;padding:22px;}
+  .vsl .play{width:62px;height:62px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:#2A1C08;}
+  .vsl small{color:#B9C7BD;font-size:12.5px;}
+  section{padding:clamp(44px,6vw,80px) 0;}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:600;margin:0 0 12px;}
+  .sec-h{font-size:clamp(24px,3.4vw,34px);font-weight:600;letter-spacing:-.01em;line-height:1.1;}
+  .sec-intro{color:var(--muted);max-width:56ch;margin:12px 0 0;font-size:16px;}
+  #calc{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .calc-grid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:30px;align-items:start;}
+  @media(min-width:880px){.calc-grid{grid-template-columns:1fr 1.02fr;}}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);}
+  .panel-h{padding:18px 22px 0;}
+  .panel-h h3{font-size:19px;font-weight:600;}
+  .panel-h p{margin:3px 0 0;color:var(--muted);font-size:13px;}
+  form{padding:18px 22px 22px;display:flex;flex-direction:column;gap:15px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  label{font-size:13px;font-weight:500;display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+  label .hint{font-weight:400;color:var(--faint);font-size:11.5px;}
+  select,input{font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;width:100%;}
+  input[type=number]{font-family:"IBM Plex Mono",monospace;font-weight:600;}
+  select:focus,input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  legend{font-size:13px;font-weight:500;padding:0;margin-bottom:2px;}
+  .task{display:grid;grid-template-columns:1fr 80px;align-items:center;gap:12px;}
+  .task span{font-size:13.5px;color:var(--muted);}
+  .task input{padding:8px 10px;text-align:right;}
+  .snap{position:sticky;top:76px;overflow:hidden;}
+  .snap-top{padding:20px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--accent-soft),transparent);}
+  .snap-top .who{font-size:12.5px;color:var(--muted);margin:0 0 4px;}
+  .snap-top h3{font-size:20px;font-weight:600;}
+  .figures{display:grid;grid-template-columns:1fr 1fr;}
+  .fig{padding:20px 24px;}
+  .fig+.fig{border-left:1px solid var(--line);}
+  .fig .k{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 7px;}
+  .fig .v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:clamp(28px,4.4vw,38px);line-height:1;letter-spacing:-.02em;color:var(--accent-ink);}
+  .fig .u{font-size:12px;color:var(--muted);margin-top:6px;}
+  .narr{padding:18px 24px;border-top:1px solid var(--line);font-size:14.5px;}
+  .narr b{color:var(--accent-ink);}
+  .capture{padding:0 24px 22px;display:flex;flex-direction:column;gap:11px;}
+  .consent{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;color:var(--faint);line-height:1.45;}
+  .consent input{width:auto;margin-top:2px;}
+  .cta-full{width:100%;justify-content:center;font-size:15.5px;padding:15px;}
+  .microcopy{font-size:11.5px;color:var(--faint);text-align:center;margin:0;}
+  .formmsg{font-size:12.5px;text-align:center;margin:0;min-height:1.2em;}
+  .formmsg.ok{color:var(--accent-ink);} .formmsg.err{color:#B4763A;}
+  .steps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:34px;}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);}}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+  .step .n{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent-ink);font-weight:600;border:1.5px solid var(--accent-soft);border-radius:8px;width:34px;height:34px;display:grid;place-items:center;margin-bottom:14px;}
+  .step h3{font-size:18px;font-weight:600;margin-bottom:6px;}
+  .step p{margin:0;color:var(--muted);font-size:14.5px;}
+  .proof-lead{display:flex;flex-wrap:wrap;gap:20px 28px;align-items:center;margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 26px;}
+  .proof-lead .cred{flex:1 1 260px;}
+  .proof-lead h3{font-size:20px;font-weight:600;margin-bottom:6px;}
+  .proof-lead p{margin:0;color:var(--muted);font-size:14.5px;}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .badge{font-size:12px;font-weight:600;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:5px 12px;}
+  .results{display:grid;grid-template-columns:1fr;gap:16px;margin-top:20px;}
+  @media(min-width:760px){.results{grid-template-columns:repeat(3,1fr);}}
+  .result{border:1px dashed var(--line);border-radius:14px;padding:20px;background:var(--surface);}
+  .result .q{font-size:15px;color:var(--faint);font-style:italic;}
+  .result .slot{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;font-weight:600;}
+  .faq{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 18px;}
+  summary{cursor:pointer;font-weight:600;font-size:16px;padding:15px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";color:var(--accent-ink);font-family:"IBM Plex Mono",monospace;font-size:20px;}
+  details[open] summary::after{content:"–";}
+  details p{margin:0 0 16px;color:var(--muted);font-size:14.5px;}
+  .final{background:radial-gradient(120% 120% at 20% 0%,var(--pine) 0%,var(--pine-2) 75%);color:var(--cream);text-align:center;}
+  .final h2{color:var(--cream);font-size:clamp(26px,4vw,40px);font-weight:600;}
+  .final p{color:#D9E2D8;max-width:48ch;margin:16px auto 26px;font-size:16.5px;}
+  .final .scarce{margin-top:18px;font-size:13px;color:var(--gold);}
+  footer{border-top:1px solid var(--line);padding:28px 0;font-size:12.5px;color:var(--faint);}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:center;}
+  .toggle{font:inherit;font-size:12.5px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <span class="brand"><span class="mark"></span> Reclaim Your Time</span>
+  <a class="btn btn-p btn-sm" id="navBook" href="#" target="_blank" rel="noopener">Book a call</a>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <p class="kicker">For clinic &amp; practice owners</p>
+    <h1>You didn't open a practice to answer emails.</h1>
+    <p class="sub">See exactly how many hours — and dollars — manual admin is quietly costing you. 60 seconds, no pitch, built by a clinical exercise therapist.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#calc">Show me what it's costing →</a>
+      <a class="btn btn-ghost" id="heroBook" href="#" target="_blank" rel="noopener" style="color:var(--cream);border-color:rgba(243,239,228,.3)">Book a working session</a>
+    </div>
+    <p class="trust">Built by <b>Jonathan Fuller</b> · BScKin, MSc Physical Therapy · founder, Fuller Health &amp; Performance + Cairn Endurance</p>
+  </div>
+  <div class="vsl"><div class="play"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M6 4l13 7-13 7V4z" fill="currentColor"/></svg></div><div><strong>90 seconds: how it works</strong><br><small>Record a short Loom and drop it here</small></div></div>
+</div></div>
+
+<section id="calc"><div class="wrap">
+  <p class="eyebrow">The free snapshot</p>
+  <h2 class="sec-h">What is manual work actually costing you?</h2>
+  <p class="sec-intro">Answer a few questions. We'll show you the hours and dollars hiding in your week — then map which one to automate first.</p>
+  <div class="calc-grid">
+    <div class="panel">
+      <div class="panel-h"><h3>Your practice</h3><p>Estimates are fine — we confirm the real numbers on the call.</p></div>
+      <form id="f">
+        <div class="field"><label for="type">What kind of business?</label>
+          <select id="type">
+            <option value="clinic">Longevity / functional-med / concierge clinic</option>
+            <option value="medspa">Med spa</option><option value="pt">Physiotherapy / chiropractic</option>
+            <option value="coaching">Coaching</option><option value="other">Something else</option>
+          </select></div>
+        <div class="row2">
+          <div class="field"><label for="clients">Active clients <span class="hint">#</span></label><input id="clients" type="number" min="0" step="1" inputmode="numeric"></div>
+          <div class="field"><label for="rate">Your hourly value <span class="hint">$ / hr</span></label><input id="rate" type="number" min="0" step="10" inputmode="numeric"></div>
+        </div>
+        <fieldset><legend>Hours per week spent on…</legend>
+          <div class="task"><span>Finding &amp; following up leads</span><input id="t_leads" type="number" min="0" step="1"></div>
+          <div class="task"><span>Creating content</span><input id="t_content" type="number" min="0" step="1"></div>
+          <div class="task"><span>Client deliverables</span><input id="t_deliv" type="number" min="0" step="1"></div>
+          <div class="task"><span>Check-ins &amp; messages</span><input id="t_check" type="number" min="0" step="1"></div>
+        </fieldset>
+        <div class="field"><label for="pain">The one you most wish ran itself</label>
+          <select id="pain"><option value="t_leads">Lead follow-up</option><option value="t_content">Content</option><option value="t_deliv">Client deliverables</option><option value="t_check" selected>Check-ins &amp; retention</option></select></div>
+      </form>
+    </div>
+    <div class="panel snap">
+      <div class="snap-top"><p class="who" id="who">Longevity / functional-med clinic · 300 clients</p><h3>Here's your week on autopilot</h3></div>
+      <div class="figures">
+        <div class="fig"><p class="k">Hours reclaimed</p><div class="v"><span id="hrs">518</span></div><p class="u">per year · ≈ <span id="hrsWk">11</span> hrs/wk</p></div>
+        <div class="fig"><p class="k">That's worth</p><div class="v">$<span id="dollars">129,600</span></div><p class="u">per year, at your rate</p></div>
+      </div>
+      <p class="narr" id="narr"></p>
+      <div class="capture">
+        <div class="row2">
+          <div class="field"><label for="name">First name</label><input id="name" type="text" autocomplete="given-name"></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email"></div>
+        </div>
+        <div class="field"><label for="mobile">Mobile <span class="hint">optional — for a text follow-up</span></label><input id="mobile" type="tel" autocomplete="tel"></div>
+        <label class="consent"><input type="checkbox" id="smsok"> <span>Text me my snapshot &amp; occasional tips. Msg rates apply, reply STOP to opt out.</span></label>
+        <button class="btn btn-p cta-full" id="calcBook" type="button">Get my snapshot + book my working session →</button>
+        <p class="formmsg" id="formmsg" role="status"></p>
+        <p class="microcopy">No pitch on the call — just the plan for which workflow to automate first.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow">How it works</p><h2 class="sec-h">Three steps to your time back</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Run your snapshot</h3><p>See the real hours and dollars manual work is costing you. Free, instant, no obligation.</p></div>
+    <div class="step"><div class="n">2</div><h3>Book a working session</h3><p>30 minutes with a clinical exercise therapist. We map exactly which workflow to automate first — no sales pitch.</p></div>
+    <div class="step"><div class="n">3</div><h3>We build it</h3><p>We deploy the system that runs after the click — follow-up, check-ins, content — so your team stops doing it by hand.</p></div>
+  </div>
+</div></section>
+
+<section style="background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <p class="eyebrow">Who's behind it</p><h2 class="sec-h">A clinical exercise therapist who built this for his own practice first.</h2>
+  <div class="proof-lead"><div class="cred">
+    <h3>Jonathan Fuller</h3>
+    <p>BScKin, MSc Physical Therapy, ultra runner. Founder of Fuller Health &amp; Performance and Cairn Endurance. RYT is the exact system he built to stop losing his own week to admin — now deployed for other practices.</p>
+    <div class="badges"><span class="badge">BScKin</span><span class="badge">MSc Physical Therapy</span><span class="badge">Practice owner</span><span class="badge">Built for clinics</span></div>
+  </div></div>
+  <div class="results">
+    <div class="result"><p class="q">"[Add a real client result — hours reclaimed, a retention or booking number.]"</p><p class="slot">Your client result here</p></div>
+    <div class="result"><p class="q">"[Add a real client quote once you have one.]"</p><p class="slot">Your client result here</p></div>
+    <div class="result"><p class="q">"[Add a real before / after here.]"</p><p class="slot">Your client result here</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow">Straight answers</p><h2 class="sec-h">The questions clinic owners actually ask</h2>
+  <div class="faq">
+    <details open><summary>Is this just marketing?</summary><p>No. We build the systems that run <em>after</em> the click — lead follow-up, client check-ins, content production — so your team stops doing them by hand.</p></details>
+    <details><summary>Will it replace my staff?</summary><p>It removes the repetitive parts of their week so they spend their hours on patients, not admin. It assists, it doesn't fire.</p></details>
+    <details><summary>What does it cost?</summary><p>The snapshot and the working session are free. Builds are priced to your practice and scoped on the call — you'll know the number before you commit.</p></details>
+    <details><summary>How fast can it be live?</summary><p>Most practices share the same few bottlenecks, so we deploy from proven templates — most builds ship in days, not months.</p></details>
+  </div>
+</div></section>
+
+<section class="final"><div class="wrap">
+  <h2>Get your week back.</h2>
+  <p>Run the free snapshot, then book 30 minutes. Worst case, you leave knowing exactly what your admin is costing — and the plan to fix it.</p>
+  <a class="btn btn-gold" id="finalBook" href="#" target="_blank" rel="noopener">Book my working session →</a>
+  <p class="scarce">We take on a handful of builds a month, so each one ships fast.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© Reclaim Your Time · Built by Jonathan Fuller, MSc Physical Therapy</span>
+  <button class="toggle" id="themeBtn" type="button">Toggle theme</button>
+</div></footer>
+
+<script>
+  const BOOKING_LINK = "https://calendar.app.google/yyGpEpVHKNqTHG3S7";
+  const DISCOUNT = 0.6, WEEKS = 48;
+  const DEFAULTS = {
+    clinic:{rate:250,t_leads:4,t_content:5,t_deliv:4,t_check:5,clients:300,label:"Longevity / functional-med clinic"},
+    medspa:{rate:200,t_leads:6,t_content:4,t_deliv:1,t_check:3,clients:800,label:"Med spa"},
+    pt:{rate:120,t_leads:3,t_content:3,t_deliv:4,t_check:4,clients:120,label:"Physiotherapy / chiro"},
+    coaching:{rate:100,t_leads:3,t_content:6,t_deliv:3,t_check:4,clients:40,label:"Coaching"},
+    other:{rate:120,t_leads:3,t_content:3,t_deliv:3,t_check:3,clients:50,label:"Practice"}};
+  const OUTCOME={clinic:"seeing more patients — not drowning in admin",medspa:"booking more consults before leads go cold",pt:"treating more clients instead of writing plans by hand",coaching:"coaching more athletes instead of chasing messages",other:"growing instead of grinding"};
+  const PAIN={t_leads:"chasing leads",t_content:"making content",t_deliv:"writing deliverables",t_check:"doing check-ins"};
+  const $=id=>document.getElementById(id), fmt=n=>n.toLocaleString("en-US");
+  const ids=["clients","rate","t_leads","t_content","t_deliv","t_check"]; let touched={};
+  function store(){try{localStorage.setItem("ryt-funnel",JSON.stringify({type:$("type").value,pain:$("pain").value,touched,vals:Object.fromEntries(ids.map(i=>[i,$(i).value])),name:$("name").value,email:$("email").value}));}catch(e){}}
+  function applyDefaults(t,force){const d=DEFAULTS[t];ids.forEach(i=>{if(force||!touched[i]||$(i).value==="")$(i).value=d[i];});}
+  function calc(){
+    const t=$("type").value,d=DEFAULTS[t];const rate=Math.max(0,+$("rate").value||d.rate);
+    const raw=["t_leads","t_content","t_deliv","t_check"].reduce((s,i)=>s+Math.min(40,Math.max(0,+$(i).value||0)),0);
+    const wk=raw*DISCOUNT, yr=Math.round(wk*WEEKS), dollars=Math.round(yr*rate);
+    $("hrs").textContent=fmt(yr);$("hrsWk").textContent=Math.round(wk);$("dollars").textContent=fmt(dollars);
+    const clients=$("clients").value?`${fmt(Math.max(0,+$("clients").value))} clients`:"your practice";
+    $("who").textContent=`${d.label} · ${clients}`;
+    $("narr").innerHTML=yr>0?`Most of it disappears into <b>${PAIN[$("pain").value]}</b>. Reclaimed, that's about <b>${fmt(yr)} hours</b> a year — the difference between ${OUTCOME[t]}.`:`Add a few hours above and we'll show what's hiding in your week.`;
+    store();
+  }
+  function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("ryt-theme",t);}catch(e){}}
+  function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+
+  // capture-then-book: POST the lead to /api/lead, then open the calendar regardless.
+  async function captureAndBook(){
+    const msg=$("formmsg"); msg.className="formmsg";
+    const email=$("email").value.trim();
+    if(!validEmail(email)){ msg.className="formmsg err"; msg.textContent="Add your email so we can send your snapshot."; $("email").focus(); return; }
+    const payload={name:$("name").value.trim(),email,mobile:$("mobile").value.trim(),smsConsent:$("smsok").checked,
+      type:$("type").value,clients:$("clients").value,hoursYr:$("hrs").textContent,dollarsYr:$("dollars").textContent,pain:$("pain").value,source:"funnel"};
+    msg.className="formmsg"; msg.textContent="Saving your snapshot…";
+    try{ await fetch("/api/lead",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)}); msg.className="formmsg ok"; msg.textContent="Got it — opening your booking calendar."; }
+    catch(e){ msg.className="formmsg ok"; msg.textContent="Opening your booking calendar."; }
+    window.open(BOOKING_LINK,"_blank","noopener");
+  }
+
+  $("type").addEventListener("change",()=>{applyDefaults($("type").value,false);calc();});
+  $("pain").addEventListener("change",calc);
+  ids.forEach(i=>$(i).addEventListener("input",()=>{touched[i]=true;calc();}));
+  ["name","email"].forEach(i=>$(i).addEventListener("input",store));
+  $("calcBook").addEventListener("click",captureAndBook);
+  $("themeBtn").addEventListener("click",()=>{const c=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");setTheme(c==="dark"?"light":"dark");});
+  ["navBook","heroBook","finalBook"].forEach(id=>{const a=$(id);a.href=BOOKING_LINK;});
+
+  (function(){
+    let s=null,th=null;try{s=JSON.parse(localStorage.getItem("ryt-funnel")||"null");}catch(e){}
+    try{th=localStorage.getItem("ryt-theme");}catch(e){}
+    if(th)setTheme(th);
+    if(s&&s.vals){$("type").value=s.type||"clinic";touched=s.touched||{};ids.forEach(i=>{if(s.vals[i]!=null)$(i).value=s.vals[i];});if(s.pain)$("pain").value=s.pain;if(s.name)$("name").value=s.name;if(s.email)$("email").value=s.email;}
+    else{$("type").value="clinic";applyDefaults("clinic",true);$("pain").value="t_check";}
+    calc();
+  })();
+</script>
+</body>
+</html>

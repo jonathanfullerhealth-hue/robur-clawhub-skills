@@ -10,7 +10,7 @@ user-invocable: true
 ## What It Does
 Takes a transcript of a 20-minute discovery call with a running/longevity coach and produces a structured 8-part assessment report. The report quantifies their workflow bottlenecks, maps quick wins, calculates ROI, and recommends next steps.
 
-Built based on the "Return My Time" AI audit model — validated at $1,000 per assessment.
+Built on the "Return My Time" AI audit model. **Pricing note (2026 model change):** the audit is now delivered **free** as a lead magnet — RYT charges for *implementation*, not the assessment. Use the free automated `self-serve-assessment` for top-of-funnel; use this call-based version only for warm, high-value prospects who want a live working session. See `../reclaim-your-time/nick-saraev-playbook.md`.
 
 ## Workflow
 
